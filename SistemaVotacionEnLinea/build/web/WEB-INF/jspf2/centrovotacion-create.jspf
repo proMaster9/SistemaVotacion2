@@ -1,0 +1,64 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="col-md-offset-2 col-xs-12 col-sm-4">
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">Agregar Registro</h4>
+
+            <span class="widget-toolbar">
+                <a href="#" data-action="clean">
+                    <i class="ace-icon fa fa-pencil-square-o"></i>
+                </a>
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </span>
+        </div>
+
+        <div class="widget-body">
+            <div class="widget-main">
+                <form action="prueba.do" method="post" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Municipio: </label>
+                        <div class="col-sm-9">
+                            <select class="chosen-select form-control" name="txtMunicipio" id="form-field-select-3" data-placeholder="Choose a State...">
+                                <option value="">Seleccionar</option>
+                                <option value="1">Colón</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Direccion: </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="txtDireccion" id="form-field-3" class="col-xs-10 col-sm-12" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Dui Director: </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="txtDui" id="form-field-3" class="col-xs-10 col-sm-12" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre Centro: </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="txtNombre" id="form-field-3" class="col-xs-10 col-sm-12" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Capacidad: </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="txtCapacidad" id="form-field-3" class="col-xs-10 col-sm-12" />
+                        </div>
+                    </div>
+                    <div class="form-group center">
+                        <button class="btn btn-info" type="submit">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!-- /.span -->

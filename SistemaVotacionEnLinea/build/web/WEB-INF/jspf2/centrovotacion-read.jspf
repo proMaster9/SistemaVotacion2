@@ -1,0 +1,132 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="clearfix">
+                <div class="pull-right tableTools-container">
+                    <button class="btn btn-white btn-primary  btn-bold">
+                        <i class='fa fa-file-excel-o bigger-110 grey'></i>
+                    </button>
+                    <button class="btn btn-white btn-primary  btn-bold">
+                        <i class='fa fa-file-pdf-o bigger-110 grey'></i>
+                    </button>
+                    <button class="btn btn-white btn-primary  btn-bold">
+                        <i class='fa fa-print bigger-110 grey'></i>
+                    </button>
+                </div><!--recursos-->
+            </div>
+            <div>
+                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="center">
+                                <label class="pos-rel">
+
+                                    <span class="lbl">Nº</span>
+                                </label>
+                            </th>
+                            <th>Municipio:</th>
+                            <th>Nombre Centro:</th>
+                            <th class="hidden-480">Dirección:</th>
+
+                            <th>Capacidad JRV:</th>
+                            <th class="hidden-480">Director (DUI):</th>
+
+                            <th>Acciones:</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td class="center">
+                                <label class="pos-rel">
+                                    <span class="lbl">1</span>
+                                </label>
+                            </td>
+                            <td>Colon</td>
+                            <td>Complejo JSP</td>
+                            <td class="hidden-480">Lourdes Colón</td>
+                            <td>13</td>
+
+                            <td class="hidden-480">12345678-9</td>
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <button class="btn btn-xs btn-info">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </button>
+
+                                    <button class="btn btn-xs btn-danger">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </button>
+                                </div>
+
+                                <div class="hidden-md hidden-lg">
+                                    <div class="inline pos-rel">
+                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            <li>
+                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                    <span class="blue">
+                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                    <span class="green">
+                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                    <span class="red">
+                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer no-margin-top">
+                <ul class="pagination pull-right no-margin">
+                    <li class="prev disabled">
+                        <a href="#">
+                            <i class="ace-icon fa fa-angle-double-left"></i>
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+
+                    <li class="next">
+                        <a href="#">
+                            <i class="ace-icon fa fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div><!-- /.col -->
