@@ -39,68 +39,72 @@ public class IniciarSesion extends HttpServlet {
         PreparedStatement ps;
         ResultSet rs;
         try {
-                if (request.getParameter("txtUser") != null && request.getParameter("txtPass") != null) {
-                    String user = request.getParameter("txtUser");
-                    String pass = request.getParameter("txtPass");
-                    int tipo =0;
-                    Login login = new Login(user,pass);
-                    try {
-                        ps = con.getCnn().prepareStatement("select * from entrar('"+login.getUser()+"','"+login.getPass()+"');");
-                        rs = ps.executeQuery();
-                        while (rs.next()) {
-                            tipo = rs.getInt(1);
-                            user = rs.getString(2);
-                            pass = rs.getString(3);
-                        }
+            if (!"".equals(request.getParameter("txtUser")) && !"".equals(request.getParameter("txtPass"))) {
+                String user = request.getParameter("txtUser");
+                String pass = request.getParameter("txtPass");
+                int tipo = 0;
+                Login login = new Login(user, pass);
+                try {
+                    ps = con.getCnn().prepareStatement("select * from entrar('" + login.getUser() + "','" + login.getPass() + "');");
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        tipo = rs.getInt(1);
+                        user = rs.getString(2);
+                        pass = rs.getString(3);
+
+                    }
+                    if (request.getParameter("txtUser").equals(user) && request.getParameter("txtPass").equals(pass)) {
                         HttpSession sesion = request.getSession();
-                        switch(tipo){
+                        switch (tipo) {
                             case 1:
-                                sesion.setAttribute("user",user);
+                                sesion.setAttribute("user", user);
                                 sesion.setAttribute("pass", pass);
                                 sesion.setAttribute("tipo", tipo);
                                 response.sendRedirect("pages/tse-panelusuario.jsp");
-                            break;
+                                break;
                             case 2:
-                                sesion.setAttribute("user",user);
+                                sesion.setAttribute("user", user);
                                 sesion.setAttribute("pass", pass);
                                 sesion.setAttribute("tipo", tipo);
                                 response.sendRedirect("pages/tse-panelusuario.jsp");
-                            break;
+                                break;
                             case 3:
-                                sesion.setAttribute("user",user);
+                                sesion.setAttribute("user", user);
                                 sesion.setAttribute("pass", pass);
                                 sesion.setAttribute("tipo", tipo);
                                 response.sendRedirect("pages/tse-panelusuario.jsp");
-                            break;
+                                break;
                             default:
                                 response.sendRedirect("");
                         }
-                    } catch (SQLException ex) {
-                        System.out.println("Error" + ex);
-                    } finally {
-                        con.desconectar();
+                    }else{
+                        response.sendRedirect("login/tse-usuario.jsp");
                     }
-                }else{
-                    response.sendRedirect("../login/tse-usuario.jsp");
+                } catch (SQLException ex) {
+                    System.out.println("Error" + ex);
+                } finally {
+                    con.desconectar();
                 }
+            } else {
+                response.sendRedirect("login/tse-usuario.jsp");
+            }
         } catch (Exception e) {
             System.out.println("Error" + e);
         }
- 
-        
-}
+
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -114,7 +118,7 @@ public class IniciarSesion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -125,7 +129,7 @@ public class IniciarSesion extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-        public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
