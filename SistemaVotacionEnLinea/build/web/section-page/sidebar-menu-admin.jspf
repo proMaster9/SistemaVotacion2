@@ -126,6 +126,7 @@
     <li class="">
         <a href="#" class="dropdown-toggle">
             <i class="menu-icon fa fa-list"></i>
+            
             <span class="menu-text"> Gestionar </span>
 
             <b class="arrow fa fa-angle-down"></b>
@@ -259,7 +260,6 @@
             </li>
         </ul>
     </li>
-
     <li class="">
         <a href="#" class="dropdown-toggle">
             <i class="menu-icon fa fa-pencil-square-o"></i>
