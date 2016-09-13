@@ -57,7 +57,7 @@
                     <li class="divider"></li>
 
                     <li>
-                        <a href="#">
+                        <a href="../login/tse-usuario.jsp?cerrar=true">
                             <i class="ace-icon fa fa-power-off"></i>
                             Cerrar Sesión
                         </a>

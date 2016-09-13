@@ -1,7 +1,7 @@
 
 package crud;
 import clases.CentroVotacionDTO;
-import interfaz.Obligacion;
+import obligaciones.Obligacion;
 import java.util.List;
 import conexion.Conexion;
 import java.sql.*;
