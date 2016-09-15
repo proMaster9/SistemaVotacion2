@@ -3,11 +3,11 @@
 <div class="page-content">
     <div class="row">
         <h1>Jajaja La fumada solo es una VEZ </h1>
-        <%@include file="../jspf2/centrovotacion-create.jspf" %>
-        <%@include file="../jspf2/centrovotacion-update.jspf" %>
+        <%@include file="centrovotacion-create.jspf" %>
+        <%@include file="centrovotacion-update.jspf" %>
     </div><!-- /.row -->
     <div class="row">
-        <%@include file="../jspf2/centrovotacion-read.jspf" %>
+        <%@include file="centrovotacion-read.jspf" %>
     </div><!-- /.row -->
 </div><!-- /.page-content -->
 

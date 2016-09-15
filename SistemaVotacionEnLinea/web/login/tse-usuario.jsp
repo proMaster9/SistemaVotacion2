@@ -18,11 +18,7 @@
         <%@include file="../section-page/head.jspf" %>
     </head>
     <body class="no-skin">
-
-        <!-- contenedor del menu -->
-        <div id="navbar" class="navbar navbar-default">
-
-        </div><!-- /contenedor del munu -->
+        <div class="space"></div>
         <div class="space"></div>
         <div class="main-container">
             <div class="main-content">
