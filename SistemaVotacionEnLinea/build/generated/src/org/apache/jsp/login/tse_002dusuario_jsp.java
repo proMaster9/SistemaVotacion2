@@ -51,9 +51,9 @@ public final class tse_002dusuario_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("\r\n");
       out.write("\r\n");
 
-       if(request.getParameter("cerrar")!=null){
-            session.invalidate();
-        }
+    if (request.getParameter("cerrar") != null) {
+        session.invalidate();
+    }
 
       out.write("\r\n");
       out.write("\r\n");
@@ -87,12 +87,8 @@ public final class tse_002dusuario_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("\r\n");
       out.write("    </head>\r\n");
       out.write("    <body class=\"no-skin\">\r\n");
-      out.write("\r\n");
-      out.write("        <!-- contenedor del menu -->\r\n");
-      out.write("        <div id=\"navbar\" class=\"navbar navbar-default\">\r\n");
-      out.write("\r\n");
-      out.write("        </div><!-- /contenedor del munu -->\r\n");
-      out.write("        <div class=\"space\"></div>\r\n");
+      out.write("        <div class=\"space-32\"div>\r\n");
+      out.write("        <div class=\"space-32\"></div>\r\n");
       out.write("        <div class=\"main-container\">\r\n");
       out.write("            <div class=\"main-content\">\r\n");
       out.write("                <div class=\"row\">\r\n");
@@ -103,15 +99,13 @@ public final class tse_002dusuario_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("                                    <div class=\"widget-body\">\r\n");
       out.write("                                        <div class=\"widget-main\">\r\n");
       out.write("                                            <h4 class=\"header blue lighter bigger\">\r\n");
-      out.write("                                                <i class=\"ace-icon fa fa-user bigger-300 blue\"></i>\r\n");
-      out.write("                                                <div class=\"space-6\"></div>\r\n");
-      out.write("                                                TSE\r\n");
+      out.write("                                                <img src=\"../assets/images/logo_tse.JPG\"> \r\n");
       out.write("                                            </h4>\r\n");
       out.write("                                            <div class=\"space-6\"></div>\r\n");
       out.write("                                            <form action=\"../iniciarsesion.do\" method=\"post\">\r\n");
       out.write("                                                <div class=\"row\">\r\n");
       out.write("                                                    <label class=\"col-sm-3 control-label no-padding-right\">DUI:</label>\r\n");
-      out.write("                                                    <div class=\"col-sm-9\">\r\n");
+      out.write("                                                    <div class=\"col-md-12\">\r\n");
       out.write("                                                        <span class=\"input-icon\">\r\n");
       out.write("                                                            <input type=\"text\" name=\"txtUser\" id=\"form-field-icon-1\">\r\n");
       out.write("                                                            <i class=\"ace-icon fa fa-user blue\"></i>\r\n");

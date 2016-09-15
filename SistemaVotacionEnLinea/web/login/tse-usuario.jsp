@@ -5,9 +5,9 @@
 --%>
 <%@page session="true"  %>
 <%
-       if(request.getParameter("cerrar")!=null){
-            session.invalidate();
-        }
+    if (request.getParameter("cerrar") != null) {
+        session.invalidate();
+    }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,8 +18,8 @@
         <%@include file="../section-page/head.jspf" %>
     </head>
     <body class="no-skin">
-        <div class="space"></div>
-        <div class="space"></div>
+        <div class="space-32"div>
+        <div class="space-32"></div>
         <div class="main-container">
             <div class="main-content">
                 <div class="row">
@@ -30,15 +30,13 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <h4 class="header blue lighter bigger">
-                                                <i class="ace-icon fa fa-user bigger-300 blue"></i>
-                                                <div class="space-6"></div>
-                                                TSE
+                                                <img src="../assets/images/logo_tse.JPG"> 
                                             </h4>
                                             <div class="space-6"></div>
                                             <form action="../iniciarsesion.do" method="post">
                                                 <div class="row">
                                                     <label class="col-sm-3 control-label no-padding-right">DUI:</label>
-                                                    <div class="col-sm-9">
+                                                    <div class="col-md-12">
                                                         <span class="input-icon">
                                                             <input type="text" name="txtUser" id="form-field-icon-1">
                                                             <i class="ace-icon fa fa-user blue"></i>
