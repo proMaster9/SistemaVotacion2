@@ -31,7 +31,7 @@
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                     <img class="nav-user-photo" src="../assets/avatars/avatar5.png" alt="ADMIN" />
                     <span class="user-info">
-                        <small><% out.println(""+tipo);%></small>
+                        <% out.println(tipo);%>
                     </span>
 
                     <i class="ace-icon fa fa-caret-down"></i>
