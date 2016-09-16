@@ -3,37 +3,27 @@
 <script type="text/javascript"></script>
 
 <div class="navbar-container" id="navbar-container">
-    <!-- #section:basics/sidebar.mobile.toggle -->
     <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
         <span class="sr-only">Menú</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <!-- /section:basics/sidebar.mobile.toggle -->
     <div class="navbar-header pull-left">
-        <!-- #section:basics/navbar.layout.brand -->
         <a href="#" class="navbar-brand">
             <small>
-                <i class="fa fa-leaf"></i>
-                TSE
+                <img src="../assets/images/logo_tse.jpg" class="width-60"> 
             </small>
         </a>
-        <!-- /section:basics/navbar.layout.brand -->
-        <!-- #section:basics/navbar.toggle -->
-        <!-- /section:basics/navbar.toggle -->
     </div>
-
-    <!-- #section:basics/navbar.dropdown -->
-    <div class="navbar-buttons navbar-header pull-right" role="navigation">
-        <ul class="nav ace-nav">  
-            <!-- #section:basics/navbar.user_menu -->
+    <div class="navbar-buttons navbar-header pull-left" role="navigation">
+        <div class="space-8"></div>
+        <ul class="nav ace-nav"> 
             <li class="light-blue">
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                     <img class="nav-user-photo" src="../assets/avatars/avatar5.png" alt="ADMIN" />
                     <span class="user-info">
-                        <small>Bienvenido,</small>
-                        ADMIN
+                        <small>ADMIN</small>
                     </span>
 
                     <i class="ace-icon fa fa-caret-down"></i>

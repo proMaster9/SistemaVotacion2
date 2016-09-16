@@ -53,80 +53,20 @@
     <li class="">
         <a href="#" class="dropdown-toggle">
             <i class="menu-icon fa fa-desktop"></i>
-            <span class="menu-text">
+            <span class="menu-text" id="btnInicioSistema">
                 Conteo Actual
+                
             </span>
 
             <b class="arrow fa fa-angle-down"></b>
         </a>
-
         <b class="arrow"></b>
-
-        <ul class="submenu">
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Menu
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="#">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Option1
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="menu-icon fa fa-pencil orange"></i>
-
-                            4th level
-                            <b class="arrow fa fa-angle-down"></b>
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Menu2
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Option1
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Option2
-                </a>
-
-                <b class="arrow"></b>
-            </li> 
-        </ul>
     </li>
 
     <li class="">
         <a href="#" class="dropdown-toggle">
             <i class="menu-icon fa fa-list"></i>
-            
+
             <span class="menu-text"> Gestionar </span>
 
             <b class="arrow fa fa-angle-down"></b>
@@ -262,99 +202,17 @@
     </li>
     <li class="">
         <a href="#" class="dropdown-toggle">
-            <i class="menu-icon fa fa-pencil-square-o"></i>
-            <span class="menu-text"> Forms </span>
-
+            <i class="menu-icon fa fa-cog"></i>
+            <span class="menu-text"> Configuración </span>
             <b class="arrow fa fa-angle-down"></b>
         </a>
-
         <b class="arrow"></b>
-
         <ul class="submenu">
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Formulario 1
+            <li class="" >
+                <a href="#" >
+                    <i class="menu-icon fa fa-caret-right" id="btnInicioSistema"></i>
+                    Inicio del Sistema
                 </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Formulario 2
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-        </ul>
-    </li>
-
-    <li class="">
-        <a href="#">
-            <i class="menu-icon fa fa-calendar"></i>
-
-            <span class="menu-text">
-                Calendario
-            </span>
-        </a>
-
-        <b class="arrow"></b>
-    </li>
-
-    <li class="">
-        <a href="#">
-            <i class="menu-icon fa fa-picture-o"></i>
-            <span class="menu-text"> Imgenes </span>
-        </a>
-
-        <b class="arrow"></b>
-    </li>
-
-    <li class="">
-        <a href="#" class="dropdown-toggle">
-            <i class="menu-icon fa fa-file-o"></i>
-
-            <span class="menu-text">
-                Paginas de Error
-
-                <!-- #section:basics/sidebar.layout.badge -->
-                <span class="badge badge-primary">3</span>
-
-                <!-- /section:basics/sidebar.layout.badge -->
-            </span>
-
-            <b class="arrow fa fa-angle-down"></b>
-        </a>
-
-        <b class="arrow"></b>
-
-        <ul class="submenu">
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    FAQ
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Error 404
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="">
-                <a href="#">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Error 500
-                </a>
-
                 <b class="arrow"></b>
             </li>
         </ul>

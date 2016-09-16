@@ -40,56 +40,38 @@ public class IniciarSesion extends HttpServlet {
         ResultSet rs;
         try {
             if (!"".equals(request.getParameter("txtUser")) && !"".equals(request.getParameter("txtPass"))) {
-                String user = request.getParameter("txtUser");
-                String pass = request.getParameter("txtPass");
-                int tipo = 0;
-                Login login = new Login(user, pass);
-                try {
-                    ps = con.getCnn().prepareStatement("select * from entrar('" + login.getUser() + "','" + login.getPass() + "');");
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        tipo = rs.getInt(1);
-                        user = rs.getString(2);
-                        pass = rs.getString(3);
-
-                    }
-                    if (request.getParameter("txtUser").equals(user) && request.getParameter("txtPass").equals(pass)) {
-                        HttpSession sesion = request.getSession();
-                        switch (tipo) {
-                            case 1:
-                                sesion.setAttribute("user", user);
-                                sesion.setAttribute("pass", pass);
-                                sesion.setAttribute("tipo", tipo);
-                                response.sendRedirect("pages/tse-panelusuario.jsp");
-                                break;
-                            case 2:
-                                sesion.setAttribute("user", user);
-                                sesion.setAttribute("pass", pass);
-                                sesion.setAttribute("tipo", tipo);
-                                response.sendRedirect("pages/tse-panelusuario.jsp");
-                                break;
-                            case 3:
-                                sesion.setAttribute("user", user);
-                                sesion.setAttribute("pass", pass);
-                                sesion.setAttribute("tipo", tipo);
-                                response.sendRedirect("pages/tse-panelusuario.jsp");
-                                break;
-                            default:
-                                response.sendRedirect("");
+                String user = "";
+                String tipo = "";
+                int id_tipo = 0;
+                Login login = new Login(request.getParameter("txtUser"), request.getParameter("txtPass"));
+                ps = con.getCnn().prepareStatement("select * from entrar('" + login.getUser() + "','" + login.getPass() + "');");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    try {
+                        id_tipo = rs.getInt(1);
+                        tipo = rs.getString(2);
+                        user = rs.getString(3);
+                        if (id_tipo != 0 && request.getParameter("txtUser").equals(user)) {
+                            HttpSession sesion = request.getSession();
+                            sesion.setAttribute("id_tipo", id_tipo);
+                            sesion.setAttribute("tipo", tipo);
+                            sesion.setAttribute("user", user);
+                            response.sendRedirect("pages/tse-panelcontrol.jsp");
+                        } else {
+                            response.sendRedirect("login/tse-usuario.jsp");
                         }
-                    }else{
+                    } catch (SQLException ex) {
                         response.sendRedirect("login/tse-usuario.jsp");
                     }
-                } catch (SQLException ex) {
-                    System.out.println("Error" + ex);
-                } finally {
-                    con.desconectar();
                 }
             } else {
                 response.sendRedirect("login/tse-usuario.jsp");
             }
-        } catch (Exception e) {
-            System.out.println("Error" + e);
+        } catch (SQLException ex) {
+            System.out.println("Error" + ex);
+            response.sendRedirect("login/tse-usuario.jsp");
+        } finally {
+            con.desconectar();
         }
 
     }
