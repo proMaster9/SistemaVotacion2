@@ -56,7 +56,7 @@ public class IniciarSesion extends HttpServlet {
                             sesion.setAttribute("id_tipo", id_tipo);
                             sesion.setAttribute("tipo", tipo);
                             sesion.setAttribute("user", user);
-                            response.sendRedirect("pages/tse-panelcontrol.jsp");
+                            response.sendRedirect("pages/panelcontrol.jsp");
                         } else {
                             response.sendRedirect("login/tse-usuario.jsp");
                         }

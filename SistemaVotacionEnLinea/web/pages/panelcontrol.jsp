@@ -66,7 +66,7 @@
                 <div class="main-content-inner">
 
                     <div class="breadcrumbs" id="breadcrumbs">
-                        <%@include file="/secciones/breadcrumb.jsp" %><!-- se incluye el archivo que contiene la barra de navegacion -->
+                        <jsp:include page="/secciones/breadcrumb.jsp" /><!-- se incluye el archivo que contiene la barra de navegacion -->
                     </div>
                     <div class="page-content">
                         <div id="cargarArchivo"></div>
@@ -76,10 +76,10 @@
             </div>
 
             <div class="footer">
-                <%@include file="/secciones/footer.jsp" %><!-- se incluye el archivo que contiene el footer -->
+                <jsp:include page="/secciones/footer.jsp" /><!-- se incluye el archivo que contiene el footer -->
             </div>
         </div>
-        <%@include file="/secciones/script.jsp" %><!-- se incluye el archivo que contiene los jQuery-->
+        <jsp:include page="/secciones/script.jsp"/><!-- se incluye el archivo que contiene los jQuery-->
         <%    } else {
                 out.print("<script>location.replace('../login/tse-usuario.jsp?cerrar=true');</script>");
             }

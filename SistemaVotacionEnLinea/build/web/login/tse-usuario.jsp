@@ -15,7 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-        <%@include file="../section-page/head.jspf" %>
+          <jsp:include page="../pages/secciones/head.jsp" /><!-- se incluye el archivo que contiene todos los links --> 
     </head>
     <body class="no-skin">
         <div class="space-32"></div>
@@ -86,9 +86,9 @@
                 </div>
             </div>
             <div class="footer">
-                <%@include file="../section-page/footer.jspf" %>
+                <jsp:include page="../pages/secciones/footer.jsp" />
             </div>
         </div><!-- /.main-container -->
-        <%@include file="../section-page/script.jspf" %>
+        <jsp:include page="../pages/secciones/script.jsp"/>
     </body>
 </html>
