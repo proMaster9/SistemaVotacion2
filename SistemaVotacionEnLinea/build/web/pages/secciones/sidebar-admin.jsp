@@ -1,5 +1,9 @@
-<%-- any content can be specified here e.g.: --%>
-<%@ page pageEncoding="UTF-8" %>
+<%-- 
+    Document   : sidebar-admin
+    Created on : 16-sep-2016, 1:45:41
+    Author     : Icchigo
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript">
     try {
         ace.settings.check('sidebar', 'fixed')
@@ -208,9 +212,9 @@
         </a>
         <b class="arrow"></b>
         <ul class="submenu">
-            <li class="" >
+            <li class="" id="print1">
                 <a href="#" >
-                    <i class="menu-icon fa fa-caret-right" id="btnInicioSistema"></i>
+                    <i class="menu-icon fa fa-caret-right"></i>
                     Inicio del Sistema
                 </a>
                 <b class="arrow"></b>

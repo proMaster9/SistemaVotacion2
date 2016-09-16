@@ -1,5 +1,9 @@
-<%-- any content can be specified here e.g.: --%>
-<%@ page pageEncoding="UTF-8" %>
+<%-- 
+    Document   : breadcrumb
+    Created on : 16-sep-2016, 1:47:00
+    Author     : Icchigo
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript">
     try {
         ace.settings.check('breadcrumbs', 'fixed')

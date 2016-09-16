@@ -1,7 +1,15 @@
-<%-- any content can be specified here e.g.: --%>
+<%-- 
+    Document   : header
+    Created on : 16-sep-2016, 1:38:30
+    Author     : Icchigo
+--%>
 <%@ page pageEncoding="UTF-8" %>
+<%@page session="true" %>
 <script type="text/javascript"></script>
-
+<%
+ HttpSession sesion = request.getSession();
+        String tipo = (String)sesion.getAttribute("tipo");
+%>
 <div class="navbar-container" id="navbar-container">
     <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
         <span class="sr-only">Menú</span>
@@ -23,7 +31,7 @@
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                     <img class="nav-user-photo" src="../assets/avatars/avatar5.png" alt="ADMIN" />
                     <span class="user-info">
-                        <small>ADMIN</small>
+                        <small><% out.println(""+tipo);%></small>
                     </span>
 
                     <i class="ace-icon fa fa-caret-down"></i>

@@ -1,5 +1,9 @@
-
-<%@ page pageEncoding="UTF-8" %>
+<%-- 
+    Document   : script
+    Created on : 16-sep-2016, 1:40:48
+    Author     : Icchigo
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- basic scripts -->
 <!--[if !IE]> -->
 <script type="text/javascript">
@@ -19,6 +23,7 @@ window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/
 </script>
 
 <script src="../assets/js/bootstrap.js"></script>
+<script src="../assets/js/dropzone.js"></script>
 <script src="../assets/js/jquery-ui.custom.js"></script>
 <script src="../assets/js/jquery.ui.touch-punch.js"></script>
 <script src="../assets/js/elements.scroller.js"></script>
@@ -33,4 +38,5 @@ window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/
 <script src="../assets/js/jquery.inputlimiter.1.3.1.js"></script>
 <script src="../assets/js/ace.ajax-content.js"></script>
 <script src="../assets/js/ace.widget-box.js"></script>
+		
 <script type="text/javascript"> ace.vars['base'] = '..';</script>
