@@ -45,11 +45,21 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\n");
       out.write("\n");
 
-    HttpSession sesion = request.getSession();
-    if (sesion.getAttribute("id_tipo") != null && sesion.getAttribute("tipo") != null && sesion.getAttribute("user") != null) {
-        String user = (String) sesion.getAttribute("user");
-        String tipo = (String) sesion.getAttribute("tipo");
-        int id_tipo = (Integer) sesion.getAttribute("id_tipo");
+    if (request.getParameter("cerrar") != null) {
+               response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Pragma", "no-cache");
+        request.getSession().removeAttribute("user");
+        request.getSession().removeAttribute("tipo");
+        request.getSession().removeAttribute("id_tipo");
+        session.invalidate();
+}
+HttpSession sesion = request.getSession();
+if (sesion.getAttribute("id_tipo") != null && sesion.getAttribute("tipo") != null && sesion.getAttribute("user") != null) {
+String user = (String) sesion.getAttribute("user");
+String tipo = (String) sesion.getAttribute("tipo");
+int id_tipo = (Integer) sesion.getAttribute("id_tipo");
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -58,14 +68,14 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>Usuarios TSE</title>\n");
       out.write("        ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/secciones/head.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/head.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene todos los links --> \n");
       out.write("        <script>\n");
       out.write("            $(document).ready(function () {\n");
       out.write("                $(\"#print1\").on(\"click\", function () {\n");
       out.write("                    $(\"#cargarArchivo\").load('InicioSistema.jspf');\n");
       out.write("                });\n");
-      out.write("                 $(\"#print2\").on(\"click\", function () {\n");
+      out.write("                $(\"#print2\").on(\"click\", function () {\n");
       out.write("                    $(\"#cargarArchivo\").load('ImportarSql.jspf');\n");
       out.write("                });\n");
       out.write("\n");
@@ -73,9 +83,10 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("        </script>\n");
       out.write("    </head>\n");
       out.write("    <body class=\"no-skin\">\n");
+      out.write("     \n");
       out.write("        <div id=\"navbar\" class=\"navbar navbar-default\">\n");
       out.write("            ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/secciones/header.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/header.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene el menu -->\n");
       out.write("        </div>\n");
       out.write("\n");
@@ -94,7 +105,7 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
                 
       out.write("\n");
       out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/secciones/sidebar-admin.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/sidebar-admin.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene el sidebar menu -->\n");
       out.write("                ");
 
@@ -102,7 +113,7 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
                 
       out.write("\n");
       out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/secciones/sidebar-magistrado.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/sidebar-magistrado.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene el sidebar menu -->\n");
       out.write("                ");
  
@@ -110,7 +121,7 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
                 
       out.write("\n");
       out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "./secciones/sidebar-cnr.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/sidebar-cnr.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene el sidebar menu -->\n");
       out.write("                ");
 
@@ -125,11 +136,12 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\n");
       out.write("                    <div class=\"breadcrumbs\" id=\"breadcrumbs\">\n");
       out.write("                        ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/secciones/breadcrumb.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/breadcrumb.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene la barra de navegacion -->\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"page-content\">\n");
       out.write("                        <div id=\"cargarArchivo\"></div>\n");
+      out.write("                        \n");
       out.write("                    </div>\n");
       out.write("\n");
       out.write("                </div>\n");
@@ -137,12 +149,12 @@ public final class panelcontrol_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\n");
       out.write("            <div class=\"footer\">\n");
       out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/secciones/footer.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/footer.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene el footer -->\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("        ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/secciones/script.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "secciones/script.jsp", out, false);
       out.write("<!-- se incluye el archivo que contiene los jQuery-->\n");
       out.write("        ");
     } else {
