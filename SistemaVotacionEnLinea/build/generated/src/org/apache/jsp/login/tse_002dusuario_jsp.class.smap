@@ -5,19 +5,13 @@ JSP
 *F
 + 0 tse-usuario.jsp
 login/tse-usuario.jsp
-+ 1 head.jspf
-login/../section-page/head.jspf
-+ 2 footer.jspf
-login/../section-page/footer.jspf
-+ 3 script.jspf
-login/../section-page/script.jspf
 *L
-5,7:51
-11,8:58
-1#1,22:66
-18#0,66:87
-1#2,30:153
-83#0,5:182
-1#3,36:186
-87#0,4:222
+5,14:44
+18,7:58
+25:65,3
+26,70:68
+96:138,3
+97,2:141
+99:143,3
+100,3:146
 *E

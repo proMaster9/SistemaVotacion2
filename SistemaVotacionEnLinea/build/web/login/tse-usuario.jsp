@@ -6,6 +6,13 @@
 <%@page session="true"  %>
 <%
     if (request.getParameter("cerrar") != null) {
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Pragma", "no-cache");
+        request.getSession().removeAttribute("user");
+        request.getSession().removeAttribute("tipo");
+        request.getSession().removeAttribute("id_tipo");
         session.invalidate();
     }
 %>
@@ -15,7 +22,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-          <jsp:include page="../pages/secciones/head.jsp" /><!-- se incluye el archivo que contiene todos los links --> 
+        <jsp:include page="../pages/secciones/head.jsp" /><!-- se incluye el archivo que contiene todos los links --> 
     </head>
     <body class="no-skin">
         <div class="space-32"></div>

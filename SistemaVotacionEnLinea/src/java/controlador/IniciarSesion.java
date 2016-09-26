@@ -52,6 +52,10 @@ public class IniciarSesion extends HttpServlet {
                         tipo = rs.getString(2);
                         user = rs.getString(3);
                         if (id_tipo != 0 && request.getParameter("txtUser").equals(user)) {
+                            response.setHeader("Pragma", "no-cache");
+                            response.setHeader("Cache-Control", "no-store");
+                            response.setHeader("Cache-Control", "must-revalidate");
+                            response.setHeader("Canche-control", "no-cache");
                             HttpSession sesion = request.getSession();
                             sesion.setAttribute("id_tipo", id_tipo);
                             sesion.setAttribute("tipo", tipo);

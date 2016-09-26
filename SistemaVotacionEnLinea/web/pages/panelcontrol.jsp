@@ -6,11 +6,21 @@
 <%@page session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    HttpSession sesion = request.getSession();
-    if (sesion.getAttribute("id_tipo") != null && sesion.getAttribute("tipo") != null && sesion.getAttribute("user") != null) {
-        String user = (String) sesion.getAttribute("user");
-        String tipo = (String) sesion.getAttribute("tipo");
-        int id_tipo = (Integer) sesion.getAttribute("id_tipo");
+    if (request.getParameter("cerrar") != null) {
+               response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Pragma", "no-cache");
+        request.getSession().removeAttribute("user");
+        request.getSession().removeAttribute("tipo");
+        request.getSession().removeAttribute("id_tipo");
+        session.invalidate();
+}
+HttpSession sesion = request.getSession();
+if (sesion.getAttribute("id_tipo") != null && sesion.getAttribute("tipo") != null && sesion.getAttribute("user") != null) {
+String user = (String) sesion.getAttribute("user");
+String tipo = (String) sesion.getAttribute("tipo");
+int id_tipo = (Integer) sesion.getAttribute("id_tipo");
 %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +33,7 @@
                 $("#print1").on("click", function () {
                     $("#cargarArchivo").load('InicioSistema.jspf');
                 });
-                 $("#print2").on("click", function () {
+                $("#print2").on("click", function () {
                     $("#cargarArchivo").load('ImportarSql.jspf');
                 });
 
@@ -31,6 +41,7 @@
         </script>
     </head>
     <body class="no-skin">
+     
         <div id="navbar" class="navbar navbar-default">
             <jsp:include page="secciones/header.jsp"/><!-- se incluye el archivo que contiene el menu -->
         </div>
@@ -70,6 +81,7 @@
                     </div>
                     <div class="page-content">
                         <div id="cargarArchivo"></div>
+                        
                     </div>
 
                 </div>
