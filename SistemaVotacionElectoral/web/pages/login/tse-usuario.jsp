@@ -67,10 +67,10 @@
                         </div>
                         <div class="row m-t-15 m-b--20">
                             <div class="col-xs-6">
-                                <a href="tse-activar-cuenta.jsp">Activar cuenta</a>
+                                <a href="sign-up.html">Activar cuenta</a>
                             </div>
                             <div class="col-xs-6 align-right">
-                                <a href="tse-recuperar-contraseña.jsp">¿Olvido su Contraseña?</a>
+                                <a href="recuperar-contraseña.jsp">¿Olvido su Contraseña?</a>
                             </div>
                         </div>
                     </form>
