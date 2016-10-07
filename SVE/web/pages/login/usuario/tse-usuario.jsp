@@ -1,7 +1,7 @@
 <%-- 
     Document   : login-usuario
     Created on : 24-sep-2016, 23:31:05
-    Author     : Icchigo
+    Author     : JH
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
