@@ -122,13 +122,45 @@ public class CiudadanoDTO {
         return c;
     }
 
+    public static void agregarUsuario(Ciudadano c) {
+        int tipo = c.getTipoUsuario();
+        if(tipo == 2 || tipo == 3 || tipo == 6) {
+            System.out.println("Usuario principal");
+        }
+        else if(tipo == 5 || (tipo >= 7 && tipo <= 10)) {
+            System.out.println("Usuario secundario");
+        }
+        else {
+            System.out.println("Tipo de usuario incorrecto");
+        }
+    }
     public static void main(String[] args) {
+        Ciudadano c = new Ciudadano();
+        c.setTipoUsuario(2);
+        agregarUsuario(c);
+        c.setTipoUsuario(3);
+        agregarUsuario(c);
+        c.setTipoUsuario(6);
+        agregarUsuario(c);
+        c.setTipoUsuario(5);
+        agregarUsuario(c);
+        c.setTipoUsuario(8);
+        agregarUsuario(c);
+        c.setTipoUsuario(9);
+        agregarUsuario(c);
+        c.setTipoUsuario(10);
+        agregarUsuario(c);
+        c.setTipoUsuario(7);
+        agregarUsuario(c);
+        
+        /*
         Ciudadano c = entrarAdmi("00000000-0","12345");
         if(c.getIdUsuario() != 0) {
             System.out.println("Hola: " + c.getNumDui());
         } else {
             System.out.println("Credenciales incorrectas");
         }
+        */
     }
 
 }
