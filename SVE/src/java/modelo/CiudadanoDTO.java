@@ -157,12 +157,7 @@ public class CiudadanoDTO {
         }
         return c;
     }
-<<<<<<< HEAD
 
-    public static void agregarUsuario(Ciudadano c) {
-        int tipo = c.getTipoUsuario();
-        if(tipo == 2 || tipo == 3 || tipo == 6) {
-=======
     
     /*
     en esta funcion se registran todos los usuarios del sistema a excepcion
@@ -193,7 +188,7 @@ public class CiudadanoDTO {
             } catch (SQLException ex) {
                 Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
             }
->>>>>>> origin/master
+
             System.out.println("Usuario principal");
         }
         else if(tipo == 5 || (tipo >= 7 && tipo <= 10)) {
