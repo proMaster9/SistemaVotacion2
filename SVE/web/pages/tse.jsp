@@ -15,8 +15,8 @@
         <jsp:include page="modulos/head.jsp"/>
     </head>
 
-    <body class="theme-light-blue">
-        <jsp:include page=""/>
+    <body>
+        <jsp:include page="modulos/loader.jsp"/>
         <!-- Overlay For Sidebars -->
         <div class="overlay"></div>
         <!-- #END# Overlay For Sidebars -->
