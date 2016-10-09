@@ -66,7 +66,7 @@ create or replace function entrarPrincipal(
 	out sexo varchar(2),
 	out confirmacion int,
 	out tipo_usuario int,
-	out fecha_nac date,
+	out fecha_nac varchar(10),
 	out direccion varchar(60),
 	out id_municipio int, 
 	out id_departamento int
@@ -100,7 +100,7 @@ create or replace function entrarSecundario(
 	out sexo varchar(2),
 	out confirmacion int,
 	out tipo_usuario int,
-	out fecha_nac date,
+	out fecha_nac varchar(10),
 	out direccion varchar(60),
 	out id_municipio int, 
 	out id_departamento int
@@ -134,7 +134,7 @@ create or replace function entrarVotante(
 	out sexo varchar(2),
 	out confirmacion int,
 	out tipo_usuario int,
-	out fecha_nac date,
+	out fecha_nac varchar(10),
 	out direccion varchar(60),
 	out id_municipio int, 
 	out id_departamento int
@@ -228,7 +228,7 @@ create or replace function agregarPrincipal(
 	in _contrasenia varchar(15),
 	in _nombre varchar(20),
 	in _apellido varchar(20),
-	in _fecha_nac date,
+	in _fecha_nac varchar(10),
 	in _sexo varchar(2),
 	in _direccion varchar(60),
 	in _municipio int,
@@ -259,7 +259,7 @@ create or replace function agregarVotante(
 	in _contrasenia varchar(15),
 	in _nombre varchar(20),
 	in _apellido varchar(20),
-	in _fecha date,
+	in _fecha varchar(10),
 	in _sexo varchar(2),
 	in _direccion varchar(60),
 	in _municipio int
@@ -294,7 +294,7 @@ begin
 		/*se comprueba que el dui exista en los registros del cnr*/	
 		if exists(select * from padronelectoral where num_dui = _num_dui) then
 			select u.id_usuario into id from usuariopadron u where u.num_dui = _num_dui;
-			update usuario set id_tipo_usuario = tipo where id_usuario = id;
+			update usuario set id_tipo_usuario = tipo, contrasenia = _contrasenia where id_usuario = id;
 			return true;
 		else
 			return false;
