@@ -35,6 +35,7 @@ public class PreguntaBTO {
         
     
     }
+    con.desconectar();    
     
 }   catch(Exception e){
     System.err.println("error al mostrar publicidad "+e);
