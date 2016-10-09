@@ -106,6 +106,7 @@ try{
     
     lista.add(pub);
     }
+    con.desconectar();
     
 }catch(Exception e){
 System.err.println("error al mostrar publicidad "+e);
