@@ -1,6 +1,6 @@
 <%-- 
-    Document   : votante
-    Created on : 30-sep-2016, 20:51:52
+    Document   : login-usuario
+    Created on : 24-sep-2016, 23:31:05
     Author     : Icchigo
 --%>
 
@@ -16,19 +16,19 @@
         
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-        <link href="../../../plugins/iconfont/material-icons.css" rel="stylesheet" type="text/css">
+        <link href="../../plugins/iconfont/material-icons.css" rel="stylesheet" type="text/css">
 
         <!-- Bootstrap Core Css -->
-        <link href="../../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
         <!-- Waves Effect Css -->
-        <link href="../../../plugins/node-waves/waves.css" rel="stylesheet" />
+        <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
 
         <!-- Animation Css -->
-        <link href="../../../plugins/animate-css/animate.css" rel="stylesheet" />
+        <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
 
         <!-- Custom Css -->
-        <link href="../../../css/style.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
 
     </head>
     <body class="login-page">
@@ -36,10 +36,10 @@
             <div class="card">
                 <div class="logo">
                     <br>
-                    <div class="msg"><img src="../tse-logo.jpg"/></div>
+                    <div class="msg"><img src="../../images/tse-logo.jpg"/></div>
                 </div>
                 <div class="body" >
-                    <form id="sign_in" method="POST" action="../../../login">                 
+                    <form id="sign_in" method="POST">                 
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="material-icons col-light-blue">person</i>
@@ -62,14 +62,14 @@
                                 <label for="rememberme">Recuerdame</label>
                             </div>
                             <div class="col-xs-4">
-                                <button class="btn btn-block bg-light-blue waves-effect" type="submit" name="entrarAdmin">Entrar</button>
+                                <button class="btn btn-block bg-light-blue waves-effect" type="submit">Entrar</button>
                             </div>
                         </div>
                         <div class="row m-t-15 m-b--20">
-                            <div class="col-xs-5">
+                            <div class="col-xs-6">
                                 <a href="sign-up.html">Activar cuenta</a>
                             </div>
-                            <div class="col-xs-7 align-right">
+                            <div class="col-xs-6 align-right">
                                 <a href="recuperar-contraseña.jsp">¿Olvido su Contraseña?</a>
                             </div>
                         </div>
@@ -79,19 +79,19 @@
         </div>
 
         <!-- Jquery Core Js -->
-        <script src="../../../plugins/jquery/jquery.min.js"></script>
+        <script src="../../plugins/jquery/jquery.min.js"></script>
 
         <!-- Bootstrap Core Js -->
-        <script src="../../../plugins/bootstrap/js/bootstrap.js"></script>
+        <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
 
         <!-- Waves Effect Plugin Js -->
-        <script src="../../../plugins/node-waves/waves.js"></script>
+        <script src="../../plugins/node-waves/waves.js"></script>
 
         <!-- Validation Plugin Js -->
-        <script src="../../../plugins/jquery-validation/jquery.validate.js"></script>
+        <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
 
         <!-- Custom Js -->
-        <script src="../../../js/admin.js"></script>
-        <script src="../../../js/pages/login/sign-in.js"></script>
+        <script src="../../js/admin.js"></script>
+        <script src="../../js/pages/login/sign-in.js"></script>
     </body>
 </html>
