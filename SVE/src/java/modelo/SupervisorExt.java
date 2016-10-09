@@ -13,8 +13,8 @@ public class SupervisorExt extends Usuario{
     public SupervisorExt() {
     }
 
-    public SupervisorExt(int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario) {
-        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario);
+    public SupervisorExt(int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario, String rol) {
+        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario, rol);
     }
 
     public SupervisorExt(String identificacion, String pais, String organizacion) {
@@ -23,8 +23,8 @@ public class SupervisorExt extends Usuario{
         this.organizacion = organizacion;
     }
 
-    public SupervisorExt(String identificacion, String pais, String organizacion, int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario) {
-        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario);
+    public SupervisorExt(String identificacion, String pais, String organizacion, int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario, String rol) {
+        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario, rol);
         this.identificacion = identificacion;
         this.pais = pais;
         this.organizacion = organizacion;

@@ -44,6 +44,7 @@ public class CiudadanoDTO {
                 c.setContrasenia(rs.getString("contrasenia"));
                 c.setConfirmacion(rs.getInt("confirmacion"));
                 c.setTipoUsuario(rs.getInt("tipo_usuario"));
+                c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -78,6 +79,7 @@ public class CiudadanoDTO {
                 c.setApellido(rs.getString("apellido"));
                 c.setConfirmacion(rs.getInt("confirmacion"));
                 c.setTipoUsuario(rs.getInt("tipo_usuario"));
+                c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -115,6 +117,7 @@ public class CiudadanoDTO {
                 c.setTipoUsuario(rs.getInt("tipo_usuario"));
                 c.setIdMunicipio(rs.getInt("id_municipio"));
                 c.setIdDepartamento(rs.getInt("id_departamento"));
+                c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -150,6 +153,7 @@ public class CiudadanoDTO {
                 c.setTipoUsuario(rs.getInt("tipo_usuario"));
                 c.setIdMunicipio(rs.getInt("id_municipio"));
                 c.setIdDepartamento(rs.getInt("id_departamento"));
+                c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -438,9 +442,10 @@ public class CiudadanoDTO {
          }
          */
         /*
-         Ciudadano c = entrarAdmi("00000000-0","12345");
+         Ciudadano c = entrarVotante("00000008-0","12345");
          if(c.getIdUsuario() != 0) {
          System.out.println("Hola: " + c.getNumDui());
+             System.out.println("Tipo: " + c.getRol());
          } else {
          System.out.println("Credenciales incorrectas");
          }

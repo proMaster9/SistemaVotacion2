@@ -16,8 +16,8 @@ public class Ciudadano extends Usuario{
     public Ciudadano() {
     }
 
-    public Ciudadano(int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario) {
-        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario);
+    public Ciudadano(int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario, String rol) {
+        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario, rol);
     }
 
     public Ciudadano(String numDui, String fechaNac, String direccion, int idMunicipio, int idDepartamento) {
@@ -28,8 +28,8 @@ public class Ciudadano extends Usuario{
         this.idDepartamento = idDepartamento;
     }
 
-    public Ciudadano(String numDui, String fechaNac, String direccion, int idMunicipio, int idDepartamento, int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario) {
-        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario);
+    public Ciudadano(String numDui, String fechaNac, String direccion, int idMunicipio, int idDepartamento, int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario, String rol) {
+        super(idUsuario, contrasenia, nombre, apellido, sexo, confirmacion, tipoUsuario, rol);
         this.numDui = numDui;
         this.fechaNac = fechaNac;
         this.direccion = direccion;

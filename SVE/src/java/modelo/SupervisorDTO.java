@@ -45,6 +45,7 @@ public class SupervisorDTO {
                 sup.setTipoUsuario(rs.getInt("id_tipo_usuario"));
                 sup.setPais(rs.getString("pais"));
                 sup.setOrganizacion(rs.getString("organizacion"));
+                sup.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(SupervisorDTO.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,6 +165,10 @@ public class SupervisorDTO {
     }
 
     public static void main(String[] args) {
+        SupervisorExt sup = entrarSupervisor("00-00-00","12345");
+        if(sup.getIdUsuario() != 0) {
+            System.out.println("TIpo de usuario: " + sup.getRol());
+        }
         /*
         ArrayList<SupervisorExt> supervisor = mostrarSupervisores();
         if (supervisor.size() > 0) {
@@ -200,6 +205,7 @@ public class SupervisorDTO {
          System.out.println("Tipo usuario: " + sup.getTipoUsuario());
          System.out.println("Pais: " + sup.getPais());
          System.out.println("Organizacion: " + sup.getOrganizacion());
+             System.out.println("Tipo: " + sup.getRol());
          }
          else {
          System.out.println("Usuario no encontrado");

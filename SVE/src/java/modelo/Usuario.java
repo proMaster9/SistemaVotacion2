@@ -13,11 +13,12 @@ public class Usuario {
     protected String sexo;
     protected int confirmacion;
     protected int tipoUsuario;
-
+    protected String rol;
+    
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario) {
+    public Usuario(int idUsuario, String contrasenia, String nombre, String apellido, String sexo, int confirmacion, int tipoUsuario, String rol) {
         this.idUsuario = idUsuario;
         this.contrasenia = contrasenia;
         this.nombre = nombre;
@@ -25,6 +26,7 @@ public class Usuario {
         this.sexo = sexo;
         this.confirmacion = confirmacion;
         this.tipoUsuario = tipoUsuario;
+        this.rol = rol;
     }
 
     public int getIdUsuario() {
@@ -82,4 +84,12 @@ public class Usuario {
     public void setTipoUsuario(int tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     } 
+    
+    public String getRol() {
+        return rol;
+    }
+    
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 }
