@@ -3,10 +3,6 @@
     Created on : 25-sep-2016, 1:35:15
     Author     : JH
 --%>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<title>Panel Usuario | TSE</title>
 <!-- Favicon-->
 <link rel="icon" href="../images/presentacion.png" type="image/x-icon">
 
@@ -16,7 +12,6 @@
 
 <!-- Bootstrap Core Css -->
 <link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-
 
 <!-- Waves Effect Css -->
 <link href="../plugins/node-waves/waves.css" rel="stylesheet" />

@@ -6,10 +6,10 @@
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   border-radius: 0;
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  /*-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   -ms-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);*/
   border: none;
   position: fixed;
   top: 0;
@@ -48,7 +48,7 @@
   font-family: 'Material Icons';
   font-size: 24px;
   position: absolute;
-  top: 18px;
+  top: 8px;
   left: 20px;
   margin-right: 10px;
   -moz-transform: scale(0);
@@ -6336,10 +6336,10 @@ fieldset[disabled] .form-control {
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   border-radius: 0;
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  /*-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   -ms-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);*/
   border: none;
   position: fixed;
   top: 0;
@@ -6378,7 +6378,7 @@ fieldset[disabled] .form-control {
   font-family: 'Material Icons';
   font-size: 24px;
   position: absolute;
-  top: 18px;
+  top: 8px;
   left: 20px;
   margin-right: 10px;
   -moz-transform: scale(0);
@@ -6425,14 +6425,14 @@ fieldset[disabled] .form-control {
   transform: scale(1); }
 
 .navbar-header {
-  padding: 10px 7px; }
+  padding: 15px 7px; }
   .navbar-header .bars {
     float: left;
     text-decoration: none; }
 
 .navbar-nav > li > a {
   padding: 7px 7px 2px 7px;
-  margin-top: 17px;
+  margin-top: 10px;
   margin-left: 5px; }
 
 .navbar-nav .dropdown-menu {
@@ -7053,7 +7053,7 @@ fieldset[disabled] .form-control {
   .dropdown-menu .header {
     font-size: 13px;
     font-weight: bold;
-    min-width: 270px;
+    min-width: 200px;
     border-bottom: 1px solid #eee;
     text-align: center;
     padding: 4px 0 6px 0; }
@@ -7070,8 +7070,8 @@ fieldset[disabled] .form-control {
       height: 7px;
       margin-bottom: 7px; }
     .dropdown-menu ul.menu .icon-circle {
-      width: 36px;
-      height: 36px;
+      width: 25px;
+      height: 25px;
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       -ms-border-radius: 50%;
@@ -7081,7 +7081,7 @@ fieldset[disabled] .form-control {
       display: inline-block; }
       .dropdown-menu ul.menu .icon-circle i {
         font-size: 18px;
-        line-height: 36px; }
+        line-height: 25px; }
     .dropdown-menu ul.menu li {
       border-bottom: 1px solid #eee; }
       .dropdown-menu ul.menu li:last-child {
@@ -7098,7 +7098,7 @@ fieldset[disabled] .form-control {
     .dropdown-menu ul.menu .menu-info {
       display: inline-block;
       position: relative;
-      top: 3px;
+      bottom: 3px;
       left: 5px; }
       .dropdown-menu ul.menu .menu-info h4 {
         margin: 0;
@@ -7166,18 +7166,18 @@ fieldset[disabled] .form-control {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
   font-family: "Roboto", sans-serif;
-  background: #fdfdfd;
-  width: 300px;
+  background: #fff;
+  width: 250px;
   overflow: hidden;
   display: inline-block;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 50px);
   position: fixed;
-  top: 70px;
+  top: 50px;
   left: 0;
-  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  /*-webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);*/
   z-index: 11 !important; }
   .sidebar .legal {
     position: absolute;
@@ -7220,6 +7220,16 @@ fieldset[disabled] .form-control {
         -ms-border-radius: 50%;
         border-radius: 50%;
         vertical-align: bottom !important; }
+      .ico-user{
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%;
+      }
+      
     .sidebar .user-info .info-container {
       cursor: default;
       display: block;
@@ -7357,12 +7367,12 @@ fieldset[disabled] .form-control {
           padding-left: 95px; }
 
 .right-sidebar {
-  width: 280px;
-  height: calc(100vh - 70px);
+  width: 230px;
+  height: calc(100vh - 50px);
   position: fixed;
   right: -300px;
-  top: 70px;
-  background: #fdfdfd;
+  top: 50px;
+  background: #fff;
   z-index: 11 !important;
   -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -7412,7 +7422,7 @@ fieldset[disabled] .form-control {
 
 /* Login Page ================================== */
 .login-page {
-  background-color: white;/*Cambio*/
+  background-color: #00BCD4;
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
@@ -7442,7 +7452,7 @@ fieldset[disabled] .form-control {
 
 /* Sign Up Page ================================ */
 .signup-page {
-  background-color: white;
+  background-color: #00BCD4;
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
@@ -7472,7 +7482,7 @@ fieldset[disabled] .form-control {
 
 /* Forgot Password Page ======================== */
 .fp-page {
-  background-color: white;
+  background-color: #00BCD4;
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
@@ -7653,25 +7663,21 @@ fieldset[disabled] .form-control {
     top: 0;
     left: 0; }
     .dataTables_wrapper .dt-buttons a.dt-button {
-      /*background-color: #607D8B;*/
-      color: black;
+      background-color: #607D8B;
+      color: #fff;
       padding: 7px 12px;
       margin-right: 5px;
       text-decoration: none;
-      /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);*/
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
       -webkit-border-radius: 2px;
       -moz-border-radius: 2px;
       -ms-border-radius: 2px;
       border-radius: 2px;
-      border: 1px solid #ddd;
+      border: none;
       font-size: 13px;
       outline: none; }
       .dataTables_wrapper .dt-buttons a.dt-button:active {
-        opacity: 0.9;
-      }
-      .dataTables_wrapper .dt-buttons a.dt-button:hover {
-        border: 1px solid #03A9F4;
-      }
+        opacity: 0.8; }
 
 /* Light Gallery ================================ */
 .lg-outer .lg-thumb-item,

@@ -9,6 +9,10 @@
 <html lang="es">
 
     <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <title>Panel Usuario | TSE</title>
         <jsp:include page="modulos/head.jsp"/>
     </head>
 
@@ -17,9 +21,6 @@
         <!-- Overlay For Sidebars -->
         <div class="overlay"></div>
         <!-- #END# Overlay For Sidebars -->
-        <!-- Search Bar -->
-        <jsp:include page="modulos/search-bar.jsp"/>
-        <!-- #END# Search Bar -->
         <!-- Top Bar -->
         <jsp:include page="modulos/navbar.jsp"/>
         <!-- #Top Bar -->
@@ -27,9 +28,6 @@
         <section>
             <!-- Left Sidebar -->
             <aside id="leftsidebar" class="sidebar">
-                <!-- User Info -->
-                <jsp:include page="modulos/user-info.jsp"/>
-                <!-- #User Info -->
                 <!-- Menu -->
                 <jsp:include page="modulos/menu-admin.jsp"/>
                 <!-- #Menu -->
@@ -55,7 +53,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <img src="../images/TSE.png" width="100%"/>
                 </div>
-                
+
             </div>
         </section>
         <jsp:include page="modulos/scripts.jsp"/>
