@@ -47,10 +47,8 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
 
     HttpSession usuario = request.getSession();
-    String us=(String)usuario.getAttribute("usuario");
-    if (usuario.getAttribute("user") == null) {
-         String error = "Session Caducada";
-        response.sendRedirect("login/admin/tse_admin.jsp");
+    String us = (String) usuario.getAttribute("user");
+    if (usuario.getAttribute("user") != null) {
 
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
@@ -67,7 +65,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </head>\r\n");
       out.write("\r\n");
       out.write("    <body class=\"theme-light-blue\">\r\n");
-      out.write("        \r\n");
+      out.write("\r\n");
       out.write("        ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/loader.jsp", out, false);
       out.write("\r\n");
@@ -112,6 +110,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\r\n");
       out.write("            <div class=\"row clearfix\" >\r\n");
       out.write("                <div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12\">\r\n");
+      out.write("                    ");
       out.print(us);
       out.write("\r\n");
       out.write("                </div>\r\n");
@@ -124,8 +123,9 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </body>\r\n");
       out.write("</html>\r\n");
 
-  } else {
-       
+    } else {
+        String error = "Session Caducada";
+        //response.sendRedirect("login/admin/tse_admin.jsp");
     }
 
 

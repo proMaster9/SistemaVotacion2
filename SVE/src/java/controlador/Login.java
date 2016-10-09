@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controlador;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import static modelo.CiudadanoDTO.entrarAdmi;
  *
  * @author Icchigo
  */
-public class IniciarSesion extends HttpServlet {
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,22 +30,22 @@ public class IniciarSesion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet IniciarSesion</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet IniciarSesion at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
-//    }
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Login</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -58,11 +59,7 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            if(request.getParameter("entrarAdmin")!=null){
-                response.sendRedirect("pages/notificacion/tse_aviso.jsp");
-            }else{
-                response.sendRedirect("pages/notificacion/tse_error.jsp");
-            }
+        processRequest(request, response);
     }
 
     /**
@@ -86,9 +83,11 @@ public class IniciarSesion extends HttpServlet {
                     //debes completar campos
                 }else{
                     Ciudadano c = entrarAdmi(user,pass);
-                    if(user.equals(c.getNumDui()) || user.equals(c.getContrasenia())){
-                        usuario.setAttribute(c.getNumDui(),user);
-                        System.out.println(usuario.getAttribute(user));
+                    if(user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
+                        usuario.setAttribute("user",c.getNumDui());
+                        usuario.setAttribute("pass",c.getContrasenia());
+                        System.out.println(usuario.getAttribute("user"));
+                        System.out.println(usuario.getAttribute("pass"));
                         response.sendRedirect("pages/tse.jsp");
                     }else{
                         String error="sjsjsjsjsjsjs";

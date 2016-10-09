@@ -7,10 +7,12 @@
 <%@page contentType="text/html" import="java.util.*" pageEncoding="UTF-8" session="true"%>
 <%
     HttpSession usuario = request.getSession();
-    String us=(String)usuario.getAttribute("usuario");
-    if (usuario.getAttribute("user") == null) {
-         String error = "Session Caducada";
+    String us = (String) usuario.getAttribute("user");
+    if (us == null) {
+        String error = "Session Caducada";
         response.sendRedirect("login/admin/tse_admin.jsp");
+    } else {
+
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,7 +26,7 @@
     </head>
 
     <body class="theme-light-blue">
-        
+
         <jsp:include page="modulos/loader.jsp"/>
         <!-- Overlay For Sidebars -->
         <div class="overlay"></div>
@@ -59,7 +61,7 @@
             </div>
             <div class="row clearfix" >
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<%=us%>
+                    <%=us%>
                 </div>
 
             </div>
@@ -68,8 +70,6 @@
     </body>
 </html>
 <%
-  } else {
-       
     }
 
 %>
