@@ -319,6 +319,33 @@ $body$
 language plpgsql;
 
 
+create or replace function modificarPrincipal(
+	in _id int,
+	in _num_dui varchar(10),
+	in _contrasenia varchar(15),
+	in _nombre varchar(20),
+	in _apellido varchar(20),
+	in _fecha_nac varchar(10),
+	in _sexo varchar(2),
+	in _direccion varchar(60),
+	in _municipio int,
+	in tipo int
+) returns boolean as
+$body$
+begin
+	if(tipo = 2 or tipo = 3 or tipo = 6) then
+		update usuario set id_tipo_usuario = tipo, contrasenia = _contrasenia where id_usuario = _id;
+		update credencialtemporal set num_dui = _num_dui where id_usuario = _id;
+		update excepcionUsuario set num_dui = _num_dui, nombre = _nombre, apellido = _apellido, fecha_nac = _fecha_nac, sexo = _sexo, direccion_especifica = _direccion, id_municipio = _municipio where id_usuario = _id;
+		return true;
+	else
+		return false;
+	end if;
+	
+end;
+$body$
+language plpgsql;
+
 /*insercion de datos*/
 
 /*cuenta de administrador*/
