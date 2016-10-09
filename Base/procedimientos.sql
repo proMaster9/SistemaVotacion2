@@ -66,7 +66,7 @@ create or replace function entrarPrincipal(
 	out sexo varchar(2),
 	out confirmacion int,
 	out tipo_usuario int,
-	out fecha_nac varchar(10),
+	out fecha_nac date,
 	out direccion varchar(60),
 	out id_municipio int, 
 	out id_departamento int
@@ -100,7 +100,7 @@ create or replace function entrarSecundario(
 	out sexo varchar(2),
 	out confirmacion int,
 	out tipo_usuario int,
-	out fecha_nac varchar(10),
+	out fecha_nac date,
 	out direccion varchar(60),
 	out id_municipio int, 
 	out id_departamento int
@@ -134,7 +134,7 @@ create or replace function entrarVotante(
 	out sexo varchar(2),
 	out confirmacion int,
 	out tipo_usuario int,
-	out fecha_nac varchar(10),
+	out fecha_nac date,
 	out direccion varchar(60),
 	out id_municipio int, 
 	out id_departamento int
@@ -197,26 +197,6 @@ language plpgsql;
 
 
 /*
-	solo se pueden eliminar los usuarios que aun no han activado sus cuentas
-	y no hayan ingresado registros al sistema, este procedimiento se usa solo
-	en caso de que se haya cometido un error al momento de ingresar usuarios, y se quiere
-	corregir eliminandolo
-*/
-create or replace function eliminarSupervisor(
-	in _id_usuario int
-) returns void as
-$body$
-begin
-	delete from credencialtemporal where id_usuario = _id_usuario;
-	delete from infosupext where id_usuario = _id_usuario;
-	delete from usuario where id_usuario = _id_usuario;
-end;
-$body$
-language plpgsql;
-
-
-
-/*
 	solo para magistrados, representante cnr y director de tse
 	no es necesario que sus datos aparezcan en los registros del 
 	cnr para que puedan tener una cuent de usuario
@@ -228,7 +208,7 @@ create or replace function agregarPrincipal(
 	in _contrasenia varchar(15),
 	in _nombre varchar(20),
 	in _apellido varchar(20),
-	in _fecha_nac varchar(10),
+	in _fecha_nac date,
 	in _sexo varchar(2),
 	in _direccion varchar(60),
 	in _municipio int,
@@ -259,7 +239,7 @@ create or replace function agregarVotante(
 	in _contrasenia varchar(15),
 	in _nombre varchar(20),
 	in _apellido varchar(20),
-	in _fecha varchar(10),
+	in _fecha date,
 	in _sexo varchar(2),
 	in _direccion varchar(60),
 	in _municipio int
@@ -294,7 +274,7 @@ begin
 		/*se comprueba que el dui exista en los registros del cnr*/	
 		if exists(select * from padronelectoral where num_dui = _num_dui) then
 			select u.id_usuario into id from usuariopadron u where u.num_dui = _num_dui;
-			update usuario set id_tipo_usuario = tipo, contrasenia = _contrasenia where id_usuario = id;
+			update usuario set id_tipo_usuario = tipo where id_usuario = id;
 			return true;
 		else
 			return false;
@@ -390,8 +370,3 @@ con acceso a la papeleta de votaciones, tambien puede acceder cualquier usuario
 que este registrado en la tabla padronelectoral
 */
 select * from entrarVotante('00000008-0','12345'); 
-
-
-/*registros para partidos*/
-insert into partido (nombre,acronimo,num_dui,imagen) values ('GANA','00000017-0','img/imagen1.png');
-insert into partido (nombre,acronimo,num_dui,imagen) values ('ARENA','00000018-0','img/imagen2.png');
