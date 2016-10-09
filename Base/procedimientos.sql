@@ -5,6 +5,7 @@ create or replace function entrarAdministrador(
 	out num_dui varchar(10),
 	out contrasenia varchar(15),
 	out confirmacion int,
+	out tipo varchar(30),
 	out tipo_usuario int
 ) returns setof record as
 $body$
@@ -13,9 +14,11 @@ $body$
 		tipo int;
 		texto varchar(50);
 	begin
-	return query select u.id_usuario, ct.num_dui, u.contrasenia, u.confirmacion, u.id_tipo_usuario 
+	return query select u.id_usuario, ct.num_dui, u.contrasenia, u.confirmacion, tu.tipo_usuario, u.id_tipo_usuario 
 	from usuario u inner join credencialtemporal ct
-	on u.id_usuario = ct.id_usuario where id_tipo_usuario = 1 and ct.num_dui = _dui and u.contrasenia = _contrasenia;
+	on u.id_usuario = ct.id_usuario 
+	inner join tipousuario tu on tu.id_tipo_usuario = u.id_tipo_usuario
+	where u.id_tipo_usuario = 1 and ct.num_dui = _dui and u.contrasenia = _contrasenia;
 	end;
 $body$
 language plpgsql;
@@ -35,14 +38,16 @@ create or replace function entrarSupervisor(
 	out apellido varchar(20),
 	out sexo varchar(2),
 	out confirmacion int,
+	out tipo varchar(30),
 	out id_tipo_usuario int,
 	out pais varchar(15),
 	out organizacion varchar(15)
 ) returns setof record as
 $body$
 	begin
-		return query select u.id_usuario, ext.identificacion, u.contrasenia, ext.nombre, ext.apellido, ext.sexo, u.confirmacion, u.id_tipo_usuario, ext.pais, ext.organizacion 
+		return query select u.id_usuario, ext.identificacion, u.contrasenia, ext.nombre, ext.apellido, ext.sexo, u.confirmacion, tu.tipo_usuario, u.id_tipo_usuario, ext.pais, ext.organizacion 
 		from usuario u inner join infosupext ext on u.id_usuario = ext.id_usuario 
+		inner join tipousuario tu on tu.id_tipo_usuario = u.id_tipo_usuario
 		where ext.identificacion = _identificacion and u.contrasenia = _contrasenia;
 	end;
 $body$
@@ -65,6 +70,7 @@ create or replace function entrarPrincipal(
 	out apellido varchar(20),
 	out sexo varchar(2),
 	out confirmacion int,
+	out tipo varchar(30),
 	out tipo_usuario int,
 	out fecha_nac varchar(10),
 	out direccion varchar(60),
@@ -73,10 +79,11 @@ create or replace function entrarPrincipal(
 ) returns setof record as
 $body$
 	begin
-		return query select u.id_usuario, ex.num_dui, u.contrasenia, ex.nombre, ex.apellido, ex.sexo, u.confirmacion, u.id_tipo_usuario, ex.fecha_nac, ex.direccion_especifica, mu.id_municipio, mu.id_departamento from usuario u 
+		return query select u.id_usuario, ex.num_dui, u.contrasenia, ex.nombre, ex.apellido, ex.sexo, u.confirmacion, tu.tipo_usuario, u.id_tipo_usuario, ex.fecha_nac, ex.direccion_especifica, mu.id_municipio, mu.id_departamento from usuario u 
 		inner join credencialtemporal ct on u.id_usuario = ct.id_usuario
 		inner join excepcionusuario ex on ex.id_usuario = u.id_usuario
 		inner join municipio mu on mu.id_municipio = ex.id_municipio 
+		inner join tipousuario tu on tu.id_tipo_usuario = u.id_tipo_usuario
 		where ex.num_dui = _dui and u.contrasenia = _contrasenia and (u.id_tipo_usuario = 2 or u.id_tipo_usuario = 3 or u.id_tipo_usuario = 6) ;
 	end;
 $body$
@@ -99,6 +106,7 @@ create or replace function entrarSecundario(
 	out apellido varchar(20),
 	out sexo varchar(2),
 	out confirmacion int,
+	out tipo varchar(30),
 	out tipo_usuario int,
 	out fecha_nac varchar(10),
 	out direccion varchar(60),
@@ -107,10 +115,11 @@ create or replace function entrarSecundario(
 ) returns setof record as
 $body$
 	begin
-		return query select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u
+		return query select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, tu.tipo_usuario, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u
 		inner join usuariopadron up on up.id_usuario = u.id_usuario
 		inner join padronelectoral p on p.num_dui = up.num_dui
 		inner join municipio m on m.id_municipio = p.id_municipio 
+		inner join tipousuario tu on tu.id_tipo_usuario = u.id_tipo_usuario
 		where (u.id_tipo_usuario = 5 or (u.id_tipo_usuario >= 7 and u.id_tipo_usuario <= 10 )) and (p.num_dui = _dui and u.contrasenia = _contrasenia);
 
 
@@ -133,6 +142,7 @@ create or replace function entrarVotante(
 	out apellido varchar(20),
 	out sexo varchar(2),
 	out confirmacion int,
+	out tipo varchar(30),
 	out tipo_usuario int,
 	out fecha_nac varchar(10),
 	out direccion varchar(60),
@@ -141,10 +151,11 @@ create or replace function entrarVotante(
 ) returns setof record as
 $body$
 	begin
-		return query select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u
+		return query select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, tu.tipo_usuario, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u
 		inner join usuariopadron up on up.id_usuario = u.id_usuario
 		inner join padronelectoral p on p.num_dui = up.num_dui
 		inner join municipio m on m.id_municipio = p.id_municipio 
+		inner join tipousuario tu on tu.id_tipo_usuario = u.id_tipo_usuario
 		where p.num_dui = _dui and u.contrasenia = _contrasenia;
 
 
