@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);">
+                <a href="">
                     <div class="icon-circle bg-light-green">
                         <i class="material-icons">exit_to_app</i>
                     </div>

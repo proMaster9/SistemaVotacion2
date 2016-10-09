@@ -19,7 +19,7 @@ import static modelo.CiudadanoDTO.entrarAdmi;
  *
  * @author Icchigo
  */
-public class Login extends HttpServlet {
+public class SesionAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +38,14 @@ public class Login extends HttpServlet {
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet Login</title>");            
+//            out.println("<title>Servlet SesionAdmin</title>");            
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet SesionAdmin at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
 //    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,9 +58,9 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            
-        }catch(Exception e){
+        try {
+            response.sendRedirect("pages/notificacion/tse_aviso.jsp");
+        } catch (Exception e) {
             response.sendRedirect("pages/notificacion/tse_error.jsp");
         }
     }
@@ -77,29 +76,31 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
+        try {
             HttpSession usuario = request.getSession(true);
-            if(request.getParameter("entrarAdmin")!=null){
-                String user=request.getParameter("txtUser");
-                String pass=request.getParameter("txtPass");
-                int tipo=0;
-                if(user.equals("") || user.equals("")){
+            if (request.getParameter("entrarAdmin") != null) {
+                String user = request.getParameter("txtUser");
+                String pass = request.getParameter("txtPass");
+                int tipo = 0;
+                if (user.equals("") || user.equals("")) {
                     //debes completar campos
-                }else{
-                    Ciudadano c = entrarAdmi(user,pass);
-                    if(user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
-                        usuario.setAttribute("user",c.getNumDui());
-                        usuario.setAttribute("pass",c.getContrasenia());
+                } else {
+                    Ciudadano c = entrarAdmi(user, pass);
+                    if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
+                        usuario.setAttribute("user", c.getNumDui());
+                        usuario.setAttribute("pass", c.getContrasenia());
                         response.sendRedirect("pages/tse.jsp");
-                    }else{
-                        
+                    } else {
+
                         response.sendRedirect("pages/login/admin/tse_admin.jsp");
                     }
                 }
-            }else{
-                response.sendRedirect("pages/notificacion/tse_error.jsp");
+            } else {
+                //Cerrar sesion
+                usuario.invalidate();
+                
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             response.sendRedirect("pages/notificacion/tse_error.jsp");
         }
     }

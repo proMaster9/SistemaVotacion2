@@ -39,7 +39,7 @@
                     <div class="msg"><img src="../tse-logo.jpg"/></div>
                 </div>
                 <div class="body" >
-                    <form id="sign_in" method="POST" action="../../../login">                 
+                    <form id="sign_in" method="POST" action="../../../sesion_admin">                 
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="material-icons col-light-blue">person</i>
