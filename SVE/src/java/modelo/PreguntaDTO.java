@@ -14,10 +14,10 @@ import modelo.Pregunta;
  *
  * @author roberto
  */
-public class PreguntaBTO {
+public class PreguntaDTO {
     PreparedStatement pst;
     ResultSet rs;
-    Conexion con = new Conexion();
+    private static final Conexion con = Conexion.conectar();
     
     public ArrayList<Pregunta> mostrar(){
     ArrayList<Pregunta> lista = new ArrayList<>();

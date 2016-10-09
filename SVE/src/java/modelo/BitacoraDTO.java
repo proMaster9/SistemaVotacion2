@@ -15,10 +15,10 @@ import modelo.Bitacora;
  *
  * @author roberto
  */
-public class BitacoraBTO {
+public class BitacoraDTO {
     PreparedStatement pst;
     ResultSet rs;
-    Conexion con = new Conexion();
+     private static final Conexion con = Conexion.conectar();
     
     public boolean AgregarBitacora(Bitacora bita){
         String consu = "insert into bitacoraAcciones(id_bitacora , fecha , hora , accion) values("

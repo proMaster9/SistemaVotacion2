@@ -17,8 +17,7 @@ import java.util.Set;
 public class PublicidadDTO {
     PreparedStatement ps;
     ResultSet rs;
-    Conexion con = new Conexion();
-    
+    private static final Conexion con = Conexion.conectar();
     
     public  boolean agregarPublicidad(Publicidad pub){
         String consu = "insert into publicidad(id_publicidad , descripcion , codigo , id_usuario) "

@@ -14,10 +14,10 @@ import java.util.Set;
  *
  * @author roberto
  */
-public class CargoDirectivaBTO {
+public class CargoDirectivaDTO {
     PreparedStatement pst;
     ResultSet rs;
-    Conexion con = new Conexion();
+    private static final Conexion con = Conexion.conectar();
     
     public ArrayList<CargoDirectiva> mostrar(){
     ArrayList<CargoDirectiva> lista = new ArrayList<>();
@@ -47,8 +47,12 @@ public class CargoDirectivaBTO {
     
 
  public void main(String[] args) {
-     CargoDirectivaBTO pr = new CargoDirectivaBTO();
      
+     //y esto a quedado a medias------------
+     //CargoDirectivaBTO pr = new CargoDirectivaBTO();
+     
+     
+  
      
      
  }    
