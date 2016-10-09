@@ -6,9 +6,11 @@
 
 <%@page contentType="text/html" import="java.util.*" pageEncoding="UTF-8" session="true"%>
 <%
-    HttpSession usuario = request.getSession();
-    String us = (String) usuario.getAttribute("user");
-    if (us == null) {
+    HttpSession sesion = request.getSession();
+    String user = (String) sesion.getAttribute("user");
+    String rol = (String) sesion.getAttribute("rol");
+    int idTipo = (Integer) sesion.getAttribute("idTipo");
+    if (user == null && rol==null) {
         String error = "Session Caducada";
         response.sendRedirect("login/admin/tse_admin.jsp");
     } else {
@@ -39,7 +41,7 @@
             <!-- Left Sidebar -->
             <aside id="leftsidebar" class="sidebar">
                 <!-- Menu -->
-                <jsp:include page="modulos/menu-admin.jsp"/>
+                <jsp:include page="modulos/menu_admin.jsp"/>
                 <!-- #Menu -->
                 <!-- Footer -->
                 <jsp:include page="modulos/footer.jsp"/>
@@ -61,7 +63,7 @@
             </div>
             <div class="row clearfix" >
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <%=us%>
+                    <%=user%>
                 </div>
 
             </div>

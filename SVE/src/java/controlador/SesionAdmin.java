@@ -77,7 +77,7 @@ public class SesionAdmin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            HttpSession usuario = request.getSession(true);
+            HttpSession sesion = request.getSession(true);
             if (request.getParameter("entrarAdmin") != null) {
                 String user = request.getParameter("txtUser");
                 String pass = request.getParameter("txtPass");
@@ -87,8 +87,9 @@ public class SesionAdmin extends HttpServlet {
                 } else {
                     Ciudadano c = entrarAdmi(user, pass);
                     if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
-                        usuario.setAttribute("user", c.getNumDui());
-                        usuario.setAttribute("pass", c.getContrasenia());
+                        sesion.setAttribute("user", c.getNumDui());
+                        sesion.setAttribute("idTipo", c.getTipoUsuario());
+                        sesion.setAttribute("rol", c.getRol());
                         response.sendRedirect("pages/tse.jsp");
                     } else {
 
@@ -97,7 +98,7 @@ public class SesionAdmin extends HttpServlet {
                 }
             } else {
                 //Cerrar sesion
-                usuario.invalidate();
+                sesion.invalidate();
                 
             }
         } catch (Exception e) {

@@ -4,16 +4,16 @@
     Author     : JH
 --%>
 <%
-    HttpSession usuario = request.getSession();
-    String us="";
-    us=(String)usuario.getAttribute("user");
+    HttpSession sesion = request.getSession();
+    String rol = (String) sesion.getAttribute("rol");
+    String user = (String) sesion.getAttribute("user");
 %>
 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-    <img src="../images/avatar.png" class="ico-user" alt="User"> <%=us%>
+    <img src="../images/avatar.png" class="ico-user" alt="User"><%=user%>
 </a>
 <ul class="dropdown-menu">
     <li class="header">
-
+        <%=user%><%=rol%>
     </li>
     <li class="body">
         <ul class="menu">

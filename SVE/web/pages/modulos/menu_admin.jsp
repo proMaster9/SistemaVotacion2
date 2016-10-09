@@ -3,7 +3,11 @@
     Created on : 25-sep-2016, 15:11:32
     Author     : Icchigo
 --%>
-
+<%
+    HttpSession sesion = request.getSession();
+    int idTipo = (Integer) sesion.getAttribute("idTipo");
+    if (idTipo == 1) {
+%>
 <div class="menu">
     <ul class="list">
         <li class="header">MENÚ</li>
@@ -107,6 +111,17 @@
                 <span>Imporatar Registros CNR</span>
             </a>
         </li>
-        
+
     </ul>
 </div>
+<%
+} else {
+%>
+<div class="menu">
+    <ul class="list">
+        <li class="header">MENÚ</li>
+    </ul>
+</div>
+<%
+    }
+%>
