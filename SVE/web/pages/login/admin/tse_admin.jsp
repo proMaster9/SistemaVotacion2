@@ -39,7 +39,7 @@
                     <div class="msg"><img src="../tse-logo.jpg"/></div>
                 </div>
                 <div class="body" >
-                    <form id="sign_in" method="POST" action="../../../srvLogin">                 
+                    <form id="sign_in" method="POST" action="../../../login">                 
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="material-icons col-light-blue">person</i>
@@ -66,10 +66,10 @@
                             </div>
                         </div>
                         <div class="row m-t-15 m-b--20">
-                            <div class="col-xs-6">
+                            <div class="col-xs-5">
                                 <a href="sign-up.html">Activar cuenta</a>
                             </div>
-                            <div class="col-xs-6 align-right">
+                            <div class="col-xs-7 align-right">
                                 <a href="recuperar-contraseña.jsp">¿Olvido su Contraseña?</a>
                             </div>
                         </div>
