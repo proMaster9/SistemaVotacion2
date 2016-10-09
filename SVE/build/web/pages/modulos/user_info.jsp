@@ -19,6 +19,7 @@
                     </div>
                     <div class="menu-info">
                         <h4>Perfil</h4>
+
                     </div>
                 </a>
             </li>
@@ -35,6 +36,6 @@
         </ul>
     </li>
     <li class="footer">
-        <a href="javascript:void(0);">Ayuda</a>
+        <a href="javascript:void(0);">View All Notifications</a>
     </li>
 </ul>

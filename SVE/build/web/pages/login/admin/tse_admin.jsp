@@ -15,6 +15,7 @@
         <link rel="icon" href="" type="image/x-icon">
         
         <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
         <link href="../../../plugins/iconfont/material-icons.css" rel="stylesheet" type="text/css">
 
         <!-- Bootstrap Core Css -->
@@ -38,7 +39,7 @@
                     <div class="msg"><img src="../tse-logo.jpg"/></div>
                 </div>
                 <div class="body" >
-                    <form id="sign_in" method="POST" action="../../../iniciar_sesion">                 
+                    <form id="sign_in" method="POST" action="">                 
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="material-icons col-light-blue">person</i>

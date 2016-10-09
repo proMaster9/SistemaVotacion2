@@ -43,6 +43,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html lang=\"es\">\r\n");
       out.write("\r\n");
@@ -58,7 +59,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("    <body class=\"theme-light-blue\">\r\n");
       out.write("        ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/navbar.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/loader.jsp", out, false);
       out.write("\r\n");
       out.write("        <!-- Overlay For Sidebars -->\r\n");
       out.write("        <div class=\"overlay\"></div>\r\n");
@@ -101,7 +102,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\r\n");
       out.write("            <div class=\"row clearfix\" >\r\n");
       out.write("                <div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12\">\r\n");
-      out.write("                    \r\n");
+      out.write("                    <img src=\"../images/TSE.png\" width=\"100%\"/>\r\n");
       out.write("                </div>\r\n");
       out.write("\r\n");
       out.write("            </div>\r\n");
