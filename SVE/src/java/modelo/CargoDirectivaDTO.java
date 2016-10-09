@@ -35,6 +35,7 @@ public class CargoDirectivaBTO {
         
     
     }
+     con.desconectar();
     
     
     }catch(Exception e){
