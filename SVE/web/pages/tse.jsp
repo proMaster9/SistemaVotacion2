@@ -16,7 +16,7 @@
     </head>
 
     <body class="theme-light-blue">
-        <jsp:include page="modulos/loader.jsp"/>
+        <jsp:include page=""/>
         <!-- Overlay For Sidebars -->
         <div class="overlay"></div>
         <!-- #END# Overlay For Sidebars -->
