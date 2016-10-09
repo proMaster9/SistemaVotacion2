@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package controlador;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Ciudadano;
 import static modelo.CiudadanoDTO.entrarAdmi;
 
@@ -45,6 +45,7 @@ public class IniciarSesion extends HttpServlet {
 //            out.println("</html>");
 //        }
 //    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -57,15 +58,11 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            if (request.getParameter("entrarAdmin") != null) {
-               response.sendRedirect("pages/notifiacines/aviso.jsp");
+            if(request.getParameter("entrarAdmin")!=null){
+                response.sendRedirect("pages/notificacion/tse_aviso.jsp");
+            }else{
+                response.sendRedirect("pages/notificacion/tse_error.jsp");
             }
-
-        } catch (Exception e) {
-            response.sendRedirect("pages/tse/aviso.jsp");
-        }
-        
     }
 
     /**
@@ -79,24 +76,30 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            if (request.getParameter("entrarAdmin") != null) {
-                String user = request.getParameter("txtUser");
-                String pass = request.getParameter("txtPass");
-                if (user.equals("") || pass.equals("")) {
-                    //campos vacios
-                } else {
-                    Ciudadano c = entrarAdmi(user, pass);
-                    if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
+        try{
+            HttpSession usuario = request.getSession();
+            if(request.getParameter("entrarAdmin")!=null){
+                String user=request.getParameter("txtUser");
+                String pass=request.getParameter("txtPass");
+                int tipo=0;
+                if(user.equals("") || user.equals("")){
+                    //debes completar campos
+                }else{
+                    Ciudadano c = entrarAdmi(user,pass);
+                    if(user.equals(c.getNumDui()) || user.equals(c.getContrasenia())){
+                        usuario.setAttribute(c.getNumDui(),user);
+                        System.out.println(usuario.getAttribute(user));
                         response.sendRedirect("pages/tse.jsp");
                     }else{
-                        //datos incorrectos
+                        String error="sjsjsjsjsjsjs";
+                        response.sendRedirect("pages/login/admin/tse_admin.jsp");
                     }
                 }
+            }else{
+                response.sendRedirect("pages/notificacion/tse_error.jsp");
             }
-
-        } catch (Exception e) {
-            response.sendRedirect("pages/tse_error.jsp");
+        }catch(Exception e){
+            response.sendRedirect("pages/notificacion/tse_error.jsp");
         }
     }
 

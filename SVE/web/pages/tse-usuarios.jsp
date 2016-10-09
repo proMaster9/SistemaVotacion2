@@ -27,7 +27,7 @@
             <!-- Left Sidebar -->
             <aside id="leftsidebar" class="sidebar">
                 <!-- User Info -->
-                <jsp:include page="modulos/user-info.jsp"/>
+
                 <!-- #User Info -->
                 <!-- Menu -->
                 <jsp:include page="modulos/menu-admin.jsp"/>

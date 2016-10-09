@@ -54,6 +54,7 @@ public final class tse_005fadmin_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("        <link rel=\"icon\" href=\"\" type=\"image/x-icon\">\r\n");
       out.write("        \r\n");
       out.write("        <!-- Google Fonts -->\r\n");
+      out.write("        <link href=\"https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext\" rel=\"stylesheet\" type=\"text/css\">\r\n");
       out.write("        <link href=\"../../../plugins/iconfont/material-icons.css\" rel=\"stylesheet\" type=\"text/css\">\r\n");
       out.write("\r\n");
       out.write("        <!-- Bootstrap Core Css -->\r\n");
@@ -77,7 +78,7 @@ public final class tse_005fadmin_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                    <div class=\"msg\"><img src=\"../tse-logo.jpg\"/></div>\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"body\" >\r\n");
-      out.write("                    <form id=\"sign_in\" method=\"POST\" action=\"../../../iniciar_sesion\">                 \r\n");
+      out.write("                    <form id=\"sign_in\" method=\"POST\" action=\"\">                 \r\n");
       out.write("                        <div class=\"input-group\">\r\n");
       out.write("                            <span class=\"input-group-addon\">\r\n");
       out.write("                                <i class=\"material-icons col-light-blue\">person</i>\r\n");
