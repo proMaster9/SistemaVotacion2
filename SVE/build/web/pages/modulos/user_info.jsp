@@ -3,8 +3,13 @@
     Created on : 25-sep-2016, 15:09:02
     Author     : JH
 --%>
+<%
+    HttpSession usuario = request.getSession();
+    String us="";
+    us=(String)usuario.getAttribute("user");
+%>
 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-    <img src="../images/avatar.png" class="ico-user"  alt="User"> 
+    <img src="../images/avatar.png" class="ico-user" alt="User"> <%=us%>
 </a>
 <ul class="dropdown-menu">
     <li class="header">
