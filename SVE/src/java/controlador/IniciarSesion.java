@@ -89,6 +89,8 @@ public class IniciarSesion extends HttpServlet {
                     Ciudadano c = entrarAdmi(user, pass);
                     if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
                         response.sendRedirect("pages/tse.jsp");
+                    }else{
+                        //datos incorrectos
                     }
                 }
             }
