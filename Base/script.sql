@@ -44,7 +44,7 @@ CREATE TABLE padronElectoral (
     num_dui VARCHAR(10) NOT NULL UNIQUE,
     nombre VARCHAR(20) NOT NULL,
     apellido VARCHAR(20) NOT NULL,
-    fecha_nac DATE NOT NULL,
+    fecha_nac VARCHAR(10) NOT NULL,
     sexo VARCHAR(2) NOT NULL,
     direccion_especifica VARCHAR(60) NOT NULL,
     id_municipio INT NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE excepcionUsuario (
     num_dui VARCHAR(10) NOT NULL UNIQUE,
     nombre VARCHAR(20) NOT NULL,
     apellido VARCHAR(20) NOT NULL,
-    fecha_nac DATE NOT NULL,
+    fecha_nac VARCHAR(10) NOT NULL,
     sexo VARCHAR(2) NOT NULL,
     direccion_especifica VARCHAR(60) NOT NULL,
     id_municipio INT NOT NULL,
@@ -147,14 +147,14 @@ CREATE TABLE directivaJRV (
 
 CREATE TABLE aperturaJRV(
     id_jrv INT,
-    fecha DATE NOT NULL,
+    fecha VARCHAR(10) NOT NULL,
     hora time not null,
     CONSTRAINT pk_aperturaJRV PRIMARY KEY (id_jrv)
 );
 
 CREATE TABLE cierreJRV(
     id_jrv INT,
-    fecha DATE NOT NULL,
+    fecha VARCHAR(10) NOT NULL,
     hora time not null,
     CONSTRAINT pk_cierreJRV PRIMARY KEY (id_jrv)
 );
@@ -217,7 +217,7 @@ CREATE TABLE credencialTemporal (
 create sequence sec_bitacoraacciones;
 CREATE TABLE bitacoraAcciones (
     id_bitacora int default nextval('sec_bitacoraacciones'),
-    fecha date not null,  				
+    fecha VARCHAR(10) not null,  				
     hora time not null,
     accion varchar(60) not null,
     CONSTRAINT pk_bitacoraAcciones PRIMARY KEY (id_bitacora)
