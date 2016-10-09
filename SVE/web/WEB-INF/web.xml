@@ -5,20 +5,12 @@
         <servlet-class>controlador.IniciarSesion</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>controlador.Login</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SesionAdmin</servlet-name>
         <servlet-class>controlador.SesionAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/iniciar_sesion</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SesionAdmin</servlet-name>

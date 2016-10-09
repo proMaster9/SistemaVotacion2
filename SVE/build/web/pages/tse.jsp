@@ -11,7 +11,7 @@
     String rol = (String) sesion.getAttribute("rol");
     int idTipo = (Integer) sesion.getAttribute("idTipo");
     if (user == null && rol==null) {
-        String error = "Session Caducada";
+        System.out.println("prueba"+sesion.getAttribute("user"));
         response.sendRedirect("login/admin/tse_admin.jsp");
     } else {
 
@@ -41,7 +41,17 @@
             <!-- Left Sidebar -->
             <aside id="leftsidebar" class="sidebar">
                 <!-- Menu -->
+                <%
+                    if(idTipo==1){
+                %>
                 <jsp:include page="modulos/menu_admin.jsp"/>
+                <%
+                    }else if(idTipo==2){
+                %>
+                <jsp:include page="modulos/menu_magistrado.jsp"/>
+                <%
+                    }
+                %>
                 <!-- #Menu -->
                 <!-- Footer -->
                 <jsp:include page="modulos/footer.jsp"/>

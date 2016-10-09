@@ -7,6 +7,7 @@
     HttpSession sesion = request.getSession();
     int idTipo = (Integer) sesion.getAttribute("idTipo");
     if (idTipo == 1) {
+        
 %>
 <div class="menu">
     <ul class="list">

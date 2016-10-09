@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="../sesion_admin">
                     <div class="icon-circle bg-light-green">
                         <i class="material-icons">exit_to_app</i>
                     </div>

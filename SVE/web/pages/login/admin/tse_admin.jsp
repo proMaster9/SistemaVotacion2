@@ -3,17 +3,25 @@
     Created on : 30-sep-2016, 20:51:52
     Author     : Icchigo
 --%>
-
+<%
+    response.addHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "no-cache, must-revalidate");
+    response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+    response.addHeader("Cache-Control", "private");
+    response.setDateHeader("Expires", 0);
+%> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="UTF-8">
+        
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <title>Login Usuario | TSE </title>
         <!-- Favicon-->
         <link rel="icon" href="" type="image/x-icon">
-        
+
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
         <link href="../../../plugins/iconfont/material-icons.css" rel="stylesheet" type="text/css">
@@ -29,7 +37,17 @@
 
         <!-- Custom Css -->
         <link href="../../../css/style.css" rel="stylesheet">
-
+        <script>
+            /*function nobackbutton() {
+                history.forward();
+                window.location.hash = "no-back-button";
+                window.location.hash = "Again-No-back-button" //chrome	
+                window.onhashchange = function () {
+                    window.location.hash = "no-back-button";
+                    
+                }
+            }*/
+        </script>
     </head>
     <body class="login-page">
         <div class="login-box">

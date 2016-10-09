@@ -59,10 +59,12 @@ public class SesionAdmin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            response.sendRedirect("pages/notificacion/tse_aviso.jsp");
+            HttpSession sesion = request.getSession(true);
+            sesion.invalidate();
+
         } catch (Exception e) {
-            response.sendRedirect("pages/notificacion/tse_error.jsp");
         }
+        response.sendRedirect("pages/login/admin/tse_admin.jsp");
     }
 
     /**
@@ -98,8 +100,9 @@ public class SesionAdmin extends HttpServlet {
                 }
             } else {
                 //Cerrar sesion
-                sesion.invalidate();
                 
+                sesion.invalidate();
+
             }
         } catch (Exception e) {
             response.sendRedirect("pages/notificacion/tse_error.jsp");
