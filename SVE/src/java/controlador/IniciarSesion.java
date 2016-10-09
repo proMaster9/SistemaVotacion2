@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Ciudadano;
+import static modelo.CiudadanoDTO.entrarAdmi;
 
 /**
  *
@@ -27,23 +29,22 @@ public class IniciarSesion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IniciarSesion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet IniciarSesion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet IniciarSesion</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet IniciarSesion at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
+//    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -56,7 +57,15 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            if (request.getParameter("entrarAdmin") != null) {
+               response.sendRedirect("pages/notifiacines/aviso.jsp");
+            }
+
+        } catch (Exception e) {
+            response.sendRedirect("pages/tse/aviso.jsp");
+        }
+        
     }
 
     /**
@@ -70,7 +79,23 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            if (request.getParameter("entrarAdmin") != null) {
+                String user = request.getParameter("txtUser");
+                String pass = request.getParameter("txtPass");
+                if (user.equals("") || pass.equals("")) {
+                    //campos vacios
+                } else {
+                    Ciudadano c = entrarAdmi(user, pass);
+                    if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())) {
+                        response.sendRedirect("pages/tse.jsp");
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            response.sendRedirect("pages/tse_error.jsp");
+        }
     }
 
     /**

@@ -3,7 +3,6 @@
     Created on : 25-sep-2016, 1:33:21
     Author     : JH
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,7 +50,7 @@
             </div>
             <div class="row clearfix" >
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <img src="../images/TSE.png" width="100%"/>
+                    
                 </div>
 
             </div>
