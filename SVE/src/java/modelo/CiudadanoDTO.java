@@ -47,7 +47,7 @@ public class CiudadanoDTO {
                 c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             con.desconectar();
         }
@@ -82,7 +82,7 @@ public class CiudadanoDTO {
                 c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             con.desconectar();
         }
@@ -120,7 +120,7 @@ public class CiudadanoDTO {
                 c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             con.desconectar();
         }
@@ -156,7 +156,7 @@ public class CiudadanoDTO {
                 c.setRol(rs.getString("tipo"));
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             con.desconectar();
         }
@@ -205,7 +205,7 @@ public class CiudadanoDTO {
                 return false;
             }
         } //usuarios secundarios
-        else if (tipo == 5 || (tipo >= 7 && tipo <= 10)) {
+        else if (tipo == 5 || (tipo >= 7 && tipo <= 11)) {
             query = "select agregarSecundario(?,?,?)";
             try {
                 pst = con.getCnn().prepareStatement(query);
@@ -230,7 +230,55 @@ public class CiudadanoDTO {
 
         return false;
     }
-
+    
+    /*
+    solo se pueden modificar usuarios principales, obteniendo los datos
+    del objeto que se para por parametro y retornando true si se actualizo 
+    correctamente o false si hubo un error.
+    no se pueden modificar usuarios secundarios, ya que el procedimiento
+    agregarUsuario que esta arriba, cuando se trata de un usuario secundario
+    no hace registros, solo actualiza el tipo de usuario
+    */
+    public static boolean modificarUsuario(Ciudadano c) {
+        int tipo = c.getTipoUsuario();
+        String query;
+        //usuarios principales
+        if (tipo == 2 || tipo == 3 || tipo == 6) {
+            query = "select modificarPrincipal(?,?,?,?,?,?,?,?,?,?)";
+            try {
+                pst = con.getCnn().prepareStatement(query);
+                pst.setInt(1, c.getIdUsuario());
+                pst.setString(2, c.getNumDui());
+                pst.setString(3, c.getContrasenia());
+                pst.setString(4, c.getNombre());
+                pst.setString(5, c.getApellido());
+                pst.setString(6, String.valueOf(c.getFechaNac()));
+                pst.setString(7, c.getSexo());
+                pst.setString(8, c.getDireccion());
+                pst.setInt(9, c.getIdMunicipio());
+                pst.setInt(10, tipo);
+                rs = pst.executeQuery();
+                /*
+                 el procedimiento almacenado agregar principal 
+                 */
+                while (rs.next()) {
+                    if (rs.getString("modificarPrincipal").equals("t")) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } catch (SQLException ex) {
+                System.out.println(pst);
+                Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        } 
+        else {
+            return false;
+        }
+        return false;
+    }
     /*
      se recibe como parametro el id de un usuario, por medio del cual se hace
      una consulta retornando un objeto Ciudadano con la informacion de este usuario,
@@ -377,8 +425,50 @@ public class CiudadanoDTO {
         }
         return lista;
     }
+    
+    /*
+    el metodo busca a los ciudadanos que estan en los registros de padronelecoral
+    mediante el diu, que es el parametro de entrada
+    cuando se encuentra el registra, se retorna un objet Ciudadano con la informacion
+    del votante, en caso contrario se retorna un objeto vacio
+    */
+    public static Ciudadano mostrarVotante(String dui) {
+        Ciudadano c = new Ciudadano();
+        String query = "select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u inner join usuariopadron up on u.id_usuario = up.id_usuario inner join padronelectoral p on p.num_dui = up.num_dui inner join municipio m on m.id_municipio = p.id_municipio where p.num_dui = ?";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            pst.setString(1, dui);
+            rs = pst.executeQuery();
+            while(rs.next()) {
+                c.setIdUsuario(rs.getInt("id_usuario"));
+                c.setNumDui(rs.getString("num_dui"));
+                c.setContrasenia(rs.getString("contrasenia"));
+                c.setNombre(rs.getString("nombre"));
+                c.setApellido(rs.getString("apellido"));
+                c.setSexo(rs.getString("sexo"));
+                c.setConfirmacion(rs.getInt("confirmacion"));
+                c.setTipoUsuario(rs.getInt("id_tipo_usuario"));
+                c.setFechaNac(rs.getString("fecha_nac"));
+                c.setDireccion(rs.getString("direccion_especifica"));
+                c.setIdMunicipio(rs.getInt("id_municipio"));
+                c.setIdDepartamento(rs.getInt("id_departamento"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
+    }
 
     public static void main(String[] args) {
+        /*
+        Ciudadano c = mostrarVotante("00000015-0");
+        if(c.getIdMunicipio() != 0) {
+            System.out.println("Hola: " + c.getNombre());
+            System.out.println("Tu eres: " + c.getNumDui());
+        } else {
+            System.out.println("Votante no encontrado");
+        }
+        */
         /*
          ArrayList<Ciudadano> lista = mostrarUsuarios(11, 0);
          if (lista.size() > 0) {
@@ -424,7 +514,8 @@ public class CiudadanoDTO {
          */
         /*
          Ciudadano c = new Ciudadano();
-         c.setNumDui("00000021-0");
+         c.setIdUsuario(68);
+         c.setNumDui("00000125-0");
          c.setContrasenia("11111");
          c.setNombre("Maria");
          c.setApellido("Pilar");
@@ -434,7 +525,7 @@ public class CiudadanoDTO {
          c.setIdMunicipio(2);
          c.setTipoUsuario(2);
 
-         if(agregarUsuario(c)) {
+         if(modificarUsuario(c)) {
          System.out.println("Usuario agregado");
          }
          else {
