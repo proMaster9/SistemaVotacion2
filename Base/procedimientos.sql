@@ -301,7 +301,7 @@ $body$
 declare
 	id int;
 begin
-	if(tipo = 5 or (tipo >= 7 and tipo <= 10 )) then
+	if(tipo = 5 or (tipo >= 7 and tipo <= 11 )) then
 		/*se comprueba que el dui exista en los registros del cnr*/	
 		if exists(select * from padronelectoral where num_dui = _num_dui) then
 			select u.id_usuario into id from usuariopadron u where u.num_dui = _num_dui;
