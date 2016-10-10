@@ -6,15 +6,11 @@
 
 <%@page contentType="text/html" import="java.util.*" pageEncoding="UTF-8" session="true"%>
 <%
-    HttpSession sesion = request.getSession();
-    String user = (String) sesion.getAttribute("user");
-    String rol = (String) sesion.getAttribute("rol");
-    int idTipo = (Integer) sesion.getAttribute("idTipo");
-    if (user == null && rol==null) {
-        System.out.println("prueba"+sesion.getAttribute("user"));
+    HttpSession usuario = request.getSession();
+    String us=(String)usuario.getAttribute("usuario");
+    if (usuario.getAttribute("user") == null) {
+         String error = "Session Caducada";
         response.sendRedirect("login/admin/tse_admin.jsp");
-    } else {
-
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,7 +24,7 @@
     </head>
 
     <body class="theme-light-blue">
-
+        
         <jsp:include page="modulos/loader.jsp"/>
         <!-- Overlay For Sidebars -->
         <div class="overlay"></div>
@@ -41,17 +37,7 @@
             <!-- Left Sidebar -->
             <aside id="leftsidebar" class="sidebar">
                 <!-- Menu -->
-                <%
-                    if(idTipo==1){
-                %>
-                <jsp:include page="modulos/menu_admin.jsp"/>
-                <%
-                    }else if(idTipo==2){
-                %>
-                <jsp:include page="modulos/menu_magistrado.jsp"/>
-                <%
-                    }
-                %>
+                <jsp:include page="modulos/menu-admin.jsp"/>
                 <!-- #Menu -->
                 <!-- Footer -->
                 <jsp:include page="modulos/footer.jsp"/>
@@ -73,7 +59,7 @@
             </div>
             <div class="row clearfix" >
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <%=user%>
+<%=us%>
                 </div>
 
             </div>
@@ -82,6 +68,8 @@
     </body>
 </html>
 <%
+  } else {
+       
     }
 
 %>

@@ -3,17 +3,19 @@
     Created on : 25-sep-2016, 15:09:02
     Author     : JH
 --%>
+<%@page import="modelo.Ciudadano"%>
+<%@page import="java.util.ArrayList"%>
 <%
     HttpSession sesion = request.getSession();
-    String rol = (String) sesion.getAttribute("rol");
-    String user = (String) sesion.getAttribute("user");
+    ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>)sesion.getAttribute("usuario");
 %>
 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-    <img src="../images/avatar.png" class="ico-user" alt="User"><%=user%>
+    <img src="../images/avatar.png" class="ico-user" alt="User">
+    <small><%=usuario.get(0).getNombre()%> <%=usuario.get(0).getApellido()%></small>
 </a>
 <ul class="dropdown-menu">
     <li class="header">
-        <%=user%><%=rol%>
+        <%=usuario.get(0).getNombre()%> <%=usuario.get(0).getRol()%>
     </li>
     <li class="body">
         <ul class="menu">
