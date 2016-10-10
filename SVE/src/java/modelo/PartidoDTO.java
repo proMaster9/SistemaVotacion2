@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static modelo.CentroVotacionDTO.mostrarCentro;
 
 public class PartidoDTO {
 
@@ -57,11 +58,18 @@ public class PartidoDTO {
     aca el objeto que se pasa por parametros obligatoriamente debe llevar un 
     valor en un atributo idPartido para poder hacer la operacion.
     cuando no hay errores se retorna verdadero, en caso contrario 
-    la funcion retorna falso
+    la funcion retorna falso.
+    tambien se quita el privilegio al antiguo director de centro de votaciones,
+    y se le da ese privilegio al nuevo director de centro de votaciones
     */
     public static boolean modificarPartido(Partido p) {
         String query = "update partido set nombre=?, acronimo=?, num_dui=?, imagen=?  where id_partido=?";
         try {
+            //quitando privilegios a ex representante de partido
+            Ciudadano exrepresentante = CiudadanoDTO.mostrarVotante(mostrarPartido(p.getIdPartido()).getNumDui());
+            exrepresentante.setTipoUsuario(11);
+            CiudadanoDTO.agregarUsuario(exrepresentante);
+            
             pst = con.getCnn().prepareStatement(query);
             pst.setString(1, p.getNombre());
             pst.setString(2, p.getAcronimo());
@@ -70,6 +78,10 @@ public class PartidoDTO {
             pst.setInt(5, p.getIdPartido());
             pst.executeUpdate();
 
+            //dando privilegios al nuevo representante de partido
+            Ciudadano representante = CiudadanoDTO.mostrarVotante(p.getNumDui());
+            representante.setTipoUsuario(5);
+            CiudadanoDTO.agregarUsuario(representante);
         } catch (Exception e) {
             Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, e);
             return false;
@@ -152,5 +164,6 @@ public class PartidoDTO {
         }
         return partido;
     }
+
 
 }
