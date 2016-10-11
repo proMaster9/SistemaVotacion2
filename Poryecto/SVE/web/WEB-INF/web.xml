@@ -20,6 +20,26 @@
         <servlet-name>CerrarSesion</servlet-name>
         <servlet-class>controlador.CerrarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerAdmin</servlet-name>
+        <servlet-class>controlador.SerAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerDirectorTSE</servlet-name>
+        <servlet-class>controlador.SerDirectorTSE</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerGestorJRV</servlet-name>
+        <servlet-class>controlador.SerGestorJRV</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerMagistrado</servlet-name>
+        <servlet-class>controlador.SerMagistrado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerRepresentanteCNR</servlet-name>
+        <servlet-class>controlador.SerRepresentanteCNR</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SesionUsuario</servlet-name>
         <url-pattern>/sesion_usuario</url-pattern>
@@ -39,6 +59,26 @@
     <servlet-mapping>
         <servlet-name>CerrarSesion</servlet-name>
         <url-pattern>/cerrar_sesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAdmin</servlet-name>
+        <url-pattern>/SerAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerDirectorTSE</servlet-name>
+        <url-pattern>/SerDirectorTSE</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGestorJRV</servlet-name>
+        <url-pattern>/SerGestorJRV</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerMagistrado</servlet-name>
+        <url-pattern>/SerMagistrado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerRepresentanteCNR</servlet-name>
+        <url-pattern>/SerRepresentanteCNR</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
