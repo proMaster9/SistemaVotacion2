@@ -94,7 +94,7 @@ public class SerDirectorTSE extends HttpServlet {
                 sup.setPais(pais);
                 sup.setOrganizacion(organizacion);
                 if (SupervisorDTO.agregarSupervisor(sup)) {
-                    response.sendRedirect("pages/Prueba.jsp");
+                    response.sendRedirect("pages/supervisor_externo.jsp");
                 } else {
                     //en caso de error
                     out.print("Error");

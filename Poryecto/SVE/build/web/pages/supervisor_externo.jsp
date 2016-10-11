@@ -115,7 +115,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header bg-light-blue">
-                            <h2>Agregar Supervisor Externo</h2>
+                            <h2><i class="material-icons col-green icons-align">group_add</i>  Agregar Supervisor Externo </h2>
                             <ul class="header-dropdown m-r-0">
                                 <li>
                                     <a href="javascript:void(0);">
@@ -133,90 +133,93 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                    <div class="row clearfix">
-                                        <div class="demo-google-material-icon">
-                                            <i class="material-icons col-green icons-align">group_add</i>
-                                            <span>Registrar Supervisor</span>
-                                        </div>
-                                    </div>
                                     <form method="post" action="../SerDirectorTSE" name="frmSupervisor">
-                                        <div class="row clearfix">
-                                            <input type="hidden" name="usuario" value="supervisor">
-                                            <input type="hidden" name="txtIdUsuario">
-                                        </div>
+                                        <div class="card">
+                                            <div class="body table-responsive">
+                                                <div class="row clearfix">
+                                                    <input type="hidden" name="usuario" value="supervisor">
+                                                    <input type="hidden" name="txtIdUsuario">
+                                                </div>
 
-                                        <div class="row clearfix">
-                                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
-                                                <label>Identificación:</label>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="txtIdentificacion" placeholder="Ingresar identificación:">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
+                                                        <label>Identificación:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" class="form-control" name="txtIdentificacion" placeholder="Ingresar identificación:">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row clearfix">
-                                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
-                                                <label>Nombre:</label>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="txtNombre" placeholder="Ingresar nombre">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
+                                                        <label>Nombre:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" class="form-control" name="txtNombre" placeholder="Ingresar nombre">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row clearfix">
-                                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
-                                                <label>Apellido:</label>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="txtApellido" placeholder="Ingresar apellido">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
+                                                        <label>Apellido:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" class="form-control" name="txtApellido" placeholder="Ingresar apellido">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row clearfix">
-                                            <div class="col-md-12">
-                                                <div class="form-group align-center">
-                                                    <input type="radio" name="txtSexo" value="m">M
-                                                    <input type="radio" name="txtSexo" value="f">F
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
+                                                        <label>Género:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
+                                                        <div class="form-group">
+                                                            <input type="radio" name="txtSexo" id="male" class="with-gap">
+                                                            <label for="male">Hombre</label>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row clearfix">
-                                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
-                                                <label>País:</label>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="txtPais" placeholder="Ingresar país">
+                                                            <input type="radio" name="txtSexo" id="female" class="with-gap">
+                                                            <label for="female" class="m-l-20">Mujer</label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row clearfix">
-                                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
-                                                <label>Organización:</label>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="txtOrganizacion" placeholder="Ingresar organización">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
+                                                        <label>País:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" class="form-control" name="txtPais" placeholder="Ingresar país">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6 form-control-label">
+                                                        <label>Organización:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" class="form-control" name="txtOrganizacion" placeholder="Ingresar organización">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn bg-light-blue waves-effect" name="btnAgregar">Agregar</button>
+                                                <button type="reset" class="btn bg-light-blue waves-effect">Limpiar</button>
+                                                <button type="submit" class="btn bg-light-blue waves-effect" name="btnModificar">Modificar</button>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn bg-light-blue waves-effect" name="btnAgregar">Agregar</button>
-                                        <button type="reset" class="btn bg-light-blue waves-effect">Limpiar</button>
-                                        <button type="submit" class="btn bg-light-blue waves-effect" name="btnModificar">Modificar</button>
                                     </form>
 
                                 </div>
@@ -227,8 +230,8 @@
                                             <div class="card">
                                                 <div class="header">
                                                     <h2>
-                                                        Usuarios a Registrar
-                                                        <small>Al registrar los usuairos podran tener acceso al sistema</small>
+                                                        Supervisores Registrados
+                                                        <small>Usuarios activos en el sistema</small>
                                                     </h2>
                                                 </div>
                                                 <div class="body table-responsive">
@@ -241,7 +244,7 @@
                                                                 <th>Sexo</th>
                                                                 <th>País</th>
                                                                 <th>Organización</th>
-                                                                <th>Acciones:</th>
+                                                                <th >Acciones:</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -257,8 +260,8 @@
                                                                 <td><%= lista.getPais()%></td>
                                                                 <td><%= lista.getOrganizacion()%></td>
                                                                 <td>
-                                                                    <a href="javascript:modificarSupervisor('<%= lista.getIdUsuario()%>','<%= lista.getIdentificacion()%>','<%= lista.getNombre()%>','<%= lista.getApellido()%>','<%= lista.getSexo()%>','<%= lista.getPais()%>','<%= lista.getOrganizacion()%>')">Modificar</a>
-                                                                    <a href="../SerDirectorTSE?idSupervisor=<%= lista.getIdUsuario()%>">Eliminar</a>
+                                                                    <a class="btn bg-grey" href="javascript:modificarSupervisor('<%= lista.getIdUsuario()%>','<%= lista.getIdentificacion()%>','<%= lista.getNombre()%>','<%= lista.getApellido()%>','<%= lista.getSexo()%>','<%= lista.getPais()%>','<%= lista.getOrganizacion()%>')">Modificar</a>
+                                                                    <a  class="btn bg-blue-grey" href="../SerDirectorTSE?idSupervisor=<%= lista.getIdUsuario()%>">Eliminar</a>
                                                                 </td>
                                                             </tr>
                                                             <% }%>

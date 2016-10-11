@@ -47,7 +47,7 @@
 <script src="../js/pages/forms/form-wizard.js"></script>
 <script src="../js/pages/cards/colored.js"></script>
 <script src="../js/pages/tables/jquery-datatable.js"></script>
-<script src="../js/pages/forms/basic-form-elements.js"></script>
+
 
 <!-- Demo Js -->
 <script src="../js/demo.js"></script>
