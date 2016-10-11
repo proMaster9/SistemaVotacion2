@@ -3,6 +3,7 @@ package org.apache.jsp.pages;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import modelo.Ciudadano;
 import java.util.*;
 
 public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -45,10 +46,19 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
 
-    HttpSession usuario = request.getSession();
-    String us = (String) usuario.getAttribute("user");
-    if (usuario.getAttribute("user") != null) {
+    HttpSession sesion = request.getSession();
+    ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>)sesion.getAttribute("usuario");
+    if(usuario==null){
+        response.sendRedirect("../");//redireccionamiento a una pagina de error del sevidor
+    }
+    
+    if (usuario.get(0).getNumDui()== null && usuario.get(0).getRol()==null) {
+        System.out.println("prueba"+sesion.getAttribute("user"));
+        response.sendRedirect("../");
+    } else {
+
 
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
@@ -83,7 +93,33 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <aside id=\"leftsidebar\" class=\"sidebar\">\r\n");
       out.write("                <!-- Menu -->\r\n");
       out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu-admin.jsp", out, false);
+
+                    if(usuario.get(0).getTipoUsuario()==1){
+                
+      out.write("\r\n");
+      out.write("                ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu_admin.jsp", out, false);
+      out.write("\r\n");
+      out.write("                ");
+
+                    }else if(usuario.get(0).getTipoUsuario()==2){
+                
+      out.write("\r\n");
+      out.write("                ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu_magis.jsp", out, false);
+      out.write("\r\n");
+      out.write("                ");
+
+                    }else if(usuario.get(0).getTipoUsuario()==3){
+                
+      out.write("\r\n");
+      out.write("                ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu_cnr.jsp", out, false);
+      out.write("\r\n");
+      out.write("                ");
+
+                    }
+                
       out.write("\r\n");
       out.write("                <!-- #Menu -->\r\n");
       out.write("                <!-- Footer -->\r\n");
@@ -111,7 +147,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"row clearfix\" >\r\n");
       out.write("                <div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12\">\r\n");
       out.write("                    ");
-      out.print(us);
+      out.print(usuario.get(0).getNombre());
       out.write("\r\n");
       out.write("                </div>\r\n");
       out.write("\r\n");
@@ -123,9 +159,6 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </body>\r\n");
       out.write("</html>\r\n");
 
-    } else {
-        String error = "Session Caducada";
-        //response.sendRedirect("login/admin/tse_admin.jsp");
     }
 
 
