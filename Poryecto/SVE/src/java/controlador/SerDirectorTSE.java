@@ -11,6 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Ciudadano;
+import modelo.CiudadanoDTO;
+import modelo.Partido;
+import modelo.PartidoDTO;
+import modelo.SupervisorDTO;
+import modelo.SupervisorExt;
 
 /**
  *
@@ -30,18 +36,7 @@ public class SerDirectorTSE extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SerDirectorTSE</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SerDirectorTSE at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        PrintWriter out = response.getWriter();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,6 +52,16 @@ public class SerDirectorTSE extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        if(request.getParameter("idSupervisor") != null) {
+            int id = Integer.parseInt(request.getParameter("idSupervisor"));
+            if(SupervisorDTO.eliminarSupervisor(id)) {
+                response.sendRedirect("pages/Prueba.jsp");
+            }
+            else {
+                out.print("Error");
+            }
+        }
     }
 
     /**
@@ -71,6 +76,97 @@ public class SerDirectorTSE extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        if (request.getParameter("btnAgregar") != null) {
+            if ("supervisor".equals(request.getParameter("usuario"))) {
+                String identificacion = request.getParameter("txtIdentificacion");
+                String nombre = request.getParameter("txtNombre");
+                String apellido = request.getParameter("txtApellido");
+                String sexo = request.getParameter("txtSexo");
+                String pais = request.getParameter("txtPais");
+                String organizacion = request.getParameter("txtOrganizacion");
+                SupervisorExt sup = new SupervisorExt();
+                sup.setIdentificacion(identificacion);
+                sup.setContrasenia("12345");
+                sup.setNombre(nombre);
+                sup.setApellido(apellido);
+                sup.setSexo(sexo);
+                sup.setPais(pais);
+                sup.setOrganizacion(organizacion);
+                if (SupervisorDTO.agregarSupervisor(sup)) {
+                    response.sendRedirect("pages/Prueba.jsp");
+                } else {
+                    //en caso de error
+                    out.print("Error");
+                }
+            }
+        }
+
+        if (request.getParameter("btnModificar") != null) {
+            if ("supervisor".equals(request.getParameter("usuario"))) {
+                int id = Integer.parseInt(request.getParameter("txtIdUsuario"));
+                String identificacion = request.getParameter("txtIdentificacion");
+                String nombre = request.getParameter("txtNombre");
+                String apellido = request.getParameter("txtApellido");
+                String sexo = request.getParameter("txtSexo");
+                String pais = request.getParameter("txtPais");
+                String organizacion = request.getParameter("txtOrganizacion");
+                SupervisorExt sup = new SupervisorExt();
+                sup.setIdUsuario(id);
+                sup.setIdentificacion(identificacion);
+                sup.setContrasenia("12345");
+                sup.setNombre(nombre);
+                sup.setApellido(apellido);
+                sup.setSexo(sexo);
+                sup.setPais(pais);
+                sup.setOrganizacion(organizacion);
+                if (SupervisorDTO.modificarSupervisor(sup)) {
+                    response.sendRedirect("pages/Prueba.jsp");
+                } else {
+                    //en caso de error
+                    out.print("Error");
+                }
+            }
+        }
+        
+        //procesando datos del publicista
+        if(request.getParameter("duiPublicista") != null) {
+            Ciudadano c = CiudadanoDTO.mostrarVotante(request.getParameter("duiPublicista"));
+            if(c.getIdUsuario() != 0) {
+                c.setTipoUsuario(9);
+                c.setApellido("12345");
+                if(CiudadanoDTO.agregarUsuario(c)) {
+                    out.println("Publicista agregado");
+                    out.println("Nombre: " + c.getNombre() + "<br>");
+                    out.println("Apellido: " + c.getApellido() + "<br>");
+                    out.println("Sexo: " + c.getSexo() + "<br>");
+                } 
+                else {
+                    out.println("Error al modificar");
+                }
+
+            } else {
+                out.println("Ciudadano no encontrado");
+            }
+        }
+        
+        //procesando datos de partido
+        if(request.getParameter("btnAgregarPartido") != null) {
+            String acronimo = request.getParameter("txtAcronimo");
+            String nombre = request.getParameter("txtNombre");
+            String representante = request.getParameter("txtRepresentante");
+            Partido p = new Partido();
+            p.setAcronimo(acronimo);
+            p.setNombre(nombre);
+            p.setNumDui(representante);
+            p.setImagen("...");
+            if(PartidoDTO.agregarPartido(p)) {
+                response.sendRedirect("pages/Prueba.jsp");
+            }
+            else {
+            
+            }
+        }
     }
 
     /**
