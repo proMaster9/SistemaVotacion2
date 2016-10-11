@@ -85,7 +85,9 @@
         } else {
             response.sendRedirect("notificacion/tse_aviso.jsp");
         }
+
     }else if(sesion.getAttribute("key") != null){
         response.sendRedirect("../cerrar_sesion");
+        System.out.println("fdfdfdf"+sesion.getAttribute("key"));
     }
 %>
