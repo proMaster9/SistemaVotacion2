@@ -85,7 +85,7 @@ public class SesionAdmin extends HttpServlet {
             if(sesion.getAttribute("key")!=null){
                 sesion.invalidate();
             }
-            if (request.getParameter("entrarPrincipal") != null) {
+            if (request.getParameter("entrarAdmin") != null) {
                 String user = request.getParameter("txtUser");
                 String pass = request.getParameter("txtPass");
                 if (!user.equals("") && !pass.equals("")) {
