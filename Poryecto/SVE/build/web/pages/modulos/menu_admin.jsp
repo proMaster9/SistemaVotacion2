@@ -9,7 +9,7 @@
     HttpSession sesion = request.getSession();
     ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>)sesion.getAttribute("usuario");
     
-    if(1==1){
+    if(usuario.get(0).getTipoUsuario()==1){
 %>
 <div class="menu">
     <ul class="list">

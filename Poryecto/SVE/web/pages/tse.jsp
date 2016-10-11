@@ -10,7 +10,7 @@
     HttpSession sesion = request.getSession();
     ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>) sesion.getAttribute("usuario");
     if (usuario != null) {
-        if (usuario.get(0).getNumDui() != null && usuario.get(0).getNumDui() != null && sesion.getAttribute("key") != null) {
+        if (usuario.get(0).getNumDui() != null && usuario.get(0).getContrasenia() != null && sesion.getAttribute("key") != null) {
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -50,6 +50,10 @@
                 %>
                 <jsp:include page="modulos/menu_cnr.jsp"/>
                 <%
+                } else if (usuario.get(0).getTipoUsuario() == 6) {
+                %>
+                <jsp:include page="modulos/menu_director_tse.jsp"/>
+                <%
                     }
                 %>
                 <!-- #Menu -->
@@ -86,8 +90,7 @@
             response.sendRedirect("notificacion/tse_aviso.jsp");
         }
 
-    }else if(sesion.getAttribute("key") != null){
-        response.sendRedirect("../cerrar_sesion");
-        System.out.println("fdfdfdf"+sesion.getAttribute("key"));
+    }else {
+        response.sendRedirect("login/tse_usuario.jsp");
     }
 %>

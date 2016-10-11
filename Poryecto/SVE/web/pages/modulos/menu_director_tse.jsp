@@ -1,6 +1,6 @@
 <%-- 
-    Document   : menu-admin
-    Created on : 25-sep-2016, 15:11:32
+    Document   : menu_director_cnr
+    Created on : 11-oct-2016, 1:51:59
     Author     : Icchigo
 --%>
 <%@page import="modelo.Ciudadano"%>
@@ -9,7 +9,7 @@
     HttpSession sesion = request.getSession();
     ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>)sesion.getAttribute("usuario");
     
-    if(usuario.get(0).getTipoUsuario()==1){
+    if(usuario.get(0).getTipoUsuario()==6){
 %>
 <div class="menu">
     <ul class="list">
@@ -20,31 +20,18 @@
                 <span>Inicio</span>
             </a>
         </li>
-        <li class="header">Configuración del Sistema</li>
         <li>
             <a href="javascript:void(0);" class="menu-toggle">
-                <i class="material-icons col-black">settings</i>
-                <span>Configuraciones</span>
+                <i class="material-icons col-black">person</i>
+                <span>Usuarios</span>
             </a>
             <ul class="ml-menu">
                 <li>
-                    <a href="configuracion_inicial.jsp">Configuracion Inicial</a>
-                </li>
-                <li>
-                    <a href="apertura_jrv.jsp">Apertura de JRV</a>
-                </li>
-                <li>
-                    <a href="cierre_jrv.jsp">Cierre de JRV</a>
+                    <a href="supervisor_externo.jsp">Supervisor Externo</a>
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="importar_registros.jsp">
-                <i class="material-icons col-black">cloud_upload</i>
-                <span>Imporatar Registros CNR</span>
-            </a>
-        </li>
-
+        <li class="header">Configuración del Sistema</li>
     </ul>
 </div>
 <%

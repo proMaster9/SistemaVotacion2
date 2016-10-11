@@ -56,7 +56,7 @@ public class SerDirectorTSE extends HttpServlet {
         if(request.getParameter("idSupervisor") != null) {
             int id = Integer.parseInt(request.getParameter("idSupervisor"));
             if(SupervisorDTO.eliminarSupervisor(id)) {
-                response.sendRedirect("pages/Prueba.jsp");
+                response.sendRedirect("pages/supervisor_externo.jsp");
             }
             else {
                 out.print("Error");
@@ -121,7 +121,7 @@ public class SerDirectorTSE extends HttpServlet {
                 sup.setPais(pais);
                 sup.setOrganizacion(organizacion);
                 if (SupervisorDTO.modificarSupervisor(sup)) {
-                    response.sendRedirect("pages/Prueba.jsp");
+                    response.sendRedirect("pages/supervisor_externo.jsp");
                 } else {
                     //en caso de error
                     out.print("Error");
@@ -161,7 +161,7 @@ public class SerDirectorTSE extends HttpServlet {
             p.setNumDui(representante);
             p.setImagen("...");
             if(PartidoDTO.agregarPartido(p)) {
-                response.sendRedirect("pages/Prueba.jsp");
+                response.sendRedirect("pages/supervisor_externo.jsp");
             }
             else {
             
