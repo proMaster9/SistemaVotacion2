@@ -68,6 +68,7 @@ public class SerCiudadano extends HttpServlet {
         if(request.getParameter("txtDui") != null) {
             Ciudadano c = CiudadanoDTO.mostrarVotante(request.getParameter("txtDui"));
             if(c.getIdMunicipio() != 0) {
+                out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='1'>");
                 out.print("Nombre: " + c.getNombre() + "<br>");
                 out.print("Apellido: " + c.getApellido() + "<br>");
                 if(c.getSexo().equals("m")) {
@@ -75,9 +76,11 @@ public class SerCiudadano extends HttpServlet {
                 } else {
                     out.print("Genero: Femenino<br>");
                 }
-                out.print("<input type='submit' value='Agregar' name='btnAgregar'> ");
             }
+            //en caso de que no se encuentre, ademas del mensaje, se imprime una caja de texto con un 0
+            //esta sirve para comprobar el resultado de la busqueda
             else {
+                out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='0'>");
                 out.println("Ciudadano no encontrado");
             }
         }
