@@ -45,7 +45,7 @@ public class SerDirectorTSE extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+        //ruta absoluta en donde se guardan las imagenes de partidos
         String ruta = "/home/carlos/SistemaVotacion2/Proyecto/SVE/web/images/files/partidos/";
         Partido p = new Partido();
         int accion = 1; //1=gregar  2=modificar
@@ -76,15 +76,13 @@ public class SerDirectorTSE extends HttpServlet {
                             item.write(archivo);
                             if (archivo.exists()) {
                                 p.setImagen(nombre);
-                                out.println("GUARDADO " + archivo.getAbsolutePath() + "</p>");
                             } else {
                                 out.println("FALLO AL GUARDAR. NO EXISTE " + archivo.getAbsolutePath() + "</p>");
                             }
-                            out.println("Finalizado");
                         }
                     } else {
+                        //se reciben los campos de texto enviados y se igualan a los atributos del objeto
                         if (item.getFieldName().equals("txtAcronimo")) {
-                            out.print("Nombre: " + item.getString());
                             p.setAcronimo(item.getString());
                         }
                         if (item.getFieldName().equals("txtNombre")) {
@@ -93,27 +91,29 @@ public class SerDirectorTSE extends HttpServlet {
                         if (item.getFieldName().equals("txtDui")) {
                             p.setNumDui(item.getString());
                         }
-                        if (item.getFieldName().equals("txtId")) {
-                            if (item.getString().length() > 0) {
-                                p.setIdPartido(Integer.parseInt(item.getString()));
-                                accion = 2;
-                            }
+                        if(item.getFieldName().equals("txtId")) {
+                            p.setIdPartido(Integer.parseInt(item.getString()));
                         }
+  
                     }
+                }         
+                //si no se selecciono una imagen distinta, se conserva la imagen anterior
+                if(p.getImagen() == null) {
+                    p.setImagen(PartidoDTO.mostrarPartido(p.getIdPartido()).getImagen());
                 }
-                if (accion == 1) {
-                    if (PartidoDTO.agregarPartido(p)) {
+
+                //cuando se presiona el boton de agregar
+                if(p.getIdPartido() == 0) {
+                     if (PartidoDTO.agregarPartido(p)) {
                         response.sendRedirect("pages/crud_partidos.jsp");
                     } else {
                         //cambiar por alguna accion en caso de error
                         out.print("Error al insertar");
                     }
-                } else if (accion == 2) {
-                    String imagen = PartidoDTO.mostrarPartido(p.getIdPartido()).getImagen();
-                    if (p.getImagen().equals("")) {
-                        p.setImagen(imagen);
-                    }
-                    if (PartidoDTO.modificarPartido(p)) {
+                } 
+                //cuando se presiona el boton de modificar
+                else {
+                    if(PartidoDTO.modificarPartido(p)) {
                         response.sendRedirect("pages/crud_partidos.jsp");
                     } else {
                         out.print("Error al modificar");
@@ -144,12 +144,24 @@ public class SerDirectorTSE extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
+        //eliminar registro de suervisores
         if (request.getParameter("idSupervisor") != null) {
             int id = Integer.parseInt(request.getParameter("idSupervisor"));
             if (SupervisorDTO.eliminarSupervisor(id)) {
                 response.sendRedirect("pages/supervisor_externo.jsp");
             } else {
                 out.print("Error");
+            }
+        }
+        
+        //eliminar registro de partido
+        if(request.getParameter("idPartido") != null) {
+            int id = Integer.parseInt(request.getParameter("idPartido"));
+            if(PartidoDTO.eliminarPartido(id)) {
+                response.sendRedirect("pages/crud_partidos.jsp");
+            }
+            else {
+                out.print("Error al eliminar");
             }
         }
     }
@@ -167,6 +179,7 @@ public class SerDirectorTSE extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
+        //se agrega un supervisor
         if (request.getParameter("btnAgregar") != null) {
             if ("supervisor".equals(request.getParameter("usuario"))) {
                 String identificacion = request.getParameter("txtIdentificacion");
@@ -192,6 +205,7 @@ public class SerDirectorTSE extends HttpServlet {
             }
         }
 
+        //se modifica un supervisor
         if (request.getParameter("btnModificar") != null) {
             if ("supervisor".equals(request.getParameter("usuario"))) {
                 int id = Integer.parseInt(request.getParameter("txtIdUsuario"));
@@ -236,15 +250,6 @@ public class SerDirectorTSE extends HttpServlet {
 
             } else {
                 out.println("Ciudadano no encontrado");
-            }
-        }
-
-        //procesando datos de partido
-        if (request.getParameter("txtDui") != null) {
-            Ciudadano c = CiudadanoDTO.mostrarVotante(request.getParameter("txtDui"));
-            if (c.getIdUsuario() != 0) {
-                out.println("Nombre: " + c.getNombre() + "<br>");
-                out.println("Apellido: " + c.getApellido() + "<br>");
             }
         }
 
