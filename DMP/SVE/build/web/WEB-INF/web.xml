@@ -8,6 +8,54 @@
         <servlet-name>SerUsuariosPrincipales</servlet-name>
         <servlet-class>controlador.SerUsuariosPrincipales</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerCiudadano</servlet-name>
+        <servlet-class>controlador.SerCiudadano</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerCentroVotacion</servlet-name>
+        <servlet-class>controlador.SerCentroVotacion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerPartido</servlet-name>
+        <servlet-class>controlador.SerPartido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerCandidato</servlet-name>
+        <servlet-class>controlador.SerCandidato</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerJRV</servlet-name>
+        <servlet-class>controlador.SerJRV</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerPregunta</servlet-name>
+        <servlet-class>controlador.SerPregunta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerRespuesta</servlet-name>
+        <servlet-class>controlador.SerRespuesta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerDirectivaJRV</servlet-name>
+        <servlet-class>controlador.SerDirectivaJRV</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerPublicidad</servlet-name>
+        <servlet-class>controlador.SerPublicidad</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerVoto</servlet-name>
+        <servlet-class>controlador.SerVoto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerUsuariosSecundarios</servlet-name>
+        <servlet-class>controlador.SerUsuariosSecundarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerUsuariosInvitados</servlet-name>
+        <servlet-class>controlador.SerUsuariosInvitados</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/iniciar_sesion</url-pattern>
@@ -15,6 +63,54 @@
     <servlet-mapping>
         <servlet-name>SerUsuariosPrincipales</servlet-name>
         <url-pattern>/SerUsuariosPrincipales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerCiudadano</servlet-name>
+        <url-pattern>/SerCiudadano</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerCentroVotacion</servlet-name>
+        <url-pattern>/SerCentroVotacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerPartido</servlet-name>
+        <url-pattern>/SerPartido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerCandidato</servlet-name>
+        <url-pattern>/SerCandidato</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerJRV</servlet-name>
+        <url-pattern>/SerJRV</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerPregunta</servlet-name>
+        <url-pattern>/SerPregunta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerRespuesta</servlet-name>
+        <url-pattern>/SerRespuesta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerDirectivaJRV</servlet-name>
+        <url-pattern>/SerDirectivaJRV</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerPublicidad</servlet-name>
+        <url-pattern>/SerPublicidad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerVoto</servlet-name>
+        <url-pattern>/SerVoto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerUsuariosSecundarios</servlet-name>
+        <url-pattern>/SerUsuariosSecundarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerUsuariosInvitados</servlet-name>
+        <url-pattern>/SerUsuariosInvitados</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
