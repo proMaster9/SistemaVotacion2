@@ -215,6 +215,26 @@
                 </div>
             </div>
             <!-- #END# Modal Modificar -->
+            
+            <!-- Modal CONFIRMACION Modificado -->
+            <div class="modal fade" id="modalGuardarModificacion" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="defaultModalLabel">
+                                <i class="material-icons icons-align col-light-blue">warning</i>
+                                Desea guardar la modificacion realiizada
+                            </h3>
+                        </div>                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary waves-effect">Aceptar</button>
+                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>                  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# CONFIRMACION Modificado -->
+            
             <!-- Modal Eliminar -->
             <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -233,6 +253,25 @@
                 </div>
             </div>
             <!-- #END# Modal Eliminar -->
+            
+            <!-- Modal Confirmaacion de datos guardados con exito-->
+            <div class="modal fade" id="modalDatosGuardados" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="defaultModalLabel">
+                                <i class="material-icons icons-align col-light-blue">done</i>
+                                Datos Guardados Exitosamente
+                            </h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary waves-effect">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Modal Confirmaacion de datos guardados con exito -->
+            
             <!-- Modal Info F-->
             <div class="modal fade" id="modalInfoF" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">

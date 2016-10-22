@@ -4,6 +4,10 @@
     Author     : JH
 --%>
 
+<%@page import="java.sql.Date"%>
+<%@page import="sun.awt.SunHints.Value"%>
+<%@page import="controlador.SerUsuariosPrincipales"%>
+<%@page import="modelo.Usuario"%>
 <%@page import="modelo.DepartamentoDTO"%>
 <%@page import="modelo.Departamento"%>
 <%@page import="modelo.MunicipioDTO"%>
@@ -317,37 +321,84 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Modificar</h4>
+                            <h3 class="modal-title" id="defaultModalLabel">
+                                <i class="material-icons icons-align col-light-blue">loop</i>
+                                Modificar
+                            </h3>
                         </div>
                         <div class="modal-body">
-                            Formulario para modificar
+                            <h4>
+                                ¿Desea modificar el usuario seleccionado? 
+                            </h4>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect">Guardar</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary waves-effect">Aceptar</button>
+                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- #END# Modal Modificar -->
+            <!-- Modal CONFIRMACION Modificado -->
+            <div class="modal fade" id="modalGuardarModificacion" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="defaultModalLabel">
+                                <i class="material-icons icons-align col-light-blue">warning</i>
+                                Desea guardar la modificacion realiizada
+                            </h3>
+                        </div>                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary waves-effect">Aceptar</button>
+                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>                  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# CONFIRMACION Modificado -->
             <!-- Modal Eliminar -->
             <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Eliminar</h4>
+                            <h3 class="modal-title" id="defaultModalLabel">
+                                <i class="material-icons icons-align col-light-blue">delete</i>
+                                Eliminar
+                            </h3>
                         </div>
                         <div class="modal-body">
-                            Formulario para eliminar
+                            <h4>
+                                ¿Desea eliminar el usuario seleccionado? 
+                            </h4>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect">Si, Eliminar</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">No, Cancelar</button>
+                            <button type="button" class="btn btn-primary waves-effect">Si, Eliminar</button>
+                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">No, Cancelar</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- #END# Modal Eliminar -->
+            <!-- Modal Confirmaacion de datos guardados con exito-->
+            <div class="modal fade" id="modalDatosGuardados" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="defaultModalLabel">
+                                <i class="material-icons icons-align col-light-blue">done</i>
+                                Datos Guardados Exitosamente
+                            </h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary waves-effect">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Modal Confirmaacion de datos guardados con exito -->
+            
+            
             <!-- Modal Info F-->
             <div class="modal fade" id="modalInfoF" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
