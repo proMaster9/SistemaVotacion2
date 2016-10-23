@@ -42,7 +42,27 @@ public class MunicipioDTO {
         }
         return mun;
     }
-    
+    public static ArrayList<Municipio> mostrarUnMunicipio(int idMunicipio) {
+        int id = idMunicipio;
+        String query = "select * from municipio where id_municipio = "+id;
+        ArrayList<Municipio> mun = new ArrayList();
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            rs = pst.executeQuery();
+            while(rs.next()) {
+                Municipio m = new Municipio();
+                m.setIdMunicipio(rs.getInt("id_municipio"));
+                m.setIdDepartmento(rs.getInt("id_departamento"));
+                m.setNombreMunicipio(rs.getString("nombre_municipio"));
+                mun.add(m);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MunicipioDTO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.desconectar();
+        }
+        return mun;
+    }
    public static ArrayList<Municipio> mostrarMunicipiosDep(int idDepartmento) {
         String query = "select * from municipio where id_departamento = ?";
         ArrayList<Municipio> mun = new ArrayList();

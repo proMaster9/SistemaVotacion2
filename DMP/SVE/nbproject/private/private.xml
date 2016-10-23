@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/src/java/controlador/SvAdminGestionarUsuarios.java</file>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/web/plugins/bootstrap/css/bootstrap.css</file>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/web/js/demo.js</file>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/web/plugins/bootstrap/js/bootstrap.js</file>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/web/pages/tse_usuarios_principales.jsp</file>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/web/js/admin.js</file>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/src/java/modelo/MunicipioDTO.java</file>
-            <file>file:/C:/Users/Icchigo/Desktop/SVE/SVE/web/css/style.css</file>
+            <file>file:/C:/Users/Icchigo/Documents/DMP/SistemaVotacion2/DMP/SVE/src/java/modelo/Municipio.java</file>
+            <file>file:/C:/Users/Icchigo/Documents/DMP/SistemaVotacion2/DMP/SVE/src/java/modelo/MunicipioDTO.java</file>
+            <file>file:/C:/Users/Icchigo/Documents/DMP/SistemaVotacion2/DMP/SVE/src/java/modelo/CiudadanoDTO.java</file>
+            <file>file:/C:/Users/Icchigo/Documents/DMP/SistemaVotacion2/DMP/SVE/src/java/modelo/Ciudadano.java</file>
+            <file>file:/C:/Users/Icchigo/Documents/DMP/SistemaVotacion2/DMP/SVE/src/java/controlador/SerUsuariosPrincipales.java</file>
+            <file>file:/C:/Users/Icchigo/Documents/DMP/SistemaVotacion2/DMP/SVE/web/pages/tse_usuarios_principales.jsp</file>
+            <file>file:/C:/Users/Icchigo/Documents/DMP/SistemaVotacion2/DMP/SVE/src/java/modelo/SupervisorDTO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -22,15 +22,18 @@
             $(document).on("ready", function () {
                 //agregar usuario principal
                 $("#btnAgregar").on("click",function(){
+                    var btn="agregar";
                     var tipo=$('select[id=slTipo]').val();
                     var dui=$("#txtDui").val();
                     var nom=$("#txtNombre").val();
                     var ape=$("#txtApellido").val();
-                    var sexo = $("input:radio[name=txtSexo]:checked").val();
+                    var sexo = $("input:radio[name=rdSexo]:checked").val();
                     var mun=$('select[id=slMunicipio]').val();
                     var fecha= $("#txtFecha").val();
                     var dir=$("#txtDireccion").val();
+                    alert("dato "+tipo+" "+dui+" "+nom+" "+ape+" "+sexo+" "+fecha+" "+dir+" "+mun);
                     $.post('../SerUsuariosPrincipales',{
+                        accion:btn,
                         tipo:tipo,
                         dui:dui,
                         nom:nom,
@@ -40,7 +43,7 @@
                         mun:mun,
                         dir:dir
                     },function(data){
-                        $("#mostrarUsuarios".html(data));
+                        $("#mostrarUsuarios").html(data);
                     });
                 });
             });
@@ -106,7 +109,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-9 col-xs-6">
                                         <div class="form-group">
-                                            <select class="form-control show-tick" data-live-search="true" name="slTipo">
+                                            <select class="form-control show-tick" data-live-search="true" name="slTipo" id="slTipo">
                                                 <option>Seleccione tipo usuario</option>
                                                 <option value="2">Magistrado</option>
                                                 <option value="3">Director CNR</option>
@@ -253,9 +256,8 @@
                                         <th>DUI:</th>
                                         <th>Nombre:</th>
                                         <th>Apellido:</th>
-                                        <th>Fecha Nac:</th>
+                                        <th>Sexo:</th>
                                         <th>Municipio:</th>
-                                        <th>Departamento:</th>
                                         <th>Tipo Usuario:</th>
                                         <th>Opciones:</th>
                                     </tr>
@@ -266,9 +268,8 @@
                                         <td>0000000-0</td>
                                         <td>Juan Carlos</td>
                                         <td>Lopez Avalos</td>
-                                        <td>12-06-1996</td>
+                                        <td>M</td>
                                         <td>Santa Tecla</td>
-                                        <td>Libertad</td>
                                         <td>Administrador</td>
                                         <td>
                                             <button type="button" class="btn btn2 bg-cyan waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalModificar" ><i class="material-icons">create</i></button>
@@ -276,36 +277,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
-                                        <td>0000000-1</td>
-                                        <td>Juan Marcos</td>
-                                        <td>Lopez Avalos</td>
-                                        <td>12-06-1996</td>
-                                        <td>Santa Tecla</td>
-                                        <td>Libertad</td>
-                                        <td>Administrador</td>
-                                        <td>
-                                            <button type="button" class="btn btn2 bg-cyan waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalModificar" ><i class="material-icons">create</i></button>
-                                            <button type="button" class="btn btn2 bg-grey waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalEliminar" ><i class="material-icons">delete_forever</i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>0000000-2</td>
-                                        <td>Juan Pedro</td>
-                                        <td>Lopez Avalos</td>
-                                        <td>12-06-1996</td>
-                                        <td>Santa Tecla</td>
-                                        <td>Libertad</td>
-                                        <td>Administrador</td>
-                                        <td>
-                                            <button type="button" class="btn btn2 bg-cyan waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalModificar" ><i class="material-icons">create</i></button>
-                                            <button type="button" class="btn btn2 bg-grey waves-effect m-r-0 waves-light" data-toggle="modal" data-target="#modalEliminar" ><i class="material-icons">delete_forever</i></button>
-                                        </td>
-                                    </tr>
-                                <div id="mostrarUsuarios"></div>
+                                    
                                 </tbody>
                             </table>
+                            <div id="mostrarUsuarios"></div>
                         </div>
                     </div>
                 </div>

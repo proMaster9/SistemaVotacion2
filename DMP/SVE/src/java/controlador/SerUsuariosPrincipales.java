@@ -16,6 +16,8 @@ import modelo.Ciudadano;
 import modelo.CiudadanoDTO;
 import modelo.Municipio;
 import modelo.MunicipioDTO;
+import modelo.SupervisorDTO;
+import modelo.SupervisorExt;
 
 /**
  *
@@ -76,19 +78,7 @@ public class SerUsuariosPrincipales extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        if(request.getParameter("idDepar")!=null){
-            int idDepar=Integer.valueOf(request.getParameter("idDepar"));
-
-            out.print("<option>Seleccione municipio</option>");
-            ArrayList<Municipio> mun = MunicipioDTO.mostrarMunicipios();
-            for(Municipio lista : mun){
-                if(idDepar==lista.getIdDepartmento()){
-                    out.print("<option value="+lista.getIdMunicipio()+">"+lista.getNombreMunicipio()+"</option>");
-                }
-            }
-
-        }
-        if(request.getParameter("Agregar")!=null){
+        if(request.getParameter("accion")!=null && request.getParameter("accion").equals("agregar")){
             int tipo = Integer.valueOf(request.getParameter("tipo"));
             if(tipo == 2 || tipo == 3 || tipo == 6){
                 Ciudadano ciu = new Ciudadano();
@@ -104,11 +94,49 @@ public class SerUsuariosPrincipales extends HttpServlet {
                 ciu.setTipoUsuario(tipo);
                 //enviando los datos al modelo
                 if(CiudadanoDTO.agregarUsuario(ciu)){
+                    //actualiza la tabla en la vista usuarios principales                             
+  
+                    int contador=1;
+                    //for(Ciudadano lista:CiudadanoDTO.mostrarUsuariosPrincipales()){
+                    out.print("<table class=\"table table-bordered table-striped table-hover js-basic-example dataTable\">\n" +
+"                                <thead>\n" +
+"                                    <tr>\n" +
+"                                        <th>#</th>\n" +
+"                                        <th>DUI:</th>\n" +
+"                                        <th>Nombre:</th>\n" +
+"                                        <th>Apellido:</th>\n" +
+"                                        <th>Sexo:</th>\n" +
+"                                        <th>Municipio:</th>\n" +
+"                                        <th>Tipo Usuario:</th>\n" +
+"                                        <th>Opciones:</th>\n" +
+"                                    </tr>\n" +
+"                                </thead>\n" +
+"                                <tbody>\n" +
+"                                    <tr>\n" +
+"                                        <td>1</td>\n" +
+"                                        <td>0000000-0</td>\n" +
+"                                        <td>Juan Carlos</td>\n" +
+"                                        <td>Lopez Avalos</td>\n" +
+"                                        <td>M</td>\n" +
+"                                        <td>Santa Tecla</td>\n" +
+"                                        <td>Administrador</td>\n" +
+"                                        <td>\n" +
+"                                            <button type=\"button\" class=\"btn btn2 bg-cyan waves-effect m-r-0 waves-light\" data-toggle=\"modal\" data-target=\"#modalModificar\" ><i class=\"material-icons\">create</i></button>\n" +
+"                                            <button type=\"button\" class=\"btn btn2 bg-grey waves-effect m-r-0 waves-light\" data-toggle=\"modal\" data-target=\"#modalEliminar\" ><i class=\"material-icons\">delete_forever</i></button>\n" +
+"                                        </td>\n" +
+"                                    </tr>\n" +
+"                                    <tr>\n" +
+"                                </tbody>\n" +
+"                            </table>");
+                    contador++;
+                    //}
+                    
                     
                 }else{}
             }
         }
     }
+ 
 
     /**
      * Returns a short description of the servlet.

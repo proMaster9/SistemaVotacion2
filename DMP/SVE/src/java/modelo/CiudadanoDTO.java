@@ -425,7 +425,42 @@ public class CiudadanoDTO {
         }
         return lista;
     }
-    
+    /*metodo para mostrar todos los usuarios principales en el sistema*/
+     public static ArrayList<Ciudadano> mostrarUsuariosPrincipales() {
+        String query;
+        
+        ArrayList<Ciudadano> lista = new ArrayList();
+        query = "select u.id_usuario, ct.num_dui, u.contrasenia, ex.nombre, ex.apellido, ex.sexo, u.confirmacion, "
+                + "u.id_tipo_usuario, ex.fecha_nac, ex.direccion_especifica, ex.id_municipio, m.id_departamento "
+                + "from usuario u inner join credencialtemporal ct on ct.id_usuario = u.id_usuario "
+                + "inner join excepcionusuario ex on ex.id_usuario = u.id_usuario inner join municipio m on m.id_municipio = ex.id_municipio "
+                + "where u.id_tipo_usuario =2 or u.id_tipo_usuario =3 or u.id_tipo_usuario =6";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Ciudadano c = new Ciudadano();
+                c.setIdUsuario(rs.getInt("id_usuario"));
+                c.setNumDui(rs.getString("num_dui"));
+                c.setContrasenia(rs.getString("contrasenia"));
+                c.setNombre(rs.getString("nombre"));
+                c.setApellido(rs.getString("apellido"));
+                c.setSexo(rs.getString("sexo"));
+                c.setConfirmacion(rs.getInt("confirmacion"));
+                c.setTipoUsuario(rs.getInt("id_tipo_usuario"));
+                c.setFechaNac(rs.getString("fecha_nac"));
+                c.setDireccion(rs.getString("direccion_especifica"));
+                c.setIdMunicipio(rs.getInt("id_municipio"));
+                c.setIdDepartamento(rs.getInt("id_departamento"));
+                lista.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.desconectar();
+        }
+        return lista;
+    }
     /*
     el metodo busca a los ciudadanos que estan en los registros de padronelecoral
     mediante el diu, que es el parametro de entrada
