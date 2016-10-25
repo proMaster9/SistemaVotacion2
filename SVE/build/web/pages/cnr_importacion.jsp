@@ -13,34 +13,55 @@
         <script src="../plugins/jquery/jquery.js"></script>
         <script>
             $(document).on("ready", function () {
-                /*
-                 $("#password1").on("keyup",function(){
-                 if($("#magistrado1").val() != "") {
-                 var dui = $("#magistrado1").val();
-                 var password = $("#password1").val();
-                 $("#divMagistrado1").html("");
-                 $.post('../SerMagistrado',{
-                 dui : dui,
-                 password : password
-                 }, function(data){
-                 $("#divMagistrado1").html(data);
-                 });
-                 }
-                 });
-                 */
+
                 function buscarMagistrado(dui, password, div, servlet) {
-                    $("#" + password).on("keyup", function () {
-                        if ($("#" + dui).val() != "") {
-                            $.post(servlet, {
-                                dui:  $("#" + dui).val(),
-                                password: $("#" + password).val()
-                            }, function (data) {
-                                $("#" + div).html(data);
-                            });
+                    $("#" + password + ", #" + dui).on("keyup", function () {
+                        var coincidencia = 0;
+                        //se recorren todos los campos donde se ingresan los duis
+                        $("input[data-tipo=dui]").each(function (i) {
+                            //evaluamos si hay campos repetidos
+                            if ($(this).val() == $("#" + dui).val()) {
+                                coincidencia++;
+                            }
+                        });
+                        //si el valor de la caja de texo se repite solo con ella misma
+                        //significa que el campo no se ha duplicado
+                        if (coincidencia == 1) {
+                            //se verifica que el campo dui no este vacio
+                            if ($("#" + dui).val() != "") {
+                                $.post(servlet, {
+                                    dui: $("#" + dui).val(),
+                                    password: $("#" + password).val()
+                                }, function (data) {
+                                    $("#" + div).html(data);
+                                });
+                            }
                         }
+                        else {
+                            $("#" + div).html('<input type="hidden" value="0" data-tipo="resultado">');
+                            if ($("#" + dui).val() != "") {
+                                $("#" + div).append("Dui repetido");
+                            }
+                        }
+
                     });
                 }
 
+                $("#btnImportar").on("click", function () {
+                    var coincidencia = 0;
+                    //se recorren los campos ocultos, para verificar que todos tengan un resultado correcto
+                    $("input[data-tipo=resultado]").each(function (i) {
+                        if ($(this).val() == 0) {
+                            coincidencia++;
+                        }
+                    });
+                    if (coincidencia == 0) {
+                        $("#frmCnr").submit();
+                    }
+                    else {
+                        alert("No puedes enviar");
+                    }
+                });
                 buscarMagistrado('dui1', 'password1', 'divMagistrado1', '../SerMagistrado');
                 buscarMagistrado('dui2', 'password2', 'divMagistrado2', '../SerMagistrado');
                 buscarMagistrado('dui3', 'password3', 'divMagistrado3', '../SerMagistrado');
@@ -61,7 +82,9 @@
                 <td><input type="text" id="dui1" data-tipo="dui" ></td>
                 <td><input type="password" id="password1"></td>
                 <td>
-                    <div id="divMagistrado1"></div>
+                    <div id="divMagistrado1">
+                        <input type="hidden" value="0" data-tipo="resultado">
+                    </div>
                 </td>
             </tr>
             <!--Magistrado 2-->
@@ -69,7 +92,9 @@
                 <td><input type="text" id="dui2" data-tipo="dui"></td>
                 <td><input type="password" id="password2"></td>
                 <td>
-                    <div id="divMagistrado2"></div>
+                    <div id="divMagistrado2">
+                        <input type="hidden" value="0" data-tipo="resultado">
+                    </div>
                 </td>
             </tr>
             <!--Magistrado 3-->
@@ -77,11 +102,16 @@
                 <td><input type="text" id="dui3" data-tipo="dui"></td>
                 <td><input type="password" id="password3"></td>
                 <td>
-                    <div id="divMagistrado3"></div>
+                    <div id="divMagistrado3">
+                        <input type="hidden" value="0" data-tipo="resultado">
+                    </div>
                 </td>
             </tr>
         </table>
-        <input type="file" id="btnSubir"><br>
-        <input type="button" id="btnImportar" value="Importar datos">
+        <form id="frmCnr" action="../SerCiudadano" method="post" enctype="multipart/form-data">
+            <input type="file" name="btnArchivo" id="btnSubir"><br>
+            <input type="button" id="btnImportar" value="Importar datos">
+        </form>
+        
     </body>
 </html>
