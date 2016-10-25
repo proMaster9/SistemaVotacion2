@@ -39,13 +39,16 @@ public class SerMagistrado extends HttpServlet {
             Ciudadano c = CiudadanoDTO.entrarPrincipal(dui, password);
             if(c.getIdUsuario() != 0) {
                 if(c.getTipoUsuario() == 2) {
+                    out.print("<input type='hidden' value='1' data-tipo='resultado'>");
                     out.print("Correcto");
                 }
                 else {
+                    out.print("<input type='hidden' value='0' data-tipo='resultado'>");
                     out.print("Incorrecto");
                 }
             }
             else {
+                out.print("<input type='hidden' value='0' data-tipo='resultado'>");
                 out.print("Incorrecto");
             }
         }
