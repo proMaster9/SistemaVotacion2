@@ -12,16 +12,18 @@ public class Candidato {
     private String foto;
     private int tipo;
     private int idDepartamento;
+    private int idPartido;
 
     public Candidato() {
     }
 
-    public Candidato(int idCandidato, String numDui, String foto, int tipo, int idDepartamento) {
+    public Candidato(int idCandidato, String numDui, String foto, int tipo, int idDepartamento, int idPartido) {
         this.idCandidato = idCandidato;
         this.numDui = numDui;
         this.foto = foto;
         this.tipo = tipo;
         this.idDepartamento = idDepartamento;
+        this.idPartido = idPartido;
     }
 
     public int getIdCandidato() {
@@ -62,6 +64,14 @@ public class Candidato {
 
     public void setIdDepartamento(int idDepartamento) {
         this.idDepartamento = idDepartamento;
+    }
+
+    public int getIdPartido() {
+        return idPartido;
+    }
+
+    public void setIdPartido(int idPartido) {
+        this.idPartido = idPartido;
     }
     
    

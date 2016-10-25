@@ -4,8 +4,6 @@
     Author     : JH
 --%>
 
-<!-- Jquery Core Js -->
-<script src="../plugins/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core Js -->
 <script src="../plugins/bootstrap/js/bootstrap.js"></script>
@@ -22,6 +20,9 @@
 <!-- JQuery Steps Plugin Js -->
 <script src="../plugins/jquery-steps/jquery.steps.js"></script>
 
+    <!-- Bootstrap Notify Plugin Js -->
+    <script src="../plugins/bootstrap-notify/bootstrap-notify.js"></script>
+    
 <!-- Sweet Alert Plugin Js -->
 <script src="../plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -47,6 +48,8 @@
 <script src="../js/pages/forms/form-wizard.js"></script>
 <script src="../js/pages/cards/colored.js"></script>
 <script src="../js/pages/tables/jquery-datatable.js"></script>
+<script src="../js/pages/ui/modals.js"></script>
+
 
 
 <!-- Demo Js -->

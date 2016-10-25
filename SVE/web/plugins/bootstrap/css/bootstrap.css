@@ -2272,9 +2272,9 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 8px;
+  padding: 5px;
   line-height: 1.42857143;
-  vertical-align: top;
+  vertical-align: center;
   border-top: 1px solid #ddd;
 }
 .table > thead > tr > th {
@@ -3023,6 +3023,7 @@ select[multiple].input-lg {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,

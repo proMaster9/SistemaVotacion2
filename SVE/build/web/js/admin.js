@@ -102,7 +102,7 @@ $.AdminBSB.leftSideBar = {
         });
 
         //Set Waves
-        Waves.attach('.menu .list a', ['waves-block']);
+        Waves.attach('.menu .list a', ['waves-light-blue waves-block']);
         Waves.init();
     },
     setMenuHeight: function () {
@@ -323,7 +323,7 @@ $.AdminBSB.dropdownMenu = {
         });
 
         //Set Waves
-        Waves.attach('.dropdown-menu li a', ['waves-block']);
+        Waves.attach('.dropdown-menu li a', ['waves-light-blue waves-block']);
         Waves.init();
     },
     dropdownEffect: function (target) {

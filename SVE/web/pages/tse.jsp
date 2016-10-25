@@ -1,17 +1,9 @@
 <%-- 
-    Document   : panel-usuario
-    Created on : 25-sep-2016, 1:33:21
+    Document   : tse
+    Created on : 09-oct-2016, 23:39:55
     Author     : JH
 --%>
 
-<%@page contentType="text/html" import="java.util.*" pageEncoding="UTF-8" session="true"%>
-<%
-    HttpSession usuario = request.getSession();
-    String us=(String)usuario.getAttribute("usuario");
-    if (usuario.getAttribute("user") == null) {
-         String error = "Session Caducada";
-        response.sendRedirect("login/admin/tse_admin.jsp");
-%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,7 +16,7 @@
     </head>
 
     <body class="theme-light-blue">
-        
+
         <jsp:include page="modulos/loader.jsp"/>
         <!-- Overlay For Sidebars -->
         <div class="overlay"></div>
@@ -37,7 +29,7 @@
             <!-- Left Sidebar -->
             <aside id="leftsidebar" class="sidebar">
                 <!-- Menu -->
-                <jsp:include page="modulos/menu-admin.jsp"/>
+                <jsp:include page="modulos/menu.jsp"/>
                 <!-- #Menu -->
                 <!-- Footer -->
                 <jsp:include page="modulos/footer.jsp"/>
@@ -46,7 +38,7 @@
             <!-- #END# Left Sidebar -->
             <!-- Right Sidebar -->
             <aside id="rightsidebar" class="right-sidebar">
-                <jsp:include page="modulos/opciones-ico.jsp"/>
+                <jsp:include page="modulos/opciones.jsp"/>
             </aside>
             <!-- #END# Right Sidebar -->
         </section>
@@ -59,7 +51,7 @@
             </div>
             <div class="row clearfix" >
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<%=us%>
+
                 </div>
 
             </div>
@@ -67,9 +59,3 @@
         <jsp:include page="modulos/scripts.jsp"/>
     </body>
 </html>
-<%
-  } else {
-       
-    }
-
-%>

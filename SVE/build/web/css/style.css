@@ -2351,7 +2351,7 @@
 
 /* General ===================================== */
 body {
-  background-color: #e9e9e9;
+  /*background-color: #e9e9e9;*/
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -2390,7 +2390,7 @@ a {
   animation: none !important; }
 
 section.content {
-  margin: 100px 15px 0 315px;
+  margin: 80px 25px 0 270px;
   -moz-transition: 0.5s;
   -o-transition: 0.5s;
   -webkit-transition: 0.5s;
@@ -2472,7 +2472,7 @@ section.content {
     top: 6px !important; }
 
 .btn:not(.btn-link):not(.btn-circle) {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);*/
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -2486,7 +2486,11 @@ section.content {
     font-size: 20px;
     position: relative;
     top: 3px; }
-
+  .btn2{
+    display: inline;
+    padding: 4px 11px;
+    font-size: 10px;
+  }
 .btn-warning,
 .btn-warning:hover,
 .btn-warning:active,
@@ -2806,17 +2810,22 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+.card1{
+    border: 1px solid #f1f1f1
+    
+}
 .card {
   background: #fff;
   min-height: 50px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   position: relative;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  margin-left: 5px;
+  border: 1px solid rgba(204, 204, 204, 0.35);}
   .card .card-inside-title {
-    margin-top: 25px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: block;
-    font-size: 15px;
+    font-size: 16px;
     color: #000; }
     .card .card-inside-title small {
       color: #999;
@@ -2933,7 +2942,7 @@ section.content {
       color: #555; }
   .card .header {
     color: #555;
-    padding: 20px;
+    padding: 15px;
     position: relative;
     border-bottom: 1px solid rgba(204, 204, 204, 0.35); }
     .card .header .header-dropdown {
@@ -2948,6 +2957,7 @@ section.content {
       .card .header .header-dropdown i {
         font-size: 20px;
         color: #999;
+        margin-left: 7px;
         -moz-transition: all 0.5s;
         -o-transition: all 0.5s;
         -webkit-transition: all 0.5s;
@@ -2956,7 +2966,7 @@ section.content {
           color: #000; }
     .card .header h2 {
       margin: 0;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: normal;
       color: #111; }
       .card .header h2 small {
@@ -2969,7 +2979,7 @@ section.content {
           font-weight: bold;
           color: #777; }
   .card .body {
-    font-size: 14px;
+    font-size: 12px;
     color: #555;
     padding: 20px; }
     .card .body .col-xs-1,
@@ -3032,6 +3042,7 @@ section.content {
     .card .body .col-md-12,
     .card .body .col-lg-12 {
       margin-bottom: 20px; }
+
 
 /* Infobox ===================================== */
 .info-box {
@@ -4042,7 +4053,7 @@ section.content {
     margin-top: 0 !important; }
   .bootstrap-select .dropdown-menu li.selected a {
     background-color: #eee !important;
-    color: #555 !important; }
+    color: #03A9F4 !important; }
   .bootstrap-select .dropdown-menu .active a {
     background-color: transparent;
     color: #333 !important; }
@@ -4223,11 +4234,12 @@ section.content {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
-  border-radius: 0;
+  border-radius: 15px 15px 15px 15px; 
+  background-color: none;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.31) !important;
   border: none; }
   .modal .modal-content .modal-body {
-    color: #777;
+    color: none;
     padding: 15px 25px; }
 
 .modal .modal-footer {
@@ -7167,6 +7179,7 @@ fieldset[disabled] .form-control {
   transition: all 0.5s;
   font-family: "Roboto", sans-serif;
   background: #fff;
+  border-right: 1px solid rgba(204, 204, 204, 0.35);
   width: 250px;
   overflow: hidden;
   display: inline-block;
@@ -7185,6 +7198,7 @@ fieldset[disabled] .form-control {
     width: 100%;
     border-top: 1px solid #eee;
     padding: 15px;
+    text-align: center;
     overflow: hidden; }
     .sidebar .legal .copyright {
       font-size: 13px;

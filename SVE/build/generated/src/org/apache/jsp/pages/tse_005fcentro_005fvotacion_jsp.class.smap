@@ -1,0 +1,23 @@
+SMAP
+tse_005fcentro_005fvotacion_jsp.java
+JSP
+*S JSP
+*F
++ 0 tse_centro_votacion.jsp
+pages/tse_centro_votacion.jsp
+*L
+1:44,2
+6,10:46
+16:56,3
+17,7:59
+24:66,3
+25,6:69
+31:75,3
+32,2:78
+34:80,3
+35,5:83
+40:88,3
+41,293:91
+334:384,3
+335,4:387
+*E

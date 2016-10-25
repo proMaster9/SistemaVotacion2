@@ -3,8 +3,6 @@ package org.apache.jsp.pages;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import modelo.Ciudadano;
-import java.util.*;
 
 public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -32,7 +30,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext _jspx_page_context = null;
 
     try {
-      response.setContentType("text/html;charset=UTF-8");
+      response.setContentType("text/html");
       pageContext = _jspxFactory.getPageContext(this, request, response,
       			null, true, 8192, true);
       _jspx_page_context = pageContext;
@@ -44,22 +42,6 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
       out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-
-    HttpSession sesion = request.getSession();
-    ArrayList<Ciudadano> usuario = (ArrayList<Ciudadano>)sesion.getAttribute("usuario");
-    if(usuario==null){
-        response.sendRedirect("../");//redireccionamiento a una pagina de error del sevidor
-    }
-    
-    if (usuario.get(0).getNumDui()== null && usuario.get(0).getRol()==null) {
-        System.out.println("prueba"+sesion.getAttribute("user"));
-        response.sendRedirect("../");
-    } else {
-
-
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html lang=\"es\">\r\n");
@@ -93,33 +75,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <aside id=\"leftsidebar\" class=\"sidebar\">\r\n");
       out.write("                <!-- Menu -->\r\n");
       out.write("                ");
-
-                    if(usuario.get(0).getTipoUsuario()==1){
-                
-      out.write("\r\n");
-      out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu_admin.jsp", out, false);
-      out.write("\r\n");
-      out.write("                ");
-
-                    }else if(usuario.get(0).getTipoUsuario()==2){
-                
-      out.write("\r\n");
-      out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu_magis.jsp", out, false);
-      out.write("\r\n");
-      out.write("                ");
-
-                    }else if(usuario.get(0).getTipoUsuario()==3){
-                
-      out.write("\r\n");
-      out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu_cnr.jsp", out, false);
-      out.write("\r\n");
-      out.write("                ");
-
-                    }
-                
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/menu.jsp", out, false);
       out.write("\r\n");
       out.write("                <!-- #Menu -->\r\n");
       out.write("                <!-- Footer -->\r\n");
@@ -132,7 +88,7 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <!-- Right Sidebar -->\r\n");
       out.write("            <aside id=\"rightsidebar\" class=\"right-sidebar\">\r\n");
       out.write("                ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/opciones-ico.jsp", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "modulos/opciones.jsp", out, false);
       out.write("\r\n");
       out.write("            </aside>\r\n");
       out.write("            <!-- #END# Right Sidebar -->\r\n");
@@ -146,8 +102,6 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\r\n");
       out.write("            <div class=\"row clearfix\" >\r\n");
       out.write("                <div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12\">\r\n");
-      out.write("                    ");
-      out.print(usuario.get(0).getNombre());
       out.write("\r\n");
       out.write("                </div>\r\n");
       out.write("\r\n");
@@ -158,12 +112,6 @@ public final class tse_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("    </body>\r\n");
       out.write("</html>\r\n");
-
-    }
-
-
-      out.write('\r');
-      out.write('\n');
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

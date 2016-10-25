@@ -45,6 +45,5 @@ public class Conexion {
     public void desconectar() {
         instance = null;
     }
-    
 
 }

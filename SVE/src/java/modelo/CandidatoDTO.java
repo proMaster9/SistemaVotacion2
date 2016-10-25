@@ -21,13 +21,14 @@ public class CandidatoDTO {
     retorna false cuando hubo algun error
     */
     public static boolean agregarCandidato(Candidato can) {
-        String query = "insert into candidato (num_dui, foto, tipo, id_departamento  ) values (?,?,?,?)";
+        String query = "insert into candidato (num_dui, foto, tipo, id_departamento, id_partido ) values (?,?,?,?,?)";
         try {
             pst = con.getCnn().prepareStatement(query);
             pst.setString(1, can.getNumDui());
             pst.setString(2, can.getFoto());
             pst.setInt(3, can.getTipo());
             pst.setInt(4, can.getIdDepartamento());
+            pst.setInt(5, can.getIdPartido());
             pst.executeUpdate();
 
         } catch (SQLException ex) {
@@ -48,14 +49,15 @@ public class CandidatoDTO {
     retorna true cuando modifica correctamente, y false cuando ocurre algun error
     */
     public static boolean modificarCandidato(Candidato can) {
-        String query = "update candidato set num_dui=?, foto=?, tipo=?, id_departamento=?  where id_candidato=?";
+        String query = "update candidato set num_dui=?, foto=?, tipo=?, id_departamento=?, id_partido=?  where id_candidato=?";
         try {
             pst = con.getCnn().prepareStatement(query);
             pst.setString(1, can.getNumDui());
             pst.setString(2, can.getFoto());
             pst.setInt(3, can.getTipo());
             pst.setInt(4, can.getIdDepartamento());
-            pst.setInt(5, can.getIdCandidato());
+            pst.setInt(5, can.getIdPartido());
+            pst.setInt(6, can.getIdCandidato());
             pst.executeUpdate();
 
         } catch (Exception ex) {
@@ -109,6 +111,7 @@ public class CandidatoDTO {
                 can.setFoto(rs.getString("foto"));
                 can.setTipo(rs.getInt("tipo"));
                 can.setIdDepartamento(rs.getInt("id_departamento"));
+                can.setIdPartido(rs.getInt("id_partido"));
             }
         } catch (Exception ex) {
             Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
@@ -135,6 +138,7 @@ public class CandidatoDTO {
                 can.setFoto(rs.getString("foto"));
                 can.setTipo(rs.getInt("tipo"));
                 can.setIdDepartamento(rs.getInt("id_departamento"));
+                can.setIdPartido(rs.getInt("id_partido"));
                 candidatos.add(can);
             }
         } catch (Exception ex) {
@@ -162,6 +166,7 @@ public class CandidatoDTO {
                 can.setFoto(rs.getString("foto"));
                 can.setTipo(rs.getInt("tipo"));
                 can.setIdDepartamento(rs.getInt("id_departamento"));
+                can.setIdPartido(rs.getInt("id_partido"));
                 candidatos.add(can);
             }
         } catch (Exception ex) {

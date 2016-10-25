@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package controlador;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,15 +57,11 @@ public class IniciarSesion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            if(request.getParameter("entrarAdmin")!=null){
-                response.sendRedirect("pages/notificacion/tse_aviso.jsp");
-            }else{
-                response.sendRedirect("pages/notificacion/tse_error.jsp");
-            }
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        processRequest(request, response);
+//    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -77,28 +75,81 @@ public class IniciarSesion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            HttpSession usuario = request.getSession(true);
-            if(request.getParameter("entrarAdmin")!=null){
-                String user=request.getParameter("txtUser");
-                String pass=request.getParameter("txtPass");
-                int tipo=0;
-                if(user.equals("") || user.equals("")){
-                    //debes completar campos
-                }else{
-                    Ciudadano c = entrarAdmi(user,pass);
-                    if(user.equals(c.getNumDui()) || user.equals(c.getContrasenia())){
-                        usuario.setAttribute(c.getNumDui(),user);
-                        System.out.println(usuario.getAttribute(user));
-                        response.sendRedirect("pages/tse.jsp");
+            HttpSession sesion = request.getSession();
+          
+            if (request.getParameter("btnEntrarA") != null) {
+                String user = request.getParameter("txtUser");
+                String pass = request.getParameter("txtPass");
+                if (!user.equals("") && !pass.equals("")) {
+                    Ciudadano c = entrarAdmi(user, pass);
+                    if(c.getConfirmacion() == 0 ){
+                        if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
+                            ArrayList<Ciudadano> usuario = new ArrayList<>();
+                            usuario.add(c);
+                            sesion.setAttribute("usuario",usuario);
+                            response.sendRedirect("pages/tse.jsp");
+                        } else {
+                            //datos incorrectos
+                            response.sendRedirect("pages/login/admin/admin.jsp");
+                        }
                     }else{
-                        String error="sjsjsjsjsjsjs";
-                        response.sendRedirect("pages/login/admin/tse_admin.jsp");
+                        //activar modal notificando que la cuenta no esta activa
+                        response.sendRedirect("pages/login/admin/admin.jsp");
                     }
+                } else {
+                    //debes completar campos
+                    response.sendRedirect("pages/login/admin/admin.jsp");
                 }
-            }else{
-                response.sendRedirect("pages/notificacion/tse_error.jsp");
+            } else if (request.getParameter("btnEntrarP") != null) {
+                String user = request.getParameter("txtUser");
+                String pass = request.getParameter("txtPass");
+                if (!user.equals("") && !pass.equals("")) {
+                    Ciudadano c = entrarAdmi(user, pass);
+                    if(c.getConfirmacion() == 0 ){
+                        if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
+                            ArrayList<Ciudadano> usuario = new ArrayList<>();
+                            usuario.add(c);
+                            sesion.setAttribute("usuario",usuario);
+                            response.sendRedirect("pages/tse.jsp");
+                        } else {
+                            //datos incorrectos
+                            response.sendRedirect("pages/login/principal.jsp");
+                        }
+                    }else{
+                        //activar modal notificando que la cuenta no esta activa
+                        response.sendRedirect("pages/login/principal.jsp");
+                    }
+                } else {
+                    //debes completar campos
+                    response.sendRedirect("pages/login/principal.jsp");
+                }
+            }else if (request.getParameter("btnEntrarU") != null) {
+                String user = request.getParameter("txtUser");
+                String pass = request.getParameter("txtPass");
+                if (!user.equals("") && !pass.equals("")) {
+                    Ciudadano c = entrarAdmi(user, pass);
+                    if(c.getConfirmacion() == 0 ){
+                        if (user.equals(c.getNumDui()) && pass.equals(c.getContrasenia())){
+                            ArrayList<Ciudadano> usuario = new ArrayList<>();
+                            usuario.add(c);
+                            sesion.setAttribute("usuario",usuario);
+                            response.sendRedirect("pages/tse.jsp");
+                        } else {
+                            //datos incorrectos
+                            response.sendRedirect("pages/login/usuario.jsp");
+                        }
+                    }else{
+                        //activar modal notificando que la cuenta no esta activa
+                        response.sendRedirect("pages/login/usuario.jsp");
+                    }
+                } else {
+                    //debes completar campos
+                    response.sendRedirect("pages/login/usuario.jsp");
+                }
+            }else {
+                response.sendRedirect("pages/notificacion/tse_aviso.jsp");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             response.sendRedirect("pages/notificacion/tse_error.jsp");
         }
     }
