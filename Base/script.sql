@@ -102,22 +102,19 @@ CREATE TABLE partido (
     nombre VARCHAR(60) NOT NULL,
     acronimo VARCHAR(10) NOT NULL,
     num_dui VARCHAR(10) NOT NULL UNIQUE,/*dui del presidente del partido*/
-    imagen VARCHAR(15) NOT NULL,
+    imagen VARCHAR(60) NOT NULL,
     CONSTRAINT pk_partido PRIMARY KEY (id_partido)
 );
 
-CREATE TABLE detallePartido (
-    id_partido INT NOT NULL,
-    id_candidato INT NOT NULL UNIQUE
-);
 
 create sequence sec_candidato;
 CREATE TABLE candidato (
     id_candidato INT default nextval('sec_candidato'),
     num_dui VARCHAR(10) NOT NULL UNIQUE,
-    foto VARCHAR(15) NOT NULL,
+    foto VARCHAR(60) NOT NULL,
     id_departamento int not null,
     tipo INT NOT NULL,/*existen dos tipos de candidatos 1 es afiliado a partdio y 2 es independiente*/
+    id_partido int not null,
     CONSTRAINT pk_candidato PRIMARY KEY (id_candidato)
 );
 
@@ -281,9 +278,7 @@ alter table municipio add constraint fk_municipio_departamento foreign key (id_d
 
 alter table JRV add constraint fk_JRV_centroVotacion foreign key (id_centro_votacion) references centroVotacion(id_centro_votacion);
 
-alter table detallePartido add constraint fk_detallePartido_candidato foreign key (id_candidato) references candidato(id_candidato);
-
-alter table detallePartido add constraint fk_detalleP_partido foreign key (id_partido) references partido(id_partido);
+alter table candidato add constraint fk_candidato_partido foreign key(id_partido) references partido(id_partido);
 alter table directivaJRV add constraint fk_directivaJRV_partido foreign key (id_partido) references partido(id_partido);
 
 alter table votoMarca add constraint fk_vMarca_candidato foreign key (id_candidato) references candidato(id_candidato);
