@@ -5,14 +5,23 @@
  */
 package controlador;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Ciudadano;
 import modelo.CiudadanoDTO;
+import modelo.ConsultasDTO;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -33,14 +42,59 @@ public class SerCiudadano extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        /*
-        out.print(getServletContext().getRealPath("/")+"images/files/partidos/ <br>");
-        out.print(getServletContext().getContextPath()+"/web/images/files/candidatos/<br>");
-        out.print(System.getProperty("user.dir") + "<br>");
-        out.print(System.getProperty("user.home") + "<br>");
-        out.print(this.getClass().getProtectionDomain().getCodeSource().getLocation()+"<br>");
-        */
+        //Procesando el archivo .sql con los datos del cnr
+        //en esta ruta se guarda temporalmente el archivo .sql
+        String ruta = getServletContext().getRealPath("/") + "pages/procesos/";
+        if (ServletFileUpload.isMultipartContent(request)) {
+            FileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+            diskFileItemFactory.setSizeThreshold(40960);
+            File repositoryPath = new File("/temp");
+            diskFileItemFactory.setRepository(repositoryPath);
+            ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
+            servletFileUpload.setSizeMax(81920); // bytes
+            upload.setSizeMax(307200); // 1024 x 300 = 307200 bytes = 300 Kb
+            List listUploadFiles = null;
+            FileItem item = null;
+            try {
+                listUploadFiles = upload.parseRequest(request);
+                Iterator it = listUploadFiles.iterator();
+                while (it.hasNext()) {
+                    item = (FileItem) it.next();
+                    if (!item.isFormField()) {
+                        if (item.getSize() > 0) {
+                            String nombre = item.getName();
+                            String tipo = item.getContentType();
+                            long tamanio = item.getSize();
+                            String extension = nombre.substring(nombre.lastIndexOf("."));
+                            File archivo = new File(ruta, nombre);
+                            item.write(archivo);
+                            if (archivo.exists()) {
+                                String script = ruta + "" + nombre;
+                                if(ConsultasDTO.ejecutar("copy padronelectoral from '"+script+"' with (delimiter ',')")){
+                                    out.print("Registros importados correctamente");
+                                }
+                                else {
+                                    out.print("Hubo un error");
+                                }
+                                
+                            } else {
+                                out.println("FALLO AL GUARDAR. NO EXISTE " + archivo.getAbsolutePath() + "</p>");
+                            }
+                        }
+                    }
+                }
+
+            } catch (FileUploadException e) {
+                out.println("Error Upload: " + e.getMessage());
+                e.printStackTrace();
+            } catch (Exception e) {
+                out.println("Error otros: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -83,8 +137,7 @@ public class SerCiudadano extends HttpServlet {
                     } else {
                         out.print("Genero: Femenino<br>");
                     }
-                }
-                else {
+                } else {
                     out.print("Ciudadano no encontrado<br>");
                     out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='0'>");
                 }
@@ -93,8 +146,7 @@ public class SerCiudadano extends HttpServlet {
                 if (c.getIdMunicipio() != 0) {
                     out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='1'>");
                     out.print("Correcto");
-                } 
-                else {
+                } else {
                     out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='0'>");
                     out.print("Incorrecto");
                 }
