@@ -431,5 +431,5 @@ select * from entrarVotante('00000008-0','12345');
 
 
 /*registros para partidos*/
-insert into partido (nombre,acronimo,num_dui,imagen) values ('GANA','00000017-0','img/imagen1.png');
-insert into partido (nombre,acronimo,num_dui,imagen) values ('ARENA','00000018-0','img/imagen2.png');
+insert into partido (nombre,acronimo,num_dui,imagen) values ('Gran Alianza Nacional','GANA','00000017-0','img/imagen1.png');
+insert into partido (nombre,acronimo,num_dui,imagen) values ('Alianza Republicana Nacionalista', 'ARENA','00000018-0','img/imagen2.png');
