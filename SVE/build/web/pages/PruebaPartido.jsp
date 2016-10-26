@@ -78,6 +78,7 @@
                 <th></th>
             </tr>
             <tbody>
+            <div id="divPartido">
                 <% for (Partido p : PartidoDTO.mostrarPartidos()) {%>
                 <tr>
                     <td><%= p.getAcronimo()%></td>
@@ -86,11 +87,12 @@
                     <td><img src="../images/files/partidos/<%= p.getImagen()%>"></td>
                     <td>
                         <a href="javascript:modificar('<%= p.getIdPartido()%>','<%= p.getAcronimo()%>','<%= p.getNombre()%>','<%= p.getNumDui()%>','<img src=../images/files/partidos/<%= p.getImagen()%> >')">Modificar</a>
-                        <a href="../SerPartido?idPartido=<%= p.getIdPartido()%>">Eliminar</a
+                        <a href="../SerPartido?idPartido=<%= p.getIdPartido()%>">Eliminar</a>
                     </td>
                 </tr>
                 <% }%>
-            </tbody>
-        </table>
-    </body>
+            </div>
+        </tbody>
+    </table>
+</body>
 </html>

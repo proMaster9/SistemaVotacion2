@@ -65,6 +65,7 @@ public class SerCiudadano extends HttpServlet {
                 Iterator it = listUploadFiles.iterator();
                 while (it.hasNext()) {
                     item = (FileItem) it.next();
+                    //este es el archivo que se envia en el campo file
                     if (!item.isFormField()) {
                         if (item.getSize() > 0) {
                             String nombre = item.getName();
@@ -75,6 +76,7 @@ public class SerCiudadano extends HttpServlet {
                             item.write(archivo);
                             if (archivo.exists()) {
                                 String script = ruta + "" + nombre;
+                                //consulta para importar registros
                                 if (ConsultasDTO.ejecutar("copy padronelectoral from '" + script + "' with (delimiter ',')")) {
                                     out.print("Registros importados correctamente");
                                 } else {
@@ -86,6 +88,7 @@ public class SerCiudadano extends HttpServlet {
                             }
                         }
                     } else {
+                        //ac recogemos los duis de los magistrados
                         if (item.getFieldName().equals("dui1")) {
                             b.setMagistrado1(item.getString());
                         }
@@ -98,6 +101,8 @@ public class SerCiudadano extends HttpServlet {
 
                     }
                 }
+                //registramos en la base de datos los duis de los magistrados
+                //que autorizaron la insercion de datos CNR
                 b.setAccion("Registro de datos CNR");
                 if (BitacoraDTO.agregarBitacora(b)) {
                     out.print("<br>Bitacora agregada");
