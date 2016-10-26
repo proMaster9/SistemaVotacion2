@@ -145,14 +145,14 @@ CREATE TABLE directivaJRV (
 CREATE TABLE aperturaJRV(
     id_jrv INT,
     fecha VARCHAR(10) NOT NULL,
-    hora time not null,
+    hora varchar(8) not null,
     CONSTRAINT pk_aperturaJRV PRIMARY KEY (id_jrv)
 );
 
 CREATE TABLE cierreJRV(
     id_jrv INT,
     fecha VARCHAR(10) NOT NULL,
-    hora time not null,
+    hora varchar(8) not null,
     CONSTRAINT pk_cierreJRV PRIMARY KEY (id_jrv)
 );
 
@@ -215,7 +215,7 @@ create sequence sec_bitacoraacciones;
 CREATE TABLE bitacoraAcciones (
     id_bitacora int default nextval('sec_bitacoraacciones'),
     fecha VARCHAR(10) not null,  				
-    hora time not null,
+    hora varchar(8) not null,
     accion varchar(60) not null,
     CONSTRAINT pk_bitacoraAcciones PRIMARY KEY (id_bitacora)
 );
