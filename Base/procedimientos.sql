@@ -263,30 +263,6 @@ language plpgsql;
 
 
 /*
-	aca se agregan los ciudadanos, desde los registros del cnr a nuestra tabla
-*/
-create or replace function agregarVotante(
-	in _num_dui varchar(10),
-	in _contrasenia varchar(15),
-	in _nombre varchar(20),
-	in _apellido varchar(20),
-	in _fecha varchar(10),
-	in _sexo varchar(2),
-	in _direccion varchar(60),
-	in _municipio int
-) returns void as
-$body$
-begin
-	insert into padronelectoral(num_dui,nombre,apellido,fecha_nac,sexo,direccion_especifica,id_municipio) 
-	values (_num_dui,_nombre,_apellido,_fecha,_sexo,_direccion,_municipio);
-	insert into usuario (id_tipo_usuario, contrasenia, confirmacion) values (11,_contrasenia,0);
-	insert into usuariopadron (id_usuario,num_dui) values (lastval(),_num_dui); 
-end;
-$body$
-language plpgsql;
-
-
-/*
 	procedimiento para agregar Representante de partido (5),Gestor de jrv (7),
 	director de centro de votaciones (8), publicista (9) y presidente de jrv (10)
 	estos usuarios necesitar estar entre los registros del cnr para poder tener 
@@ -381,6 +357,21 @@ end;
 $body$
 language plpgsql;
 
+/*creacion de trigger para la creacion de cuentas de usuario a los ciudadanos*/
+create or replace function agregarVotante_trigger() returns trigger as
+$insertar$
+declare begin
+	insert into usuario (id_tipo_usuario, contrasenia, confirmacion) values (11,'12345',0);
+	insert into usuariopadron (id_usuario,num_dui) values (lastval(),new.num_dui); 
+	return null;
+end;
+$insertar$
+language plpgsql;
+
+create trigger agregarVotante_trigger after insert
+on padronelectoral for each row
+execute procedure agregarVotante_trigger();
+
 /*insercion de datos*/
 
 /*cuenta de administrador*/
@@ -413,18 +404,18 @@ select agregarSupervisor('00-00-08','12345','Job','Flores','m','Dinamarca','OEA'
 select agregarSupervisor('00-00-09','12345','Chabelo','Sandoval','m','Corea','JUVEO');
 
 /*datos del cnr*/
-select * from agregarVotante('00000008-0','12345','Sara','Benitez','1994-05-10','f','Direcion falsa',1);
-select * from agregarVotante('00000009-0','12345','Jorge','Anne','1995-02-10','m','Direccion postisa',2);
-select * from agregarVotante('00000010-0','12345','Isaac','Ponce','1992-02-10','m','Direccion postisa',3);
-select * from agregarVotante('00000011-0','12345','Jonh','Mendoza','1995-05-20','m','Direccion postisa',4);
-select * from agregarVotante('00000012-0','12345','Magdalena','De Ramirez','1994-05-12','f','Direccion postisa',5);
-select * from agregarVotante('00000013-0','12345','Fernanda','Olivares','1994-05-10','f','Direccion postisa',6);
-select * from agregarVotante('00000014-0','12345','Melvin','Dagoberto','1994-05-10','m','Direccion postisa',7);
-select * from agregarVotante('00000015-0','12345','Fredy','Mendoza','1995-05-10','m','Direccion postisa',8);
-select * from agregarVotante('00000016-0','12345','Faustino','Asprilla','1994-05-10','m','Calle el matazano',9);
-select * from agregarVotante('00000017-0','12345','Maria','Flores','1992-03-10','f','kernel informatico $5',10);
-select * from agregarVotante('00000018-0','12345','Carlos','Benitez','1994-05-10','f','Direcion falsa',1);
-select * from agregarVotante('00000019-0','12345','Mario','Anne','1994-05-10','m','Direccion postisa',12);
+insert into padronelectoral values('00000008-0','Sara','Benitez','1994-05-10','f','Direcion falsa',1);
+insert into padronelectoral values('00000009-0','Jorge','Anne','1995-02-10','m','Direccion postisa',2);
+insert into padronelectoral values('00000010-0','Isaac','Ponce','1992-02-10','m','Direccion postisa',3);
+insert into padronelectoral values('00000011-0','Jonh','Mendoza','1995-05-20','m','Direccion postisa',4);
+insert into padronelectoral values('00000012-0','Magdalena','De Ramirez','1994-05-12','f','Direccion postisa',5);
+insert into padronelectoral values('00000013-0','Fernanda','Olivares','1994-05-10','f','Direccion postisa',6);
+insert into padronelectoral values('00000014-0','Melvin','Dagoberto','1994-05-10','m','Direccion postisa',7);
+insert into padronelectoral values('00000015-0','Fredy','Mendoza','1995-05-10','m','Direccion postisa',8);
+insert into padronelectoral values('00000016-0','Faustino','Asprilla','1994-05-10','m','Calle el matazano',9);
+insert into padronelectoral values('00000017-0','Maria','Flores','1992-03-10','f','kernel informatico $5',10);
+insert into padronelectoral values('00000018-0','Carlos','Benitez','1994-05-10','f','Direcion falsa',1);
+insert into padronelectoral values('00000019-0','Mario','Anne','1994-05-10','m','Direccion postisa',12);
 
 /*cuenta para representante de partido*/
 select agregarSecundario('00000008-0','12345',5);
