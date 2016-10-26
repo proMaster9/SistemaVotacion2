@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerCandidato.java</file>
-            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/modelo/BitacoraDTO.java</file>
-            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/modelo/Bitacora.java</file>
-            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerCiudadano.java</file>
-            <file>file:/home/carlos/SistemaVotacion2/SVE/web/pages/cnr_importacion.jsp</file>
-            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerPartido.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/web/pages/tse_usuarios_principales.jsp</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/web/pages/PruebaCentro.jsp</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerCentroVotacion.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/modelo/CiudadanoDTO.java</file>
         </group>
     </open-files>
 </project-private>
