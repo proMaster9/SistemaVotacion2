@@ -13,17 +13,21 @@ public class Bitacora{
     private String fecha;
     private String hora;
     private String accion;
-    private ArrayList<Ciudadano> responsable;
+    private String magistrado1;
+    private String magistrado2;
+    private String magistrado3;
 
     public Bitacora() {
     }
 
-    public Bitacora(int idBitacora, String fecha, String hora, String accion, ArrayList<Ciudadano> responsable) {
+    public Bitacora(int idBitacora, String fecha, String hora, String accion, String magistrado1, String magistrado2, String magistrado3) {
         this.idBitacora = idBitacora;
         this.fecha = fecha;
         this.hora = hora;
         this.accion = accion;
-        this.responsable = responsable;
+        this.magistrado1 = magistrado1;
+        this.magistrado2 = magistrado2;
+        this.magistrado3 = magistrado3;
     }
 
     public int getIdBitacora() {
@@ -58,13 +62,30 @@ public class Bitacora{
         this.accion = accion;
     }
 
-    public ArrayList<Ciudadano> getResponsable() {
-        return responsable;
+    public String getMagistrado1() {
+        return magistrado1;
     }
 
-    public void setResponsable(ArrayList<Ciudadano> responsable) {
-        this.responsable = responsable;
+    public void setMagistrado1(String magistrado1) {
+        this.magistrado1 = magistrado1;
     }
 
+    public String getMagistrado2() {
+        return magistrado2;
+    }
+
+    public void setMagistrado2(String magistrado2) {
+        this.magistrado2 = magistrado2;
+    }
+
+    public String getMagistrado3() {
+        return magistrado3;
+    }
+
+    public void setMagistrado3(String magistrado3) {
+        this.magistrado3 = magistrado3;
+    }
+
+    
     
 }
