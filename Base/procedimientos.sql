@@ -318,7 +318,12 @@ end;
 $body$
 language plpgsql;
 
-
+/*
+se modifica la informacin de un usuario principal 
+el procedimiento retorna un true cuando la modificacion es exitosa, retorna false
+cuando hubo un error, una causa de error puede ser que se le intenta asignar un
+tipo de usuario no permitido
+*/
 create or replace function modificarPrincipal(
 	in _id int,
 	in _num_dui varchar(10),
@@ -341,6 +346,36 @@ begin
 	else
 		return false;
 	end if;
+	
+end;
+$body$
+language plpgsql;
+
+
+/*----procedimientos agregados octubre 25, 2016----*/
+/*
+se registra una accion en la bitacora, incluyendo las credenciales de los 3 magistrados
+que autorizaron la accion
+*/
+create or replace function agregarBitacora(
+	in _accion varchar(60),
+	in _magistrado1 varchar(10),
+	in _magistrado2 varchar(10),
+	in _magistrado3 varchar(10)
+) returns void as
+$body$
+declare 
+	id int;
+	horas float;
+	minutos float;
+begin
+	horas = extract(hour from current_time);
+	minutos = extract(minute from current_time) as minutos;
+	insert into bitacoraacciones (fecha,hora,accion) values (current_date, horas || ':' || minutos || ':00' ,_accion);
+	id = lastval();
+	insert into detallebitacora (id_bitacora,num_dui) values (id, _magistrado1);
+	insert into detallebitacora (id_bitacora,num_dui) values (id, _magistrado2);
+	insert into detallebitacora (id_bitacora,num_dui) values (id, _magistrado3);
 	
 end;
 $body$
