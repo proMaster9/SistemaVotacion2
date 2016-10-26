@@ -71,47 +71,47 @@
     <body>
         <h1>Importacion de registros CNR</h1>
         <h3>Credenciales de magistrados</h3>
-        <table>
-            <tr>
-                <th>Identificacion</th>
-                <th>Contraseña</th>
-                <th>Estado</th>
-            </tr>
-            <!--Magistrado 1-->
-            <tr>
-                <td><input type="text" id="dui1" data-tipo="dui" ></td>
-                <td><input type="password" id="password1"></td>
-                <td>
-                    <div id="divMagistrado1">
-                        <input type="hidden" value="0" data-tipo="resultado">
-                    </div>
-                </td>
-            </tr>
-            <!--Magistrado 2-->
-            <tr>
-                <td><input type="text" id="dui2" data-tipo="dui"></td>
-                <td><input type="password" id="password2"></td>
-                <td>
-                    <div id="divMagistrado2">
-                        <input type="hidden" value="0" data-tipo="resultado">
-                    </div>
-                </td>
-            </tr>
-            <!--Magistrado 3-->
-            <tr>
-                <td><input type="text" id="dui3" data-tipo="dui"></td>
-                <td><input type="password" id="password3"></td>
-                <td>
-                    <div id="divMagistrado3">
-                        <input type="hidden" value="0" data-tipo="resultado">
-                    </div>
-                </td>
-            </tr>
-        </table>
         <form id="frmCnr" action="../SerCiudadano" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <th>Identificacion</th>
+                    <th>Contraseña</th>
+                    <th>Estado</th>
+                </tr>
+                <!--Magistrado 1-->
+                <tr>
+                    <td><input type="text" id="dui1" data-tipo="dui" name="dui1"></td>
+                    <td><input type="password" id="password1"></td>
+                    <td>
+                        <div id="divMagistrado1">
+                            <input type="hidden" value="0" data-tipo="resultado">
+                        </div>
+                    </td>
+                </tr>
+                <!--Magistrado 2-->
+                <tr>
+                    <td><input type="text" id="dui2" data-tipo="dui" name="dui2"></td>
+                    <td><input type="password" id="password2"></td>
+                    <td>
+                        <div id="divMagistrado2">
+                            <input type="hidden" value="0" data-tipo="resultado">
+                        </div>
+                    </td>
+                </tr>
+                <!--Magistrado 3-->
+                <tr>
+                    <td><input type="text" id="dui3" data-tipo="dui" name="dui3"></td>
+                    <td><input type="password" id="password3"></td>
+                    <td>
+                        <div id="divMagistrado3">
+                            <input type="hidden" value="0" data-tipo="resultado">
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <input type="file" name="btnArchivo" id="btnSubir"><br>
             <input type="button" id="btnImportar" value="Importar datos">
         </form>
-        
+
     </body>
 </html>
