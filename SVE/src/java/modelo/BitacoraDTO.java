@@ -9,6 +9,8 @@ import java.sql.*;
 import conexion.Conexion;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Bitacora;
 
 /**
@@ -16,58 +18,55 @@ import modelo.Bitacora;
  * @author roberto
  */
 public class BitacoraDTO {
-    PreparedStatement pst;
-    ResultSet rs;
+    private static PreparedStatement pst;
+    private static ResultSet rs;
      private static final Conexion con = Conexion.conectar();
     
-    public boolean AgregarBitacora(Bitacora bita){
-        String consu = "insert into bitacoraAcciones(id_bitacora , fecha , hora , accion) values("
-                + "? , ? , ? , ?)";
-        
-        try{
-        pst = con.getCnn().prepareStatement(consu);
-        pst.setInt(1, bita.getIdBitacora());
-        pst.setString(2, bita.getFecha());
-        pst.setString(3, bita.getHora());
-        pst.setString(4, bita.getAccion());
-        pst.execute();
-        System.out.println("AgregarBitacora ejecutado exitosamente");
-        return true;    
-        
-        }catch(Exception e){
-        System.err.println("Error al ejecutar AgregarBitacora "+e);
-        return false;
+    public static boolean agregarBitacora(Bitacora b){
+        String query = "select agregarBitacora(?,?,?,?)";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            pst.setString(1, b.getAccion());
+            pst.setString(2, b.getMagistrado1());
+            pst.setString(3, b.getMagistrado2());
+            pst.setString(4, b.getMagistrado3());
+            pst.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BitacoraDTO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-    
-    
     }
     
-    public ArrayList<Bitacora> MostrarBitacora(){
-        ArrayList<Bitacora> lista = new ArrayList<>();
-        
-        try{
-        String consu = "select * from bitacoraAcciones";
-        pst = con.getCnn().prepareStatement(consu);
-        rs = pst.executeQuery();
-        
-        while(rs.next()){
-         Bitacora bit = new Bitacora();
-         
-         bit.setIdBitacora(rs.getInt("id_bitacora"));
-         bit.setFecha(rs.getString("fecha"));
-         bit.setHora(rs.getString("hora"));
-         bit.setAccion(rs.getString("accion"));
-         lista.add(bit);
-        
+    public static ArrayList<Bitacora> mostrarBitacoras() {
+        String query = "select * from bitacoraacciones";
+        ArrayList<String> magistrado = new ArrayList();
+        ArrayList<Bitacora> bitacora = new ArrayList();
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            rs = pst.executeQuery();
+            while(rs.next()) {
+                Bitacora b = new Bitacora();
+                b.setIdBitacora(rs.getInt("id_bitacora"));
+                b.setFecha(rs.getString("fecha"));
+                b.setHora(rs.getString("hora"));
+                b.setAccion(rs.getString("accion"));
+                //obtengo los magistrados que aparecen en esta bitacora
+                String magistrados = "select * from detallebitacora where id_bitacora = "+b.getIdBitacora();
+                pst = con.getCnn().prepareStatement(magistrados);
+                rs = pst.executeQuery();
+                while(rs.next()) {
+                    magistrado.add(rs.getString("num_dui"));
+                }
+                b.setMagistrado1(magistrado.get(0));
+                b.setMagistrado2(magistrado.get(1));
+                b.setMagistrado3(magistrado.get(2));
+                bitacora.add(b);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BitacoraDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        con.desconectar();
-        
-        }catch(Exception e){
-        System.err.println("Error al ejecutar MostrarBitacora "+e);
-            
-        }
-        return lista;
-    
+        return bitacora;
     }
     
 }
