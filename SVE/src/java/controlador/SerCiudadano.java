@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Bitacora;
+import modelo.BitacoraDTO;
 import modelo.Ciudadano;
 import modelo.CiudadanoDTO;
 import modelo.ConsultasDTO;
@@ -44,6 +46,7 @@ public class SerCiudadano extends HttpServlet {
         PrintWriter out = response.getWriter();
         //Procesando el archivo .sql con los datos del cnr
         //en esta ruta se guarda temporalmente el archivo .sql
+        Bitacora b = new Bitacora();
         String ruta = getServletContext().getRealPath("/") + "pages/procesos/";
         if (ServletFileUpload.isMultipartContent(request)) {
             FileItemFactory factory = new DiskFileItemFactory();
@@ -72,18 +75,34 @@ public class SerCiudadano extends HttpServlet {
                             item.write(archivo);
                             if (archivo.exists()) {
                                 String script = ruta + "" + nombre;
-                                if(ConsultasDTO.ejecutar("copy padronelectoral from '"+script+"' with (delimiter ',')")){
+                                if (ConsultasDTO.ejecutar("copy padronelectoral from '" + script + "' with (delimiter ',')")) {
                                     out.print("Registros importados correctamente");
-                                }
-                                else {
+                                } else {
                                     out.print("Hubo un error");
                                 }
-                                
+
                             } else {
                                 out.println("FALLO AL GUARDAR. NO EXISTE " + archivo.getAbsolutePath() + "</p>");
                             }
                         }
+                    } else {
+                        if (item.getFieldName().equals("dui1")) {
+                            b.setMagistrado1(item.getString());
+                        }
+                        if (item.getFieldName().equals("dui2")) {
+                            b.setMagistrado2(item.getString());
+                        }
+                        if (item.getFieldName().equals("dui3")) {
+                            b.setMagistrado3(item.getString());
+                        }
+
                     }
+                }
+                b.setAccion("Registro de datos CNR");
+                if (BitacoraDTO.agregarBitacora(b)) {
+                    out.print("<br>Bitacora agregada");
+                } else {
+                    out.print("<br>Hubo un error al agregar la bitacora");
                 }
 
             } catch (FileUploadException e) {
