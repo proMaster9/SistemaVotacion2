@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Municipio;
+import modelo.MunicipioDTO;
 
 /**
  *
@@ -30,17 +32,15 @@ public class SerDepartamento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SerDepartamento</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SerDepartamento at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        if(request.getParameter("dep") != null) {
+            int departamento = Integer.parseInt(request.getParameter("dep"));
+            out.print("Municipio: ");
+            out.print("<select name='selMunicipio' id='slMunicipio'>");
+            for(Municipio m:MunicipioDTO.mostrarMunicipiosDep(departamento)) {
+                out.print("<option value='"+m.getIdMunicipio()+"'>"+m.getNombreMunicipio()+"</option>");
+            }
+            out.print("</select>");
         }
     }
 
