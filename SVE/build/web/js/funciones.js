@@ -18,12 +18,6 @@ function cargarImagen(boton, divImagen) {
     });
 }
 
-//se bloquea la tecla enter en los formularios, para que no se envien al presionar esta tecla
-$('form').keypress(function (e) {
-    if (e.which == 13) {
-        return false;
-    }
-});
 
 
 //registro de un candidato
@@ -62,5 +56,21 @@ function mostrarCiudadano(caja, resultado, servlet, tipo) {
         }
     });
 }
+$(document).on("ready", function () {
+    //se bloquea la tecla enter en los formularios, para que no se envien al presionar esta tecla
+    $('form').keypress(function (e) {
+        if (e.which == 13) {
+            return false;
+        }
+    });
 
-//mostrarCiudadano('txtDui','divCiudadano','procesar.php',0);
+    //cargar municipios dinamicamente
+    $("#slDepartamento").on("change", function () {
+        var departamento = $(this).val();
+        $.post('../SerDepartamento', {
+            dep: departamento
+        }, function (data) {
+            $("#divMunicipio").html(data);
+        });
+    });
+});
