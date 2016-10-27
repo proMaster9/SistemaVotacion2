@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="java.sql.Date"%>
+<%@page import="sun.awt.SunHints.Value"%>
 <%@page import="controlador.SerUsuariosPrincipales"%>
 <%@page import="modelo.Usuario"%>
 <%@page import="modelo.DepartamentoDTO"%>
