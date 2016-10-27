@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.Date;
+import sun.awt.SunHints.Value;
 import controlador.SerUsuariosPrincipales;
 import modelo.Usuario;
 import modelo.DepartamentoDTO;
@@ -49,6 +50,7 @@ public final class tse_005fusuarios_005fprincipales_jsp extends org.apache.jaspe
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
