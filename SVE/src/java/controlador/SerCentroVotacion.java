@@ -11,6 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.CentroVotacion;
+import modelo.CentroVotacionDTO;
+import modelo.CiudadanoDTO;
+import modelo.MunicipioDTO;
 
 /**
  *
@@ -30,17 +34,31 @@ public class SerCentroVotacion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SerCentroVotacion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SerCentroVotacion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        if (request.getParameter("btnAgregar") != null) {
+            int departamento = Integer.parseInt(request.getParameter("txtDepartamento"));
+            CentroVotacion c = new CentroVotacion();
+            c.setNombreCentro(request.getParameter("txtNombre"));
+            c.setNumJrvDisponible(Integer.parseInt(request.getParameter("txtJrv")));
+            c.setNumDui(request.getParameter("txtDui"));
+            c.setIdMunicipio(Integer.parseInt(request.getParameter("slMunicipio")));
+            c.setDireccion(request.getParameter("txtDireccion"));
+            if (CentroVotacionDTO.agregarCentro(c)) {
+                for (CentroVotacion centro : CentroVotacionDTO.mostrarCentrosDep(departamento)) {
+                    out.print("<tr>");
+                    out.print("<td>" + centro.getNombreCentro() + "</td>");
+                    out.print("<td>" + centro.getNumJrvDisponible() + "</td>");
+                    out.print("<td>" + centro.getNumDui() + ", " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getApellido() + " " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getNombre() + "</td>");
+                    out.print("<td>" + MunicipioDTO.mostrarUnMunicipio(centro.getIdMunicipio()).getNombreMunicipio() + "</td>");
+                    out.print("<td>");
+                    out.print("<a href='#'>Modificar</a>");
+                    out.print("<a hrf='#>Eliminar</a>");
+                    out.print("</td>");
+                    out.print("</tr>");
+                }
+            } else {
+                out.print("Error al agregar");
+            }
         }
     }
 
