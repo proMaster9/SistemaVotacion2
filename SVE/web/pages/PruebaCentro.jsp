@@ -1,7 +1,7 @@
 <%-- 
-    Document   : PruebaCentro
-    Created on : 21-oct-2016, 22:38:04
-    Author     : Icchigo
+   Document   : PruebaCentro
+   Created on : 21-oct-2016, 22:38:04
+   Author     : Icchigo
 --%>
 
 <%@page import="modelo.CiudadanoDTO"%>
@@ -35,7 +35,7 @@
                     else {
                         $.post('../SerCentroVotacion', {
                             btnAgregar: 'true',
-                            txtDepartamento : departamento,
+                            txtDepartamento: departamento,
                             txtNombre: nombre,
                             txtJrv: jrv,
                             txtDui: dui,
@@ -46,7 +46,51 @@
                         });
                     }
                 });
+
+                //modificar un centro de votacion via ajax
+                $("#btnModificar").on("click", function () {
+                    var idCentro = $("#txtIdCentro").val();
+                    var nombre = $("#txtNombre").val();
+                    var departamento = $("#txtDepartamento").val();
+                    var jrv = $("#txtJrv").val();
+                    var dui = $("#txtDui").val();
+                    var municipio = $("#slMunicipio").val();
+                    var direccion = $("#txtDireccion").val();
+                    $.post('../SerCentroVotacion', {
+                        btnModificar: 'true',
+                        txtIdCentro : idCentro,
+                        txtDepartamento: departamento,
+                        txtNombre: nombre,
+                        txtJrv: jrv,
+                        txtDui: dui,
+                        slMunicipio: municipio,
+                        txtDireccion: direccion
+                    }, function (data) {
+                        $("#divCentro").html(data);
+                    });
+                });
+               
             });
+            function cargar(idCentro, nombre, numJrv, dui, municipio, direccion) {
+                $("#txtIdCentro").val(idCentro);
+                $("#txtNombre").val(nombre);
+                $("#txtJrv").val(numJrv);
+                $("#txtDui").val(dui);
+                $("#slMunicipio").val(municipio);
+                $("#txtDireccion").val(direccion);
+                $("#txtResultado").val(1);
+            }
+            //eliminar centros de votacion
+            function eliminar(idCentro){
+                var departamento = $("#txtDepartamento").val();
+                $.post('../SerCentroVotacion',{
+                    btnEliminar : 'true',
+                    txtIdCentro: idCentro,
+                    txtDepartamento: departamento
+                },function(data){
+                    $("#divCentro").html(data);
+                });
+            }
         </script>
     </head>
     <body>
@@ -56,8 +100,9 @@
             int departamento = 1;
         %>
         <h1>Centros de votacion</h1>
-        <form>
-            <input type="hidden" name="txtDepartamento" id="txtDepartamento" value="<%= departamento %>">
+        <form id='frmCentro'>
+            <input type="hidden" name="txtDepartamento" id="txtDepartamento" value="<%= departamento%>">
+            <input type='hidden' name='txtIdCentro' id='txtIdCentro'>
             Nombre: <input type="text" name="txtNombre" id="txtNombre"><br>
             JRV's Disponibles: <input type="number" name="txtJrv" id="txtJrv"><br>
             <!--Busqueda de ciudadano-->
@@ -81,7 +126,7 @@
             <br>
             Direccion: <input type="text" name="txtDireccion" id="txtDireccion"><br>
             <input type="button" value="Agregar" name="btnAgregar" id="btnAgregar">
-            <input type="button" value="Eliminar" name="btnEliminar" id="btnEliminar">
+            <input type="button" value="Modificar" name="btnModificar" id="btnModificar">
         </form>
         Centros del departamento de <%= DepartamentoDTO.mostrarDepartamento(departamento).getDepartamento()%>
         <table>
@@ -92,23 +137,21 @@
                 <th>Municipio</th>
                 <th></th>
             </tr>
-            <tbody>
-            <div id="divCentro">
+            <tbody id="divCentro">
                 <% for (CentroVotacion c : CentroVotacionDTO.mostrarCentrosDep(departamento)) {%>
                 <tr>
                     <td><%= c.getNombreCentro()%></td>
                     <td><%= c.getNumJrvDisponible()%></td>
                     <!--Impresio del numero de dui, apellidos y nombres del director de centro de votacion-->
                     <td><%= c.getNumDui()%>, <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getApellido()%> <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre()%></td>
-                    <td><%= MunicipioDTO.mostrarUnMunicipio(c.getIdMunicipio()).getNombreMunicipio() %></td>
+                    <td><%= MunicipioDTO.mostrarUnMunicipio(c.getIdMunicipio()).getNombreMunicipio()%></td>
                     <td>
-                        <a href='#'>Modificar</a>
-                        <a href="#">Eliminar</a>
+                        <a href="javascript:cargar('<%= c.getIdCentroVotacion()%>','<%= c.getNombreCentro()%>','<%= c.getNumJrvDisponible()%>','<%= c.getNumDui()%>','<%= c.getIdMunicipio()%>','<%= c.getDireccion()%>')">Modificar</a>
+                        <a href="javascript:eliminar('<%= c.getIdCentroVotacion()%>')">Eliminar</a>
                     </td>
                 </tr>
                 <% }%>
-            </div>
-        </tbody>
-    </table>
-</body>
+            </tbody>
+        </table>
+    </body>
 </html>
