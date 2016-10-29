@@ -35,6 +35,7 @@ public class SerCentroVotacion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        //agregar centros de votacion
         if (request.getParameter("btnAgregar") != null) {
             int departamento = Integer.parseInt(request.getParameter("txtDepartamento"));
             CentroVotacion c = new CentroVotacion();
@@ -51,13 +52,64 @@ public class SerCentroVotacion extends HttpServlet {
                     out.print("<td>" + centro.getNumDui() + ", " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getApellido() + " " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getNombre() + "</td>");
                     out.print("<td>" + MunicipioDTO.mostrarUnMunicipio(centro.getIdMunicipio()).getNombreMunicipio() + "</td>");
                     out.print("<td>");
-                    out.print("<a href='#'>Modificar</a>");
-                    out.print("<a hrf='#>Eliminar</a>");
+                    out.print("<a href=\"javascript:cargar('"+centro.getIdCentroVotacion()+"','"+centro.getNombreCentro()+"','"+centro.getNumJrvDisponible()+"','"+centro.getNumDui()+"','"+centro.getIdMunicipio()+"','"+centro.getDireccion()+"')\">Modificar</a>");
+                    out.print("<a href=\"javascript:eliminar('"+centro.getIdCentroVotacion()+"')\">Eliminar</a>");
                     out.print("</td>");
                     out.print("</tr>");
                 }
             } else {
                 out.print("Error al agregar");
+            }
+        }
+
+        //modificar centros de votacion
+        if (request.getParameter("btnModificar") != null) {
+            int departamento = Integer.parseInt(request.getParameter("txtDepartamento"));
+            CentroVotacion c = new CentroVotacion();
+            c.setIdCentroVotacion(Integer.parseInt(request.getParameter("txtIdCentro")));
+            c.setNombreCentro(request.getParameter("txtNombre"));
+            c.setNumJrvDisponible(Integer.parseInt(request.getParameter("txtJrv")));
+            c.setNumDui(request.getParameter("txtDui"));
+            c.setIdMunicipio(Integer.parseInt(request.getParameter("slMunicipio")));
+            c.setDireccion(request.getParameter("txtDireccion"));
+            if (CentroVotacionDTO.modificarCentro(c)) {
+                for (CentroVotacion centro : CentroVotacionDTO.mostrarCentrosDep(departamento)) {
+                    out.print("<tr>");
+                    out.print("<td>" + centro.getNombreCentro() + "</td>");
+                    out.print("<td>" + centro.getNumJrvDisponible() + "</td>");
+                    out.print("<td>" + centro.getNumDui() + ", " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getApellido() + " " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getNombre() + "</td>");
+                    out.print("<td>" + MunicipioDTO.mostrarUnMunicipio(centro.getIdMunicipio()).getNombreMunicipio() + "</td>");
+                    out.print("<td>");
+                    out.print("<a href=\"javascript:cargar('"+centro.getIdCentroVotacion()+"','"+centro.getNombreCentro()+"','"+centro.getNumJrvDisponible()+"','"+centro.getNumDui()+"','"+centro.getIdMunicipio()+"','"+centro.getDireccion()+"')\">Modificar</a>");
+                    out.print("<a href=\"javascript:eliminar('"+centro.getIdCentroVotacion()+"')\">Eliminar</a>");
+                    out.print("</td>");
+                    out.print("</tr>");
+                }
+            }
+            else {
+                out.print("Error al modificar");
+            }
+        }
+        
+        if(request.getParameter("btnEliminar") != null) {
+            int departamento = Integer.parseInt(request.getParameter("txtDepartamento"));
+            int idCentro = Integer.parseInt(request.getParameter("txtIdCentro"));
+            if(CentroVotacionDTO.eliminarCentro(idCentro)) {
+                for (CentroVotacion centro : CentroVotacionDTO.mostrarCentrosDep(departamento)) {
+                    out.print("<tr>");
+                    out.print("<td>" + centro.getNombreCentro() + "</td>");
+                    out.print("<td>" + centro.getNumJrvDisponible() + "</td>");
+                    out.print("<td>" + centro.getNumDui() + ", " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getApellido() + " " + CiudadanoDTO.mostrarVotante(centro.getNumDui()).getNombre() + "</td>");
+                    out.print("<td>" + MunicipioDTO.mostrarUnMunicipio(centro.getIdMunicipio()).getNombreMunicipio() + "</td>");
+                    out.print("<td>");
+                    out.print("<a href=\"javascript:cargar('"+centro.getIdCentroVotacion()+"','"+centro.getNombreCentro()+"','"+centro.getNumJrvDisponible()+"','"+centro.getNumDui()+"','"+centro.getIdMunicipio()+"','"+centro.getDireccion()+"')\">Modificar</a>");
+                    out.print("<a href=\"javascript:eliminar('"+centro.getIdCentroVotacion()+"')\">Eliminar</a>");
+                    out.print("</td>");
+                    out.print("</tr>");
+                }
+            }
+            else {
+                out.print("Error al Eliminar");
             }
         }
     }
