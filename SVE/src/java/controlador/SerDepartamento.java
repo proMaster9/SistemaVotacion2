@@ -37,6 +37,7 @@ public class SerDepartamento extends HttpServlet {
             int departamento = Integer.parseInt(request.getParameter("dep"));
             out.print("Municipio: ");
             out.print("<select name='selMunicipio' id='slMunicipio'>");
+            out.print("<option value='0'>---Seleccione---</option>");
             for(Municipio m:MunicipioDTO.mostrarMunicipiosDep(departamento)) {
                 out.print("<option value='"+m.getIdMunicipio()+"'>"+m.getNombreMunicipio()+"</option>");
             }
