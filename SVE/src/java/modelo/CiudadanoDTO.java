@@ -390,14 +390,14 @@ public class CiudadanoDTO {
         }
         //usuarios principales
         if (tipoUsuario == 2 || tipoUsuario == 3 || tipoUsuario == 6) {
-            query = "select u.id_usuario, ct.num_dui, u.contrasenia, ex.nombre, ex.apellido, ex.sexo, u.confirmacion, u.id_tipo_usuario, ex.fecha_nac, ex.direccion_especifica, ex.id_municipio, m.id_departamento from usuario u inner join credencialtemporal ct on ct.id_usuario = u.id_usuario inner join excepcionusuario ex on ex.id_usuario = u.id_usuario inner join municipio m on m.id_municipio = ex.id_municipio where u.id_tipo_usuario = " + tipoUsuario + " and " + condicion;
+            query = "select u.id_usuario, ct.num_dui, u.contrasenia, ex.nombre, ex.apellido, ex.sexo, u.confirmacion, u.id_tipo_usuario, ex.fecha_nac, ex.direccion_especifica, ex.id_municipio, m.id_departamento, t.tipo_usuario from usuario u inner join credencialtemporal ct on ct.id_usuario = u.id_usuario inner join excepcionusuario ex on ex.id_usuario = u.id_usuario inner join municipio m on m.id_municipio = ex.id_municipio inner join tipousuario t on t.id_tipo_usuario = u.id_tipo_usuario where u.id_tipo_usuario = " + tipoUsuario + " and " + condicion;
 
         } //usuarios secundarios
         else if (tipoUsuario == 5 || (tipoUsuario >= 7 && tipoUsuario <= 10)) {
-            query = "select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u inner join usuariopadron up on u.id_usuario = up.id_usuario inner join padronelectoral p on p.num_dui = up.num_dui inner join municipio m on m.id_municipio = p.id_municipio where u.id_tipo_usuario = " + tipoUsuario + " and " + condicion;
+            query = "select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento, t.tipo_usuario from usuario u inner join usuariopadron up on u.id_usuario = up.id_usuario inner join padronelectoral p on p.num_dui = up.num_dui inner join municipio m on m.id_municipio = p.id_municipio inner join tipousuario t on t.id_tipo_usuario = u.id_tipo_usuario where u.id_tipo_usuario = " + tipoUsuario + " and " + condicion;
         } //votantes
         else {
-            query = "select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u inner join usuariopadron up on u.id_usuario = up.id_usuario inner join padronelectoral p on p.num_dui = up.num_dui inner join municipio m on m.id_municipio = p.id_municipio where " + condicion;
+            query = "select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento, t.tipo_usuario from usuario u inner join usuariopadron up on u.id_usuario = up.id_usuario inner join padronelectoral p on p.num_dui = up.num_dui inner join municipio m on m.id_municipio = p.id_municipio inner join tipousuario t on t.id_tipo_usuario = u.id_tipo_usuario where " + condicion;
         }
         try {
             pst = con.getCnn().prepareStatement(query);
@@ -416,6 +416,7 @@ public class CiudadanoDTO {
                 c.setDireccion(rs.getString("direccion_especifica"));
                 c.setIdMunicipio(rs.getInt("id_municipio"));
                 c.setIdDepartamento(rs.getInt("id_departamento"));
+                c.setRol(rs.getString("tipo_usuario"));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -436,7 +437,7 @@ public class CiudadanoDTO {
                 + "from usuario u inner join credencialtemporal ct on ct.id_usuario = u.id_usuario "
                 + "inner join excepcionusuario ex on ex.id_usuario = u.id_usuario inner join municipio m on m.id_municipio = ex.id_municipio "
                 + "inner join tipousuario t on t.id_tipo_usuario = u.id_tipo_usuario "
-                + "where u.id_tipo_usuario =2 or u.id_tipo_usuario =3 or u.id_tipo_usuario =6";
+                + "where u.id_tipo_usuario =2 or u.id_tipo_usuario =3 or u.id_tipo_usuario =6 order by u.id_usuario desc";
         try {
             pst = con.getCnn().prepareStatement(query);
             rs = pst.executeQuery();
@@ -498,102 +499,39 @@ public class CiudadanoDTO {
         return c;
     }
 
-    public static void main(String[] args) {
-        for (Ciudadano c : mostrarUsuariosPrincipales()) {
-            System.out.println("Dui: " +c.getNumDui());
-            System.out.println("Contraseña: "+c.getContrasenia());
-            System.out.println("Rol: "+c.getRol());
-            System.out.println("Nombre: "+c.getNombre());
-            System.out.println("Apellido: "+c.getApellido());
-            System.out.println("Sexo: "+c.getSexo());
-            System.out.println("Confirmacion: "+c.getConfirmacion());
-            System.out.println("Tipo: "+c.getTipoUsuario());
-            System.out.println("Fecha: "+c.getFechaNac());
-            System.out.println("Direccion: "+c.getDireccion());
-            System.out.println("Municipio: "+c.getIdMunicipio());
-            System.out.println("Departamento: "+c.getIdDepartamento());
+    /*
+     busqueda de usuarios principales, segun el dui
+     se retorna un objeto tipo Ciudadano
+     */
+    public static Ciudadano mostrarPrincipal(String dui) {
+        Ciudadano c = new Ciudadano();
+        String query = "select u.id_usuario, ct.num_dui, u.contrasenia, ex.nombre, ex.apellido, ex.sexo, u.confirmacion, "
+                + "u.id_tipo_usuario, ex.fecha_nac, ex.direccion_especifica, ex.id_municipio, m.id_departamento, t.tipo_usuario  "
+                + "from usuario u inner join credencialtemporal ct on ct.id_usuario = u.id_usuario "
+                + "inner join excepcionusuario ex on ex.id_usuario = u.id_usuario inner join municipio m on m.id_municipio = ex.id_municipio "
+                + "inner join tipousuario t on t.id_tipo_usuario = u.id_tipo_usuario "
+                + "where (u.id_tipo_usuario =2 or u.id_tipo_usuario =3 or u.id_tipo_usuario =6) and ct.num_dui = '" + dui + "'";
+        try {
+            pst = con.getCnn().prepareStatement(query);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                c.setIdUsuario(rs.getInt("id_usuario"));
+                c.setNumDui(rs.getString("num_dui"));
+                c.setContrasenia(rs.getString("contrasenia"));
+                c.setNombre(rs.getString("nombre"));
+                c.setApellido(rs.getString("apellido"));
+                c.setSexo(rs.getString("sexo"));
+                c.setConfirmacion(rs.getInt("confirmacion"));
+                c.setTipoUsuario(rs.getInt("id_tipo_usuario"));
+                c.setFechaNac(rs.getString("fecha_nac"));
+                c.setDireccion(rs.getString("direccion_especifica"));
+                c.setIdMunicipio(rs.getInt("id_municipio"));
+                c.setIdDepartamento(rs.getInt("id_departamento"));
+                c.setRol(rs.getString("tipo_usuario"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*
-         Ciudadano c = mostrarVotante("00000015-0");
-         if(c.getIdMunicipio() != 0) {
-         System.out.println("Hola: " + c.getNombre());
-         System.out.println("Tu eres: " + c.getNumDui());
-         } else {
-         System.out.println("Votante no encontrado");
-         }
-         */
-        /*
-         ArrayList<Ciudadano> lista = mostrarUsuarios(11, 0);
-         if (lista.size() > 0) {
-         for (Ciudadano c : lista) {
-         System.out.println(c.getNumDui());
-         System.out.println(c.getContrasenia());
-         System.out.println(c.getNombre());
-         }
-         } else {
-         System.out.println("Datos no encontrados");
-         }
-         */
-        /*
-         Ciudadano c = mostrarUsuario(58);
-         if(c.getIdUsuario() != 0) {
-         System.out.println(c.getNumDui());
-         System.out.println(c.getContrasenia());
-         System.out.println(c.getNombre());
-         System.out.println(c.getApellido());
-         System.out.println(c.getSexo());
-         System.out.println(c.getConfirmacion());
-         System.out.println(c.getTipoUsuario());
-         System.out.println(c.getFechaNac());
-         System.out.println(c.getDireccion());
-         System.out.println(c.getIdMunicipio());
-         System.out.println(c.getIdDepartamento());
-         }
-         else {
-         System.out.println("Usuario no encontrado");
-         }
-         */
-        /*
-         Ciudadano c = new Ciudadano();
-         c.setNumDui("00000019-0");
-         c.setContrasenia("54321");
-         c.setTipoUsuario(5);
-         if(agregarUsuario(c)) {
-         System.out.println("Usuario agregado");
-         } 
-         else {
-         System.out.println("Hubo un error");
-         }
-         */
-        /*
-         Ciudadano c = new Ciudadano();
-         c.setIdUsuario(68);
-         c.setNumDui("00000125-0");
-         c.setContrasenia("11111");
-         c.setNombre("Maria");
-         c.setApellido("Pilar");
-         c.setFechaNac("10-09-2018");
-         c.setSexo("f");
-         c.setDireccion("Canton el espino #12");
-         c.setIdMunicipio(2);
-         c.setTipoUsuario(2);
-
-         if(modificarUsuario(c)) {
-         System.out.println("Usuario agregado");
-         }
-         else {
-         System.out.println("Error");
-         }
-         */
-        /*
-         Ciudadano c = entrarVotante("00000008-0","12345");
-         if(c.getIdUsuario() != 0) {
-         System.out.println("Hola: " + c.getNumDui());
-         System.out.println("Tipo: " + c.getRol());
-         } else {
-         System.out.println("Credenciales incorrectas");
-         }
-         */
+        return c;
     }
-
 }
