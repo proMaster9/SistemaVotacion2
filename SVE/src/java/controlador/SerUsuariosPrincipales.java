@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Ciudadano;
 import modelo.CiudadanoDTO;
+import modelo.DepartamentoDTO;
 import modelo.Municipio;
 import modelo.MunicipioDTO;
 import modelo.SupervisorDTO;
@@ -37,18 +38,7 @@ public class SerUsuariosPrincipales extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SerUsuariosPrincipales</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SerUsuariosPrincipales at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        PrintWriter out = response.getWriter();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,66 +67,96 @@ public class SerUsuariosPrincipales extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        if(request.getParameter("accion")!=null && request.getParameter("accion").equals("agregar")){
-            int tipo = Integer.valueOf(request.getParameter("tipo"));
-            if(tipo == 2 || tipo == 3 || tipo == 6){
-                Ciudadano ciu = new Ciudadano();
-                //recuperando los datos enviados desde la vista
-                ciu.setNumDui(request.getParameter("dui"));
-                ciu.setNombre(request.getParameter("nom"));
-                ciu.setApellido(request.getParameter("ape"));
-                ciu.setSexo(request.getParameter("sexo"));
-                ciu.setDireccion(request.getParameter("dir"));
-                ciu.setIdMunicipio(Integer.valueOf(request.getParameter("mun")));
-                ciu.setFechaNac(request.getParameter("fecha"));
-                ciu.setContrasenia("12345");
-                ciu.setTipoUsuario(tipo);
-                //enviando los datos al modelo
-                if(CiudadanoDTO.agregarUsuario(ciu)){
-                    //actualiza la tabla en la vista usuarios principales                             
-  
-                    int contador=1;
-                    //for(Ciudadano lista:CiudadanoDTO.mostrarUsuariosPrincipales()){
-                    out.print("<table class=\"table table-bordered table-striped table-hover js-basic-example dataTable\">\n" +
-"                                <thead>\n" +
-"                                    <tr>\n" +
-"                                        <th>#</th>\n" +
-"                                        <th>DUI:</th>\n" +
-"                                        <th>Nombre:</th>\n" +
-"                                        <th>Apellido:</th>\n" +
-"                                        <th>Sexo:</th>\n" +
-"                                        <th>Municipio:</th>\n" +
-"                                        <th>Tipo Usuario:</th>\n" +
-"                                        <th>Opciones:</th>\n" +
-"                                    </tr>\n" +
-"                                </thead>\n" +
-"                                <tbody>\n" +
-"                                    <tr>\n" +
-"                                        <td>1</td>\n" +
-"                                        <td>0000000-0</td>\n" +
-"                                        <td>Juan Carlos</td>\n" +
-"                                        <td>Lopez Avalos</td>\n" +
-"                                        <td>M</td>\n" +
-"                                        <td>Santa Tecla</td>\n" +
-"                                        <td>Administrador</td>\n" +
-"                                        <td>\n" +
-"                                            <button type=\"button\" class=\"btn btn2 bg-cyan waves-effect m-r-0 waves-light\" data-toggle=\"modal\" data-target=\"#modalModificar\" ><i class=\"material-icons\">create</i></button>\n" +
-"                                            <button type=\"button\" class=\"btn btn2 bg-grey waves-effect m-r-0 waves-light\" data-toggle=\"modal\" data-target=\"#modalEliminar\" ><i class=\"material-icons\">delete_forever</i></button>\n" +
-"                                        </td>\n" +
-"                                    </tr>\n" +
-"                                    <tr>\n" +
-"                                </tbody>\n" +
-"                            </table>");
-                    contador++;
-                    //}
-                    
-                    
-                }else{}
+        //registro de usuarios
+        if (request.getParameter("btnAgregar") != null) {
+            Ciudadano c = new Ciudadano();
+            c.setContrasenia("12345");
+            c.setNumDui(request.getParameter("txtDui"));
+            c.setNombre(request.getParameter("txtNombre"));
+            c.setApellido(request.getParameter("txtApellido"));
+            c.setSexo(request.getParameter("rdbSexo"));
+            c.setFechaNac(request.getParameter("txtFecha"));
+            c.setIdDepartamento(Integer.parseInt(request.getParameter("slDepartamento")));
+            c.setIdMunicipio(Integer.parseInt(request.getParameter("slMunicipio")));
+            c.setDireccion(request.getParameter("txtDireccion"));
+            c.setTipoUsuario(Integer.parseInt(request.getParameter("slTipo")));
+            if (CiudadanoDTO.agregarUsuario(c) == false) {
+                out.print("hubo un error");
+            }
+            //Impresion de filas 
+            for (Ciudadano us : CiudadanoDTO.mostrarUsuariosPrincipales()) {
+                out.print("<tr>");
+                out.print("<td>" + us.getNumDui() + "</td>");
+                out.print("<td>" + us.getApellido() + ", " + us.getNombre() + "</td>");
+                if (us.getSexo().equals("m")) {
+                    out.print("<td>Masculino</td>");
+                } else {
+                    out.print("<td>Femenino</td>");
+                }
+                out.print("<td data-rol='" + us.getTipoUsuario() + "'>" + us.getRol() + "</td>");
+                out.print("<td>" + us.getFechaNac() + "</td>");
+                out.print("<td>" + DepartamentoDTO.mostrarDepartamento(us.getIdDepartamento()).getDepartamento() + ", " + MunicipioDTO.mostrarUnMunicipio(us.getIdMunicipio()).getNombreMunicipio() + "</td>");
+                out.print("<td>" + us.getDireccion() + "</td>");
+                out.print("<td>");
+                out.print("<a href=\"javascript:cargar('"+us.getIdUsuario()+"','"+us.getNumDui()+"','"+us.getNombre()+"','"+us.getApellido()+"','"+us.getSexo()+"','"+us.getFechaNac()+"','"+us.getIdDepartamento()+"','"+us.getIdMunicipio()+"','"+us.getDireccion()+"','"+us.getTipoUsuario()+"')\">Modificar</a>");
+                out.print("</td>");
+                out.print("</tr>");
+            }
+            
+        }
+        //busqueda de dui en los registros
+        if (request.getParameter("btnBuscar") != null) {
+            Ciudadano c = CiudadanoDTO.mostrarPrincipal(request.getParameter("txtDui"));
+            //evita que se registre un dui repetido
+            if (c.getIdUsuario() != 0) {
+                out.print("Dui en uso");
+                out.print("<input type='hidden' id='txtResultado' value='0'>");
+            } else { //solo deja pasar numeros de dui disponibles
+                out.print("Dui disponible");
+                out.print("<input type='hidden' id='txtResultado' value='1'>");
             }
         }
+        
+        if (request.getParameter("btnModificar") != null) {
+            Ciudadano c = new Ciudadano();
+            c.setIdUsuario(Integer.parseInt(request.getParameter("txtId")));
+            c.setContrasenia("12345");
+            c.setNumDui(request.getParameter("txtDui"));
+            c.setNombre(request.getParameter("txtNombre"));
+            c.setApellido(request.getParameter("txtApellido"));
+            c.setSexo(request.getParameter("rdbSexo"));
+            c.setFechaNac(request.getParameter("txtFecha"));
+            c.setIdDepartamento(Integer.parseInt(request.getParameter("slDepartamento")));
+            c.setIdMunicipio(Integer.parseInt(request.getParameter("slMunicipio")));
+            c.setDireccion(request.getParameter("txtDireccion"));
+            c.setTipoUsuario(Integer.parseInt(request.getParameter("slTipo")));
+            if(CiudadanoDTO.modificarUsuario(c) == false) {
+                out.print("Hubo un error");
+            }
+            //Impresion de filas 
+            for (Ciudadano us : CiudadanoDTO.mostrarUsuariosPrincipales()) {
+                out.print("<tr>");
+                out.print("<td>" + us.getNumDui() + "</td>");
+                out.print("<td>" + us.getApellido() + ", " + us.getNombre() + "</td>");
+                if (us.getSexo().equals("m")) {
+                    out.print("<td>Masculino</td>");
+                } else {
+                    out.print("<td>Femenino</td>");
+                }
+                out.print("<td data-rol='" + us.getTipoUsuario() + "'>" + us.getRol() + "</td>");
+                out.print("<td>" + us.getFechaNac() + "</td>");
+                out.print("<td>" + DepartamentoDTO.mostrarDepartamento(us.getIdDepartamento()).getDepartamento() + ", " + MunicipioDTO.mostrarUnMunicipio(us.getIdMunicipio()).getNombreMunicipio() + "</td>");
+                out.print("<td>" + us.getDireccion() + "</td>");
+                out.print("<td>");
+                out.print("<a href=\"javascript:cargar('"+us.getIdUsuario()+"','"+us.getNumDui()+"','"+us.getNombre()+"','"+us.getApellido()+"','"+us.getSexo()+"','"+us.getFechaNac()+"','"+us.getIdDepartamento()+"','"+us.getIdMunicipio()+"','"+us.getDireccion()+"','"+us.getTipoUsuario()+"')\">Modificar</a>");
+                out.print("</td>");
+                out.print("</tr>");
+            }
+        }
+        
     }
- 
 
     /**
      * Returns a short description of the servlet.
