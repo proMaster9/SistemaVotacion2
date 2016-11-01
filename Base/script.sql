@@ -114,10 +114,15 @@ CREATE TABLE candidato (
     foto VARCHAR(60) NOT NULL,
     id_departamento int not null,
     tipo INT NOT NULL,/*existen dos tipos de candidatos 1 es afiliado a partdio y 2 es independiente*/
-    id_partido int not null,
+    /*id_partido int not null,  este campo fue eliminado, en lugar cree la tabla detallePartido*/ 
     CONSTRAINT pk_candidato PRIMARY KEY (id_candidato)
 );
 
+create table detallePartido(
+    id_candidato int not null,
+    id_partido int not null,
+    constraint pk_detalleCandidato primary key (id_candidato)
+);
 create sequence sec_jrv;
 CREATE TABLE JRV (
     id_jrv INT default nextval('sec_jrv'),
@@ -278,7 +283,12 @@ alter table municipio add constraint fk_municipio_departamento foreign key (id_d
 
 alter table JRV add constraint fk_JRV_centroVotacion foreign key (id_centro_votacion) references centroVotacion(id_centro_votacion);
 
-alter table candidato add constraint fk_candidato_partido foreign key(id_partido) references partido(id_partido);
+/* alter table candidato add constraint fk_candidato_partido foreign key(id_partido) references partido(id_partido); */
+/*modificacion - Octubre 31 -- 2016 */
+alter table detallePartido add constraint fk_detallePartido_candidato foreign key(id_candidato) references candidato(id_candidato);
+alter table detallePartido add constraint fk_detallePartido_partido foreign key(id_partido) references partido(id_partido);
+/*fin de modificacion*/
+
 alter table directivaJRV add constraint fk_directivaJRV_partido foreign key (id_partido) references partido(id_partido);
 
 alter table votoMarca add constraint fk_vMarca_candidato foreign key (id_candidato) references candidato(id_candidato);
