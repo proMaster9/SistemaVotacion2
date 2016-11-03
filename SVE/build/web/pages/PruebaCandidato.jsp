@@ -21,7 +21,10 @@
         <script src="../js/funciones.js"></script>
         <script>
             $(document).on("ready", function () {
-                mostrarCiudadano('txtDui', 'divCiudadano', '../SerCiudadano', 0);
+                $("#btAgregar").on("click",function(){
+                    alert("funciona");
+                });
+                $("#btnModificar").prop("disabled","disabled");
                 enviarForm('frmCandidato', 'btnAgregar');
                 cargarImagen("btnImagen", "divImg");
                 //evitar la actualizacion si no se selecciona un registro
@@ -34,22 +37,41 @@
                         alert("No puedes modificar");
                     }
                 });
+                //vlidar el dui del candidato
+                $("#txtDuiCandidato").on("keyup", function () {
+                    var dui = $("#txtDuiCandidato").val();
+                    var longitud = dui.length;
+                    if (longitud >= 10) {
+                        $.post('../SerCandidato', {
+                            txtDuiCandidato: dui
+                        }, function (data) {
+                            $("#divCiudadano").html(data);
+                        });
+                    }
+                    else {
+                        $("#divCiudadano").html("<input type='hidden' name='txtResultado' id='txtResultado'>");
+                    }
+                });
 
             });
             function modificar(idCandidato, idPartido, idDepartamento, dui, foto) {
                 $("#txtId").val(idCandidato);
                 $("#slPartido").val(idPartido);
                 $("#slDepartamento").val(idDepartamento);
-                $("#txtDui").val(dui);
+                $("#txtDuiCandidato").val(dui);
                 $("#divImg").html(foto);
+                $("#btnAgregar").prop("disabled","disabled");
+                $("#btnModificar").prop("disabled",false);
             }
 
         </script>
     </head>
     <body>
-        <h1>Candidatos</h1>
+        <h1>Candidatos Partidarios</h1>
         <form method="post" name="frmCandidato" id="frmCandidato" action="../SerCandidato" enctype="multipart/form-data">
             <input type="hidden" name="txtId" id="txtId" value="0">
+            <!--Se define que es un candidato partidario-->
+            <input type="hidden" name="txtTipo" id="txtTipo" value="1">
             Partido: 
             <select name="slPartido" id="slPartido">
                 <%
@@ -66,7 +88,7 @@
             </select>
             <!--Busqueda de ciudadano-->
             <div>
-                Dui: <input type="text" name="txtDui" id="txtDui" autocomplete="off"><br>
+                Dui: <input type="text" name="txtDui" id="txtDuiCandidato" autocomplete="off"><br>
 
                 <!--Impresion de resultados de busqueda-->
                 <div id="divCiudadano">
@@ -76,7 +98,6 @@
                 Foto: <input type="file" name="btnImagen" id="btnImagen">
                 <br>
                 <div id="divImg"></div>
-
             </div>
             <!--Fin de busqueda-->
             <input type="button" value="Agregar" id="btnAgregar">
@@ -93,7 +114,10 @@
             </tr>
             <tbody>
             <div id="divCandidato">
-                <% for (Candidato c : CandidatoDTO.mostrarCandidatos()) {%>
+                <% for (Candidato c : CandidatoDTO.mostrarCandidatos()) {
+                        if (c.getTipo() == 1) {
+                %>
+
                 <tr>
                     <td><%= DepartamentoDTO.mostrarDepartamento(c.getIdDepartamento()).getDepartamento()%></td>
                     <td><%= c.getNumDui()%></td>
@@ -105,10 +129,11 @@
                     <td><img src="../images/files/candidatos/<%= c.getFoto()%>"></td>
                     <td>
                         <a href="javascript:modificar('<%= c.getIdCandidato()%>','<%= c.getIdPartido()%>','<%= c.getIdDepartamento()%>','<%= c.getNumDui()%>','<img src=../images/files/candidatos/<%= c.getFoto()%>>')">Modificar</a>
-                        <a href="../SerCandidato?idCandidato=<%= c.getIdCandidato() %>">Eliminar</a>
+                        <a href="../SerCandidato?idCandidato=<%= c.getIdCandidato()%>">Eliminar</a>
                     </td>
                 </tr>
-                <% }%>
+                <% }
+                    }%>
             </div>
         </tbody>
     </table>

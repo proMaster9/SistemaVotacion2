@@ -1,16 +1,17 @@
 <%-- 
-    Document   : crud_candidatos
-    Created on : 10-20-2016, 11:01:51 AM
+    Document   : PruebaCandidatoIndependiente
+    Created on : 11-02-2016, 11:31:44 AM
     Author     : carlos
 --%>
 
-<%@page import="modelo.Departamento"%>
-<%@page import="modelo.DepartamentoDTO"%>
 <%@page import="modelo.CiudadanoDTO"%>
-<%@page import="modelo.Candidato"%>
 <%@page import="modelo.CandidatoDTO"%>
+<%@page import="modelo.Candidato"%>
+<%@page import="modelo.DepartamentoDTO"%>
+<%@page import="modelo.Departamento"%>
 <%@page import="modelo.Partido"%>
 <%@page import="modelo.PartidoDTO"%>
+<%@page import="modelo.Partido"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,10 +22,7 @@
         <script src="../js/funciones.js"></script>
         <script>
             $(document).on("ready", function () {
-                $("#btAgregar").on("click",function(){
-                    alert("funciona");
-                });
-                $("#btnModificar").prop("disabled","disabled");
+                $("#btnModificar").prop("disabled", "disabled");
                 enviarForm('frmCandidato', 'btnAgregar');
                 cargarImagen("btnImagen", "divImg");
                 //evitar la actualizacion si no se selecciona un registro
@@ -37,7 +35,6 @@
                         alert("No puedes modificar");
                     }
                 });
-                //vlidar el dui del candidato
                 $("#txtDuiCandidato").on("keyup", function () {
                     var dui = $("#txtDuiCandidato").val();
                     var longitud = dui.length;
@@ -52,7 +49,6 @@
                         $("#divCiudadano").html("<input type='hidden' name='txtResultado' id='txtResultado'>");
                     }
                 });
-
             });
             function modificar(idCandidato, idPartido, idDepartamento, dui, foto) {
                 $("#txtId").val(idCandidato);
@@ -60,26 +56,18 @@
                 $("#slDepartamento").val(idDepartamento);
                 $("#txtDuiCandidato").val(dui);
                 $("#divImg").html(foto);
-                $("#btnAgregar").prop("disabled","disabled");
-                $("#btnModificar").prop("disabled",false);
+                $("#btnAgregar").prop("disabled", "disabled");
+                $("#btnModificar").prop("disabled", false);
             }
 
         </script>
     </head>
     <body>
-        <h1>Candidatos Partidarios</h1>
+        <h1>Candidatos Independientes</h1>
         <form method="post" name="frmCandidato" id="frmCandidato" action="../SerCandidato" enctype="multipart/form-data">
             <input type="hidden" name="txtId" id="txtId" value="0">
             <!--Se define que es un candidato partidario-->
-            <input type="hidden" name="txtTipo" id="txtTipo" value="1">
-            Partido: 
-            <select name="slPartido" id="slPartido">
-                <%
-                    for (Partido p : PartidoDTO.mostrarPartidos()) {
-                %>
-                <option value="<%= p.getIdPartido()%>"><%= p.getAcronimo()%></option>
-                <% }%>
-            </select><br>
+            <input type="hidden" name="txtTipo" id="txtTipo" value="2">
             Departamento:
             <select name="slDepartamento" id="slDepartamento">
                 <% for (Departamento d : DepartamentoDTO.mostrarDepartamentos()) {%>
@@ -108,14 +96,13 @@
                 <th>Departamento</th>
                 <th>Candidato</th>
                 <th>Nombre</th>
-                <th>Partido</th>
                 <th>Foto</th>
                 <th></th>
             </tr>
             <tbody>
             <div id="divCandidato">
                 <% for (Candidato c : CandidatoDTO.mostrarCandidatos()) {
-                        if (c.getTipo() == 1) {
+                        if (c.getTipo() == 2) {
                 %>
 
                 <tr>
@@ -125,7 +112,6 @@
                         <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getApellido()%>, 
                         <%= CiudadanoDTO.mostrarVotante(c.getNumDui()).getNombre()%>
                     </td>
-                    <td><%= PartidoDTO.mostrarPartido(c.getIdPartido()).getAcronimo()%></td>
                     <td><img src="../images/files/candidatos/<%= c.getFoto()%>"></td>
                     <td>
                         <a href="javascript:modificar('<%= c.getIdCandidato()%>','<%= c.getIdPartido()%>','<%= c.getIdDepartamento()%>','<%= c.getNumDui()%>','<img src=../images/files/candidatos/<%= c.getFoto()%>>')">Modificar</a>

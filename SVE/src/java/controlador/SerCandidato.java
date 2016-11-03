@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Candidato;
 import modelo.CandidatoDTO;
+import modelo.Ciudadano;
+import modelo.CiudadanoDTO;
 import modelo.Partido;
 import modelo.PartidoDTO;
 import org.apache.commons.fileupload.FileItem;
@@ -31,12 +33,14 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class SerCandidato extends HttpServlet {
 
     private String redireccionJSP = "pages/PruebaCandidato.jsp";
+    private String redireccionJSP2 = "pages/PruebaCandidatoIndependiente.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
         //ruta relativa en donde se guardan las fotos de candidatos
-        String ruta = getServletContext().getRealPath("/")+"images/files/candidatos/";
+        String ruta = getServletContext().getRealPath("/") + "images/files/candidatos/";
         //Partido p = new Partido();
         Candidato c = new Candidato();
         int accion = 1; //1=gregar  2=modificar
@@ -82,30 +86,47 @@ public class SerCandidato extends HttpServlet {
                         if (item.getFieldName().equals("txtDui")) {
                             c.setNumDui(item.getString());
                         }
-                        if(item.getFieldName().equals("txtId")) {
+                        if (item.getFieldName().equals("txtId")) {
                             c.setIdCandidato(Integer.parseInt(item.getString()));
                         }
-  
+                        if (item.getFieldName().equals("txtTipo")) {
+                            //definimos que el candidato es tipo 1 (Partidario)
+                            c.setTipo(Integer.parseInt(item.getString()));
+                        }
+
                     }
-                }         
+                }
                 //si no se selecciono una imagen distinta, se conserva la imagen anterior
-                if(c.getFoto() == null) {
+                if (c.getFoto() == null) {
                     c.setFoto(CandidatoDTO.mostrarCandidato(c.getIdCandidato()).getFoto());
                 }
 
                 //cuando se presiona el boton de agregar
-                if(c.getIdCandidato() == 0) {
-                     if (CandidatoDTO.agregarCandidato(c)) {
-                        response.sendRedirect(this.redireccionJSP);
+                if (c.getIdCandidato() == 0) {
+                    if (CandidatoDTO.agregarCandidato(c)) {
+                        //candidato partidario = 1
+                        //candidato independiente = 2
+                        if (c.getTipo() == 1) {
+                            //crud de canidatos partidadios
+                            response.sendRedirect(this.redireccionJSP);
+                        } else {
+                            //crud de canidatos independientes
+                            response.sendRedirect(this.redireccionJSP2);
+                        }
                     } else {
                         //cambiar por alguna accion en caso de error
                         out.print("Error al insertar");
                     }
-                } 
-                //cuando se presiona el boton de modificar
+                } //cuando se presiona el boton de modificar
                 else {
-                    if(CandidatoDTO.modificarCandidato(c)) {
-                        response.sendRedirect(this.redireccionJSP);
+                    if (CandidatoDTO.modificarCandidato(c)) {
+                        if (c.getTipo() == 1) {
+                            //crud de canidatos partidadios
+                            response.sendRedirect(this.redireccionJSP);
+                        } else {
+                            //crud de canidatos independientes
+                            response.sendRedirect(this.redireccionJSP2);
+                        }
                     } else {
                         out.print("Error al modificar");
                     }
@@ -135,11 +156,21 @@ public class SerCandidato extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
-        if(request.getParameter("idCandidato") != null) {
-            if(CandidatoDTO.eliminarCandidato(Integer.parseInt(request.getParameter("idCandidato")))) {
-                response.sendRedirect(this.redireccionJSP);
-            }
-            else {
+        if (request.getParameter("idCandidato") != null) {
+            //guardamos el id del candidato en una variable
+            int id = Integer.parseInt(request.getParameter("idCandidato"));
+            //obtenemos el tipo de candidato, basandose en el id enviado
+            int tipo = CandidatoDTO.mostrarCandidato(id).getTipo();
+            if (CandidatoDTO.eliminarCandidato(id)) {
+                //redireccion cuando es un candidato partidario
+                if (tipo == 1) {
+                    response.sendRedirect(this.redireccionJSP);
+                }
+                //redireccion cuando es un candidato independiente
+                else {
+                    response.sendRedirect(this.redireccionJSP2);
+                }
+            } else {
                 out.print("Error al eliminar");
             }
         }
@@ -157,6 +188,33 @@ public class SerCandidato extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        //validar que el numero de dui este disponible
+        if (request.getParameter("txtDuiCandidato") != null) {
+            String dui = request.getParameter("txtDuiCandidato");
+            Ciudadano c = CiudadanoDTO.mostrarVotante(dui);
+            if (c.getIdUsuario() != 0) {
+                Candidato can = CandidatoDTO.mostrarCandidatoDui(dui);
+                if (can.getIdCandidato() == 0) {
+                    out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='1'>");
+                    out.print("El dui esta disponible<br>");
+                    out.print("Nombre: " + c.getNombre() + "<br>");
+                    out.print("Apellido: " + c.getApellido() + "<br>");
+                    if (c.getSexo().equals("m")) {
+                        out.print("Genero: Masculino<br>");
+                    } else {
+                        out.print("Genero: Femenino<br>");
+                    }
+                    
+                } else {
+                    out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='0'>");
+                    out.print("El candidato ya esta registrado");
+                }
+            } else {
+                out.print("<input type='hidden' name='txtResultado' id='txtResultado' value='0'>");
+                out.print("Dui incorrecto");
+            }
+        }
     }
 
     /**
