@@ -1,0 +1,18 @@
+SMAP
+pruebaLoginPrincipal_jsp.java
+JSP
+*S JSP
+*F
++ 0 pruebaLoginPrincipal.jsp
+pages/login/pruebaLoginPrincipal.jsp
+*L
+5,25:45
+30:70,3
+31,2:73
+33:75,3
+34,2:78
+36:80,3
+37:83
+38:84,3
+39,6:87
+*E
