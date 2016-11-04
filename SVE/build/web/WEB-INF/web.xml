@@ -68,6 +68,10 @@
         <servlet-name>SerMagistrado</servlet-name>
         <servlet-class>controlador.SerMagistrado</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerActivacion</servlet-name>
+        <servlet-class>controlador.SerActivacion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/iniciar_sesion</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>SerMagistrado</servlet-name>
         <url-pattern>/SerMagistrado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerActivacion</servlet-name>
+        <url-pattern>/SerActivacion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
