@@ -534,4 +534,5 @@ public class CiudadanoDTO {
         }
         return c;
     }
+
 }
