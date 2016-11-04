@@ -42,11 +42,11 @@ CREATE TABLE pregunta (
 
 CREATE TABLE padronElectoral (
     num_dui VARCHAR(10) NOT NULL UNIQUE,
-    nombre VARCHAR(20) NOT NULL,
-    apellido VARCHAR(20) NOT NULL,
+    nombre VARCHAR(60) NOT NULL,
+    apellido VARCHAR(60) NOT NULL,
     fecha_nac VARCHAR(10) NOT NULL,
     sexo VARCHAR(2) NOT NULL,
-    direccion_especifica VARCHAR(60) NOT NULL,
+    direccion_especifica VARCHAR(80) NOT NULL,
     id_municipio INT NOT NULL,
     CONSTRAINT pk_padron PRIMARY KEY (num_dui)
 );
@@ -241,16 +241,7 @@ CREATE TABLE observacion (
 );
 
 /*tabla agregada para el 3er sprint*/
-create sequence sec_publicidad;
-create table publicidad(
-    id_publicidad int default nextval('sec_publicidad'),
-    descripcion varchar(140),
-    codigo text,
-    id_usuario int,
-    constraint pk_publicidad primary key(id_publicidad)
-);
 
-alter table publicidad add constraint fk_publicidad_usuario foreign key(id_usuario) references usuario(id_usuario);
 alter table usuario add constraint fk_usuario_tipo foreign key (id_tipo_usuario) references tipoUsuario(id_tipo_usuario);
 alter table respuesta add constraint fk_respuesta_pregunta foreign key (id_pregunta) references pregunta(id_pregunta);
 
