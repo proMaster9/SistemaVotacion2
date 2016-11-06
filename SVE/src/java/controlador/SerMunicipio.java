@@ -11,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Departamento;
+import modelo.DepartamentoDTO;
+import modelo.MunicipioDTO;
 
 /**
  *
@@ -27,6 +30,15 @@ public class SerMunicipio extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //obtener municipio
+    public static String obtenerMunicipio(int idMunicipio) {
+        return MunicipioDTO.mostrarUnMunicipio(idMunicipio).getNombreMunicipio();
+    }
+    //obtener departamento
+    public static String obtenerDepartamento(int idMunicipio) {
+        int idDepartamento = MunicipioDTO.mostrarUnMunicipio(idMunicipio).getIdDepartmento();
+        return DepartamentoDTO.mostrarDepartamento(idDepartamento).getDepartamento();
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
