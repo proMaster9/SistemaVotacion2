@@ -159,6 +159,7 @@ public class SerAsignacionVotantes extends HttpServlet {
                         CentroVotacion centro = CentroVotacionDTO.mostrarCentro(a.getIdCentro());
                         out.print("Centro de votacion asignado<br>");
                         out.print("Nombre: " + a.getCentro() + "<br>");
+                        out.print("Codigo de JRV: " + a.getCorrelativo() + "<br>");
                         out.print("Direccion: " + centro.getDireccion() + "<br>");
                         out.print("Municipio: " + MunicipioDTO.mostrarUnMunicipio(centro.getIdMunicipio()).getNombreMunicipio() + "<br>");
                         out.print("Departamento: " + SerMunicipio.obtenerDepartamento(centro.getIdMunicipio()));
