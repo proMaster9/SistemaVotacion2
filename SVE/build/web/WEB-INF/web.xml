@@ -76,6 +76,10 @@
         <servlet-name>SerAsignacionVotantes</servlet-name>
         <servlet-class>controlador.SerAsignacionVotantes</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerPapeleta</servlet-name>
+        <servlet-class>controlador.SerPapeleta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/iniciar_sesion</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>SerAsignacionVotantes</servlet-name>
         <url-pattern>/SerAsignacionVotantes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerPapeleta</servlet-name>
+        <url-pattern>/SerPapeleta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
