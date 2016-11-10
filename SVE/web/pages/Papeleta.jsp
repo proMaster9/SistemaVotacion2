@@ -14,7 +14,7 @@
         <title>JSP Page</title>
         <%
             //remplaza este por el id de sesion
-            int idUsuario = 10;
+            int idUsuario = 28;
             if (SerPapeleta.estadoVotante(idUsuario) == 1) {
                 response.sendRedirect("login/votante.jsp");
             }

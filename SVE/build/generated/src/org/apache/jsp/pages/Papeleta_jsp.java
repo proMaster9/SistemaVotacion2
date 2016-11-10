@@ -56,8 +56,8 @@ public final class Papeleta_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
 
             //remplaza este por el id de sesion
-            int idUsuario = 9;
-            if(SerPapeleta.estadoVotante(idUsuario) == 1) {
+            int idUsuario = 28;
+            if (SerPapeleta.estadoVotante(idUsuario) == 1) {
                 response.sendRedirect("login/votante.jsp");
             }
         
@@ -152,6 +152,8 @@ public final class Papeleta_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                }, function (data) {\n");
       out.write("                                    if (data == \"1\") {\n");
       out.write("                                        alert(\"Voto realizado correctamente\");\n");
+      out.write("                                        $(\"#btnVotar\").hide();\n");
+      out.write("                                        $(\"#btnAbstener\").hide();\n");
       out.write("                                    }\n");
       out.write("                                    else {\n");
       out.write("                                        alert(\"Hubo un error\");\n");
@@ -179,6 +181,8 @@ public final class Papeleta_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    }, function (data) {\n");
       out.write("                        if (data == \"1\") {\n");
       out.write("                            alert(\"Voto Abstenido correctamente\");\n");
+      out.write("                            $(\"#btnVotar\").hide();\n");
+      out.write("                            $(\"#btnAbstener\").hide();\n");
       out.write("                        }\n");
       out.write("                        else {\n");
       out.write("                            alert(\"Hubo un error\");\n");
@@ -207,17 +211,6 @@ public final class Papeleta_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </style>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("        ");
-
-            out.print("id Departamento: " + SerPapeleta.departamentoUsuario(idUsuario) + "<br>");
-            out.print("Departamento: " + SerPapeleta.nombreDepartamento(idUsuario));
-        
-      out.write("\n");
-      out.write("        <div>\n");
-      out.write("            Partidos: <label id=\"lblPartido\"></label><br>\n");
-      out.write("            Candidatos: <label id=\"lblCandidato\"></label>\n");
-      out.write("            Candidatos Seleccionados: <label id=\"lblNumCandidatos\">0</label>\n");
-      out.write("        </div>\n");
       out.write("        <h1>Papeleta</h1>\n");
       out.write("        <input type=\"button\" id=\"btnVotar\" value=\"Emitir Voto\">\n");
       out.write("        <input type=\"button\" id=\"btnAbstener\" value=\"Abstener Voto\">\n");
