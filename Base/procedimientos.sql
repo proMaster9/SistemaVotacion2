@@ -108,7 +108,7 @@ create or replace function entrarSecundario(
 	out confirmacion int,
 	out tipo varchar(30),
 	out tipo_usuario int,
-	out fecha_nac varchar(10),
+	out fecha_nac date,
 	out direccion varchar(60),
 	out id_municipio int, 
 	out id_departamento int
@@ -133,33 +133,38 @@ language plpgsql;
 	votaciones desde aca, sin importar el privilegio que posea en el sistema
 */
 create or replace function entrarVotante(
-	in _dui varchar(10),
-	in _contrasenia varchar(15),
-	out id_usuario int,
-	out num_dui varchar(10),
-	out contrasenia varchar(15),
-	out nombre varchar(20),
-	out apellido varchar(20),
-	out sexo varchar(2),
-	out confirmacion int,
-	out tipo varchar(30),
-	out tipo_usuario int,
-	out fecha_nac varchar(10),
-	out direccion varchar(60),
-	out id_municipio int, 
-	out id_departamento int
+    in _dui varchar(10),
+    in _contrasenia varchar(15),
+    in _id_pregunta int,
+    in _respuesta varchar(25),
+    out id_usuario int,
+    out num_dui varchar(10),
+    out contrasenia varchar(15),
+    out nombre varchar(20),
+    out apellido varchar(20),
+    out sexo varchar(2),
+    out confirmacion int,
+    out tipo varchar(30),
+    out tipo_usuario int,
+    out fecha_nac date,
+    out direccion varchar(60),
+    out id_municipio int, 
+    out id_departamento int,
+    out id_pregunta int,
+    out respuesta varchar(25)
 ) returns setof record as
 $body$
-	begin
-		return query select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, tu.tipo_usuario, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento from usuario u
+    begin
+        return query select u.id_usuario, p.num_dui, u.contrasenia, p.nombre, p.apellido, p.sexo, u.confirmacion, tu.tipo_usuario, u.id_tipo_usuario, p.fecha_nac, p.direccion_especifica, p.id_municipio, m.id_departamento, r.id_pregunta, r.respuesta from usuario u
 		inner join usuariopadron up on up.id_usuario = u.id_usuario
 		inner join padronelectoral p on p.num_dui = up.num_dui
 		inner join municipio m on m.id_municipio = p.id_municipio 
 		inner join tipousuario tu on tu.id_tipo_usuario = u.id_tipo_usuario
-		where p.num_dui = _dui and u.contrasenia = _contrasenia;
+		inner join respuesta r on r.id_usuario = u.id_usuario
+		where p.num_dui = _dui and u.contrasenia = _contrasenia and r.id_pregunta= _id_pregunta and r.respuesta=_respuesta;
 
 
-	end;
+    end;
 $body$
 language plpgsql;
 
@@ -175,7 +180,7 @@ create or replace function agregarSupervisor(
 ) returns void as
 $body$
 begin
-	insert into usuario (id_tipo_usuario,contrasenia,confirmacion) values (4,contrasenia,0);
+	insert into usuario (id_tipo_usuario,contrasenia,confirmacion) values (4,contrasenia,1);
 	insert into infosupext (id_usuario,identificacion,nombre,apellido,sexo,pais,organizacion) 
 	values (lastval(),identificacion,nombre,apellido,sexo,pais,organizacion);
 end;
@@ -248,7 +253,7 @@ create or replace function agregarPrincipal(
 $body$
 begin
 	if(tipo = 2 or tipo = 3 or tipo = 6) then
-		insert into usuario (id_tipo_usuario, contrasenia, confirmacion) values (tipo, _contrasenia, 0);
+		insert into usuario (id_tipo_usuario, contrasenia, confirmacion) values (tipo, _contrasenia, 1);
 		insert into credencialtemporal (id_usuario, num_dui) values (lastval(), _num_dui);
 		insert into excepcionUsuario (id_usuario,num_dui, nombre, apellido, fecha_nac, sexo, direccion_especifica, id_municipio)
 		values (lastval(),_num_dui,_nombre,_apellido,_fecha_nac,_sexo,_direccion,_municipio);
@@ -403,59 +408,3 @@ select agregarSupervisor('00-00-07','12345','Ariel','Guzman','m','Corea','JUVEO'
 select agregarSupervisor('00-00-08','12345','Job','Flores','m','Dinamarca','OEA');
 select agregarSupervisor('00-00-09','12345','Chabelo','Sandoval','m','Corea','JUVEO');
 
-/*datos del cnr*/
-insert into padronelectoral values('00000008-0','Sara','Benitez','1994-05-10','f','Direcion falsa',1);
-insert into padronelectoral values('00000009-0','Jorge','Anne','1995-02-10','m','Direccion postisa',2);
-insert into padronelectoral values('00000010-0','Isaac','Ponce','1992-02-10','m','Direccion postisa',3);
-insert into padronelectoral values('00000011-0','Jonh','Mendoza','1995-05-20','m','Direccion postisa',4);
-insert into padronelectoral values('00000012-0','Magdalena','De Ramirez','1994-05-12','f','Direccion postisa',5);
-insert into padronelectoral values('00000013-0','Fernanda','Olivares','1994-05-10','f','Direccion postisa',6);
-insert into padronelectoral values('00000014-0','Melvin','Dagoberto','1994-05-10','m','Direccion postisa',7);
-insert into padronelectoral values('00000015-0','Fredy','Mendoza','1995-05-10','m','Direccion postisa',8);
-insert into padronelectoral values('00000016-0','Faustino','Asprilla','1994-05-10','m','Calle el matazano',9);
-insert into padronelectoral values('00000017-0','Maria','Flores','1992-03-10','f','kernel informatico $5',10);
-insert into padronelectoral values('00000018-0','Carlos','Benitez','1994-05-10','f','Direcion falsa',1);
-insert into padronelectoral values('00000019-0','Mario','Anne','1994-05-10','m','Direccion postisa',12);
-
-/*cuenta para representante de partido*/
-select agregarSecundario('00000008-0','12345',5);
-
-/*cuenta para director de centro de votaciones*/
-select agregarSecundario('00000009-0','12345',8);
-
-/*cuenta para publicista*/
-select agregarSecundario('00000010-0','12345',9);
-
-/*cuenta para presidente de jrv*/
-select agregarSecundario('00000011-0','12345',10);
-
-/*cuenta para gestor de jrv*/
-select agregarSecundario('00000012-0','12345',7);
-select agregarSecundario('00000013-0','12345',7);
-select agregarSecundario('00000014-0','12345',7);
-select agregarSecundario('00000015-0','12345',7);
-
-/*inicios de sesion*/
-select * from entrarAdministrador('00000000-0','12345');
-select * from entrarSupervisor('00-00-00','12345'); 
-select * from entrarPrincipal('00000001-0','12345'); /*magistrado*/
-select * from entrarPrincipal('00000006-0','12345'); /*representante crn*/
-select * from entrarPrincipal('00000007-0','12345'); /*director tse*/
-
-select * from entrarSecundario('00000008-0','12345'); /*representante de partido*/
-select * from entrarSecundario('00000009-0','12345'); /*director de centro de votaciones*/
-select * from entrarSecundario('00000010-0','12345'); /*publicista*/
-select * from entrarSecundario('00000011-0','12345'); /*presidente de jrv*/
-select * from entrarSecundario('00000012-0','12345'); /*gestor de jrv*/
-
-/*
-cuando un usuario secundario accede desde aca, se convierte en un votante 
-con acceso a la papeleta de votaciones, tambien puede acceder cualquier usuario 
-que este registrado en la tabla padronelectoral
-*/
-select * from entrarVotante('00000008-0','12345'); 
-
-
-/*registros para partidos*/
-insert into partido (nombre,acronimo,num_dui,imagen) values ('Gran Alianza Nacional','GANA','00000017-0','img/imagen1.png');
-insert into partido (nombre,acronimo,num_dui,imagen) values ('Alianza Republicana Nacionalista', 'ARENA','00000018-0','img/imagen2.png');
