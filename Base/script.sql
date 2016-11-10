@@ -21,7 +21,7 @@ CREATE TABLE centroVotacion (
     id_municipio INT NOT NULL,
     direccion_especifica VARCHAR(60) NOT NULL,
     num_dui VARCHAR(10) NOT NULL UNIQUE,/*dui del encargado del centro de votacion*/
-    nombre_centro VARCHAR(20) NOT NULL,
+    nombre_centro VARCHAR(50) NOT NULL,
     num_jrv_disponibles INT NOT NULL,
     CONSTRAINT pk_centroVotacion PRIMARY KEY (id_centro_votacion)
 );
@@ -44,7 +44,7 @@ CREATE TABLE padronElectoral (
     num_dui VARCHAR(10) NOT NULL UNIQUE,
     nombre VARCHAR(60) NOT NULL,
     apellido VARCHAR(60) NOT NULL,
-    fecha_nac VARCHAR(10) NOT NULL,
+    fecha_nac date NOT NULL,
     sexo VARCHAR(2) NOT NULL,
     direccion_especifica VARCHAR(80) NOT NULL,
     id_municipio INT NOT NULL,
@@ -306,20 +306,20 @@ alter table candidato add constraint fk_candidato_departament foreign key (id_de
 
 /*-----------------INSERCION DE REGISTROS DE PRUEBA----------------------*/
 /** insercion departamento by roberto*/
-INSERT INTO departamento(nombre_departamento) VALUES ('Ahuachapan');
-INSERT INTO departamento(nombre_departamento) VALUES ('Santa Ana');
-INSERT INTO departamento(nombre_departamento) VALUES ('Sonsonate');
-INSERT INTO departamento(nombre_departamento) VALUES ('Chalatenango');
-INSERT INTO departamento(nombre_departamento) VALUES ('Cuscatlan');
-INSERT INTO departamento(nombre_departamento) VALUES ('San Salvador');
-INSERT INTO departamento(nombre_departamento) VALUES ('La Libertad');
-INSERT INTO departamento(nombre_departamento) VALUES ('San Vicente');
-INSERT INTO departamento(nombre_departamento) VALUES ('Cabañas');
-INSERT INTO departamento(nombre_departamento) VALUES ('La Paz');
-INSERT INTO departamento(nombre_departamento) VALUES ('Usulutan');
-INSERT INTO departamento(nombre_departamento) VALUES ('San Miguel');
-INSERT INTO departamento(nombre_departamento) VALUES ('Morazan');
-INSERT INTO departamento(nombre_departamento) VALUES ('La Union');
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Ahuachapan', 4);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Santa Ana', 7);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Sonsonate', 6);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Chalatenango',3);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Cuscatlan', 3);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('San Salvador', 24);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('La Libertad', 10);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('San Vicente', 3);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Cabañas', 3);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('La Paz', 4);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Usulutan', 5);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('San Miguel', 6);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('Morazan', 3);
+INSERT INTO departamento(nombre_departamento, num_candidatos) VALUES ('La Union', 3);
 
 /**insercion municipio por departamento by roberto*/
 
