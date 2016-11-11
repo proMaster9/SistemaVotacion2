@@ -286,7 +286,7 @@ begin
 		/*se comprueba que el dui exista en los registros del cnr*/	
 		if exists(select * from padronelectoral where num_dui = _num_dui) then
 			select u.id_usuario into id from usuariopadron u where u.num_dui = _num_dui;
-			update usuario set id_tipo_usuario = tipo, contrasenia = _contrasenia where id_usuario = id;
+			update usuario set id_tipo_usuario = tipo, contrasenia = _contrasenia, confirmacion = 1 where id_usuario = id;
 			return true;
 		else
 			return false;
