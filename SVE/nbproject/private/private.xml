@@ -3,7 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerUsuariosPrincipales.java</file>
             <file>file:/home/carlos/SistemaVotacion2/SVE/web/pages/Papeleta.jsp</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerPapeleta.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerPublicidad.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerPregunta.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerVoto.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerPartido.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerUsuariosSecundarios.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerRespuesta.java</file>
+            <file>file:/home/carlos/SistemaVotacion2/SVE/src/java/controlador/SerUsuariosInvitados.java</file>
         </group>
     </open-files>
 </project-private>

@@ -4,7 +4,6 @@
     Author     : carlos
 --%>
 
-<%@page import="modelo.VotoBandera"%>
 <%@page import="controlador.SerPapeleta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +13,7 @@
         <title>JSP Page</title>
         <%
             //remplaza este por el id de sesion
-            int idUsuario = 28;
+            int idUsuario = 13676;
             if (SerPapeleta.estadoVotante(idUsuario) == 1) {
                 response.sendRedirect("login/votante.jsp");
             }

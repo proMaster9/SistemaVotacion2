@@ -56,7 +56,7 @@ public final class Papeleta_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
 
             //remplaza este por el id de sesion
-            int idUsuario = 28;
+            int idUsuario = 13669;
             if (SerPapeleta.estadoVotante(idUsuario) == 1) {
                 response.sendRedirect("login/votante.jsp");
             }
